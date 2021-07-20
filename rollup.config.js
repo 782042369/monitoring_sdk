@@ -2,7 +2,7 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 16:15:37
  * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-20 12:36:10
+ * @LastEditTime: 2021-07-20 13:44:42
  * @Description:
  */
 import path from 'path'
@@ -54,16 +54,16 @@ const outputMap = [
     file: 'lib/index.js', // 通用模块
     format: 'umd',
   },
-  // {
-  //   file: packageJSON.main, // 通用模块
-  //   format: 'umd',
-  //   plugins: [terser({ compress: { drop_console: true } })],
-  // },
-  // {
-  //   file: packageJSON.module, // es6模块
-  //   format: 'es',
-  //   plugins: [terser({ compress: { drop_console: true } })],
-  // },
+  {
+    file: packageJSON.main, // 通用模块
+    format: 'umd',
+    plugins: [terser({ compress: { drop_console: true } })],
+  },
+  {
+    file: packageJSON.module, // es6模块
+    format: 'es',
+    plugins: [terser({ compress: { drop_console: true } })],
+  },
 ]
 
 const buildConf = (options) => Object.assign({}, commonConf, options)
