@@ -1,9 +1,5 @@
 import BaseMonitor from '../base/baseMonitor'
-import {
-  ErrorCategoryEnum,
-  AjaxLibEnum,
-  ErrorLevelEnum,
-} from '../base/baseConfig'
+import { ErrorCategoryEnum, AjaxLibEnum, ErrorLevelEnum } from '../enum'
 import type { ParamsType } from './type'
 /**
  * ajax error异常
@@ -39,7 +35,7 @@ class AxiosError extends BaseMonitor {
   constructor(params: {
     reportUrl: string
     extendsInfo: Record<string, any>
-    appId: string
+    appID: string
   }) {
     super(params)
   }
@@ -62,7 +58,7 @@ class XHRError extends BaseMonitor {
   constructor(params: {
     reportUrl: string
     extendsInfo: Record<string, any>
-    appId: string
+    appID: string
   }) {
     super(params)
   }

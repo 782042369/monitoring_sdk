@@ -1,16 +1,4 @@
-interface OptionsType {
-    isPage: boolean;
-    isResource: boolean;
-    url: string;
-    appID: string;
-    jsError?: boolean;
-    promiseError?: boolean;
-    resourceError?: boolean;
-    ajaxError?: boolean;
-    vueError?: boolean;
-    vue?: boolean;
-    extendsInfo: Record<string, any>;
-}
+import { OptionsType } from './type';
 declare class MonitorJS {
     jsError: boolean;
     promiseError: boolean;
@@ -20,12 +8,12 @@ declare class MonitorJS {
     constructor();
     /**
      * 处理异常信息初始化
-     * @param {*} options
+     * @param {OptionsType} options
      */
     init(options: OptionsType): void;
     /**
      * 监听页面性能
-     * @param {*} options {pageId：页面标示,url：上报地址}
+     * @param {OptionsType} options {pageId：页面标示,url：上报地址}
      */
     monitorPerformance(options: OptionsType): void;
 }

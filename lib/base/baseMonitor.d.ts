@@ -12,7 +12,7 @@ declare class BaseMonitor {
     errorObj: ObjectProps;
     reportUrl: string;
     extendsInfo: Record<string, any>;
-    appId: string;
+    appID: string;
     selector: string;
     /**
      * 上报错误地址
@@ -21,7 +21,7 @@ declare class BaseMonitor {
     constructor(params: {
         reportUrl: string;
         extendsInfo: Record<string, any>;
-        appId: string;
+        appID: string;
     });
     /**
      * 记录错误信息

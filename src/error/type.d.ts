@@ -8,5 +8,5 @@
 export type ParamsType = {
   reportUrl: string
   extendsInfo: Record<string, any>
-  appId: string
+  appID: string
 }

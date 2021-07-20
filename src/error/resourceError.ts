@@ -6,10 +6,10 @@
  * @Description:
  */
 import BaseMonitor from '../base/baseMonitor'
-import { ErrorCategoryEnum, ErrorLevelEnum } from '../base/baseConfig'
+import { ErrorCategoryEnum, ErrorLevelEnum } from '../enum'
 import type { ParamsType } from './type'
-import getSelector from '../util/getSelector'
-import getLastEvent from '../util/getLastEvent'
+import getSelector from '../utils/getSelector'
+import getLastEvent from '../utils/getLastEvent'
 /**
  * 资源加载错误
  */

@@ -2,7 +2,7 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 16:15:37
  * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-20 14:40:43
+ * @LastEditTime: 2021-07-20 19:11:20
  * @Description:
  */
 import path from 'path'
@@ -55,6 +55,7 @@ const outputMap = [
     plugins: [
       terser({ compress: { drop_console: true, drop_debugger: true } }),
     ],
+    name: 'MonitorJS',
   },
   {
     file: packageJSON.main, // 通用模块
@@ -62,6 +63,7 @@ const outputMap = [
     plugins: [
       terser({ compress: { drop_console: true, drop_debugger: true } }),
     ],
+    name: 'MonitorJS',
   },
   {
     file: packageJSON.module, // es6模块

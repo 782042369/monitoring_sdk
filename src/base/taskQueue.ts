@@ -1,19 +1,16 @@
+/*
+ * @Author: 杨宏旋
+ * @Date: 2021-07-19 18:15:10
+ * @LastEditors: 杨宏旋
+ * @LastEditTime: 2021-07-20 19:03:45
+ * @Description:
+ */
 import API from './api'
-import { DataProps } from './typpe'
-/* eslint-disable */
-interface QueueProps {
-  isStop: boolean
-  queues: {
-    reportUrl: string
-    data: DataProps
-  }[]
-  add(reportUrl: string, data: DataProps): void
-  fire(): void
-}
+import { DataProps, QueueProps } from './typpe'
 /**
  * 消息队列
  */
-let TaskQueue: QueueProps = {
+const TaskQueue: QueueProps = {
   /**
    * 是否停止fire
    */
@@ -42,7 +39,7 @@ let TaskQueue: QueueProps = {
       return
     }
     this.isStop = false
-    let item = this.queues[0]
+    const item = this.queues[0]
     item.reportUrl && new API(item.reportUrl).report(item.data)
     this.queues.splice(0, 1)
     this.fire() // 递归

@@ -3,9 +3,10 @@
  */
 import pagePerformance from './performance.js'
 import BaseMonitor from '../base/baseMonitor'
-import { ErrorLevelEnum, ErrorCategoryEnum } from '../base/baseConfig.js'
+import { ErrorLevelEnum, ErrorCategoryEnum } from '../enum/index.js'
 import API from '../base/api.js'
-import { MyDate } from '../util'
+import { MyDate } from '../utils'
+import { OptionsType } from '../type'
 
 class MonitorPerformance extends BaseMonitor {
   isPage: any
@@ -14,22 +15,16 @@ class MonitorPerformance extends BaseMonitor {
   outTime: number
   config: any
   constructor(options: {
-    isPage: boolean
-    isResource: boolean
-    url: string
-    appID: string
-    jsError?: boolean
-    promiseError?: boolean
-    resourceError?: boolean
-    ajaxError?: boolean
-    vueError?: boolean
-    vue?: boolean
-    extendsInfo: Record<string, any>
+    reportUrl: OptionsType['reportUrl']
+    extendsInfo: OptionsType['extendsInfo']
+    appID: OptionsType['appID']
+    isPage: OptionsType['isPage']
+    isResource: OptionsType['isResource']
   }) {
     super({
-      reportUrl: options.appID,
+      reportUrl: options.reportUrl,
+      appID: options.appID,
       extendsInfo: options.extendsInfo,
-      appId: options.appID,
     })
     options.isPage = options.isPage !== false
     options.isResource = options.isResource !== false
@@ -42,7 +37,7 @@ class MonitorPerformance extends BaseMonitor {
       performance: {}, // 页面性能列表
     }
     this.category = ErrorCategoryEnum.PERFORMANCE
-    this.url = options.url || ''
+    this.reportUrl = options.reportUrl || ''
   }
 
   /**
@@ -50,23 +45,17 @@ class MonitorPerformance extends BaseMonitor {
    * @param {*} options
    */
   getSourceType(options: {
+    reportUrl: string
+    appID: string
+    extendsInfo?: Record<string, any>
     isPage?: boolean
     isResource?: boolean
-    url?: string
-    appID?: string
-    jsError?: boolean | undefined
-    promiseError?: boolean | undefined
-    resourceError?: boolean | undefined
-    ajaxError?: boolean | undefined
-    vueError?: boolean | undefined
-    vue?: boolean | undefined
-    extendsInfo?: Record<string, any>
-    isRScript?: any
-    isRCSS?: any
+    isRScript?: boolean
+    isRCSS?: boolean
     isRFetch?: any
-    isRXHR?: any
-    isRLink?: any
-    isRIMG?: any
+    isRXHR?: boolean
+    isRLink?: boolean
+    isRIMG?: boolean
   }) {
     const usefulType = [] // 'navigation'
     options.isRScript !== false && usefulType.push('script') // 资源数据细分，是否上报script数据

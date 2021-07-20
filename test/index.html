@@ -2,7 +2,7 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 18:15:30
  * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-20 14:04:13
+ * @LastEditTime: 2021-07-20 18:55:15
  * @Description:
 -->
 <!DOCTYPE html>
@@ -35,9 +35,8 @@
 <script>
   new MonitorJS().init({
     appID: '1111',
-    url: 'http://baidu.com/api', //上报错误地址
+    reportUrl: 'http://baidu.com/api', //上报错误地址
     isPage: true,
-    isResource: true,
   })
   setTimeout(() => {
     console.log(1)

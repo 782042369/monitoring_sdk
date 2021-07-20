@@ -5,7 +5,7 @@
  * @LastEditTime: 2021-07-20 13:15:05
  * @Description:
  */
-import { checkUrl } from '../util'
+import { checkUrl } from '../utils'
 import { DataProps } from './typpe'
 /**
  * 数据持久化

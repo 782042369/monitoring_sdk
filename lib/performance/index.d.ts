@@ -1,4 +1,5 @@
 import BaseMonitor from '../base/baseMonitor';
+import { OptionsType } from '../type';
 declare class MonitorPerformance extends BaseMonitor {
     isPage: any;
     isResource: any;
@@ -6,40 +7,28 @@ declare class MonitorPerformance extends BaseMonitor {
     outTime: number;
     config: any;
     constructor(options: {
-        isPage: boolean;
-        isResource: boolean;
-        url: string;
-        appID: string;
-        jsError?: boolean;
-        promiseError?: boolean;
-        resourceError?: boolean;
-        ajaxError?: boolean;
-        vueError?: boolean;
-        vue?: boolean;
-        extendsInfo: Record<string, any>;
+        reportUrl: OptionsType['reportUrl'];
+        extendsInfo: OptionsType['extendsInfo'];
+        appID: OptionsType['appID'];
+        isPage: OptionsType['isPage'];
+        isResource: OptionsType['isResource'];
     });
     /**
      * 获取需要上报资源数据类型
      * @param {*} options
      */
     getSourceType(options: {
+        reportUrl: string;
+        appID: string;
+        extendsInfo?: Record<string, any>;
         isPage?: boolean;
         isResource?: boolean;
-        url?: string;
-        appID?: string;
-        jsError?: boolean | undefined;
-        promiseError?: boolean | undefined;
-        resourceError?: boolean | undefined;
-        ajaxError?: boolean | undefined;
-        vueError?: boolean | undefined;
-        vue?: boolean | undefined;
-        extendsInfo?: Record<string, any>;
-        isRScript?: any;
-        isRCSS?: any;
+        isRScript?: boolean;
+        isRCSS?: boolean;
         isRFetch?: any;
-        isRXHR?: any;
-        isRLink?: any;
-        isRIMG?: any;
+        isRXHR?: boolean;
+        isRLink?: boolean;
+        isRIMG?: boolean;
     }): string[];
     /**
      * 记录页面信息

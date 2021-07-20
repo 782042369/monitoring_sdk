@@ -1,6 +1,6 @@
-import { ErrorLevelEnum, ErrorCategoryEnum } from './baseConfig'
+import { ErrorLevelEnum, ErrorCategoryEnum } from '../enum'
 import DeviceInfo from '../device'
-import { isFunction, isObject } from '../util'
+import { isFunction, isObject } from '../utils'
 import TaskQueue from './taskQueue'
 import { ObjectProps } from './typpe'
 /**
@@ -16,7 +16,7 @@ class BaseMonitor {
   errorObj: ObjectProps
   reportUrl: string
   extendsInfo: Record<string, any>
-  appId: string
+  appID: string
   selector: string
   /**
    * 上报错误地址
@@ -25,7 +25,7 @@ class BaseMonitor {
   constructor(params: {
     reportUrl: string
     extendsInfo: Record<string, any>
-    appId: string
+    appID: string
   }) {
     this.category = ErrorCategoryEnum.UNKNOW_ERROR // 错误类型
     this.level = ErrorLevelEnum.INFO // 错误等级
@@ -36,7 +36,7 @@ class BaseMonitor {
     this.errorObj = {} // 错误堆栈
     this.reportUrl = params.reportUrl // 上报错误地址
     this.extendsInfo = params.extendsInfo // 扩展信息
-    this.appId = params.appId // 应用id
+    this.appID = params.appID // 应用id
     this.selector = '' // 触发错误的元素
   }
 
@@ -88,7 +88,6 @@ class BaseMonitor {
    */
   handleErrorInfo() {
     const txt: Record<string, any> = {
-      errortype: this.category,
       loginformation: this.msg,
       url: encodeURIComponent(this.url),
     }
@@ -111,7 +110,8 @@ class BaseMonitor {
     recordInfo.logType = this.level // 错误级别
     recordInfo.logInfo = JSON.stringify(txt) // 错误信息
     recordInfo.deviceInfo = deviceInfo // 设备信息
-    recordInfo.appId = this.appId // 应用id
+    recordInfo.appID = this.appID // 应用id
+    recordInfo.time = new Date().getTime()
     this.selector && (recordInfo.selector = this.selector)
     return recordInfo
   }

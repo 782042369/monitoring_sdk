@@ -1,8 +1,5 @@
-import BaseMonitor from '../base/baseMonitor';
-import type { ParamsType } from './type';
-/**
- * vue错误
- */
+import BaseMonitor from '../../base/baseMonitor';
+import type { ParamsType } from '../type';
 declare class VueError extends BaseMonitor {
     constructor(params: ParamsType);
     /**

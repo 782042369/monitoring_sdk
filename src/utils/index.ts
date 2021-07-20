@@ -1,8 +1,9 @@
+/* eslint-disable no-useless-escape */
 /*
  * @Author: 杨宏旋
  * @Date: 2021-07-19 16:25:42
  * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-20 12:50:35
+ * @LastEditTime: 2021-07-20 19:20:19
  * @Description:
  */
 
@@ -25,7 +26,9 @@ export function isFunction(func: any) {
 export function isArray(list: any) {
   return type(list) === 'Array'
 }
-
+export function isString(list: any) {
+  return type(list) === 'String'
+}
 export function isUndefined(list: any) {
   return type(list) === 'Undefined'
 }
@@ -105,4 +108,8 @@ MyDate.prototype.format = function (fmt: string) {
     }
   }
   return fmt
+}
+export function getLocationHref() {
+  if (typeof document === 'undefined' || document.location === null) return ''
+  return document.location.href
 }

@@ -2,16 +2,15 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 16:15:37
  * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-20 14:32:47
+ * @LastEditTime: 2021-07-20 19:19:41
  * @Description:
  */
 import path from 'path'
 import resolve from 'rollup-plugin-node-resolve' // 依赖引用插件
-import commonjs from 'rollup-plugin-commonjs' // commonjs模块转换插件
 import { eslint } from 'rollup-plugin-eslint' // eslint插件
 import ts from 'rollup-plugin-typescript2'
 import babel from 'rollup-plugin-babel'
-import { terser } from 'rollup-plugin-terser'
+import { DEFAULT_EXTENSIONS } from '@babel/core'
 const getPath = (_path) => path.resolve(__dirname, _path)
 import packageJSON from './package.json'
 
@@ -25,6 +24,7 @@ const tsPlugin = ts({
 // eslint
 const esPlugin = eslint({
   throwOnError: true,
+  throwOnWarning: true,
   include: ['src/**/*.ts'],
   exclude: ['node_modules/**', 'lib/**'],
   fix: true,
@@ -38,7 +38,7 @@ const commonConf = {
     tsPlugin,
     babel({
       exclude: 'node_modules/**',
-      extensions,
+      extensions: [...DEFAULT_EXTENSIONS, ...extensions],
     }),
   ],
 }
@@ -47,6 +47,7 @@ const outputMap = [
   {
     file: 'lib/index.js', // 通用模块
     format: 'umd',
+    name: 'MonitorJS',
   },
 ]
 

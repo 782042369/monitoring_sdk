@@ -2,7 +2,7 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 18:15:30
  * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-20 15:09:15
+ * @LastEditTime: 2021-07-20 16:38:12
  * @Description:
 -->
 <!DOCTYPE html>
@@ -18,7 +18,7 @@
   </head>
   <body>
     <div id="app">
-      <button @click="func2">性能监听</button>
+      <button @click="func2">错误事件监听</button>
       <br /><br />
       <img
         src="https://pic.xiaohuochai.site/blog/chromePerformance1.png"
@@ -46,11 +46,10 @@
 <script>
   new MonitorJS().init({
     appID: '1111',
-    url: 'http://baidu.com/api', //上报错误地址
+    reportUrl: 'http://baidu.com/api', //上报错误地址
     vueError: true, //是否上报Vue错误
     vue: Vue,
     isPage: true,
-    isResource: true,
   })
   let vm = new Vue({
     el: '#app',
@@ -78,7 +77,9 @@
           resolve()
         })
       },
-      func2() {},
+      func2() {
+        ss()
+      },
     },
   })
 </script>

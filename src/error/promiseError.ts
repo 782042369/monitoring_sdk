@@ -6,7 +6,7 @@
  * @Description:
  */
 import BaseMonitor from '../base/baseMonitor'
-import { ErrorCategoryEnum, ErrorLevelEnum } from '../base/baseConfig'
+import { ErrorCategoryEnum, ErrorLevelEnum } from '../enum'
 import type { ParamsType } from './type'
 
 /**

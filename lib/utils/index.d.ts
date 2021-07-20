@@ -1,6 +1,7 @@
 export declare function checkUrl(url: string | undefined): boolean;
 export declare function isFunction(func: any): boolean;
 export declare function isArray(list: any): boolean;
+export declare function isString(list: any): boolean;
 export declare function isUndefined(list: any): boolean;
 /**
  * 是否为null
@@ -21,3 +22,4 @@ export declare class MyDate extends Date {
     format: any;
     constructor();
 }
+export declare function getLocationHref(): string;

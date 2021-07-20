@@ -2,7 +2,7 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 16:18:12
  * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-20 12:48:05
+ * @LastEditTime: 2021-07-20 19:19:31
  * @Description:
  */
 const path = require('path')
@@ -20,8 +20,15 @@ module.exports = {
     project: resolve('./jsconfig.json'),
     tsconfigRootDir: resolve('./'),
     sourceType: 'module',
+    ecmaFeatures: {
+      experimentalObjectRestSpread: true,
+    },
   },
-  extends: ['plugin:prettier/recommended'],
+  extends: [
+    'eslint:recommended', // eslint 推荐规则
+    'plugin:prettier/recommended',
+  ],
+  plugins: ['@typescript-eslint'],
   // plugins: ['prettier'],
   rules: {
     'prettier/prettier': 'error',
@@ -37,7 +44,7 @@ module.exports = {
     eqeqeq: 1, // 要求使用 === 和 !==
     'arrow-parens': ['error', 'always'],
     'prefer-arrow-callback': 1, // 要求回调函数使用箭头函数
-    // 要求使用模板字面量而非字符串连接
-    'prefer-template': 1,
+    'prefer-template': 1, // 要求使用模板字面量而非字符串连接
+    '@typescript-eslint/no-unused-vars': 'off',
   },
 }

@@ -2,7 +2,7 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 16:17:00
  * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-20 10:59:45
+ * @LastEditTime: 2021-07-20 19:01:49
  * @Description:
  */
 
@@ -14,21 +14,9 @@ import {
   VueError,
 } from './error'
 import MonitorPerformance from './performance'
-import { AjaxLibEnum } from './base/baseConfig'
-import { checkUrl } from './util'
-interface OptionsType {
-  isPage: boolean
-  isResource: boolean
-  url: string
-  appID: string
-  jsError?: boolean
-  promiseError?: boolean
-  resourceError?: boolean
-  ajaxError?: boolean
-  vueError?: boolean
-  vue?: boolean
-  extendsInfo: Record<string, any>
-}
+import { AjaxLibEnum } from './enum'
+import { checkUrl } from './utils'
+import { OptionsType } from './type'
 
 class MonitorJS {
   jsError: boolean
@@ -45,24 +33,24 @@ class MonitorJS {
   }
   /**
    * 处理异常信息初始化
-   * @param {*} options
+   * @param {OptionsType} options
    */
   init(options: OptionsType) {
-    if (!options?.url || !checkUrl(options.url)) {
-      throw `url is error,${options.url}`
+    if (!options?.reportUrl || !checkUrl(options.reportUrl)) {
+      throw `reportUrl is error,${options.reportUrl}`
     }
     if (!options?.appID) {
-      throw `appID is error,${options.url}`
+      throw `appID is error,${options.appID}`
     }
     this.jsError = !(options?.jsError === false)
     this.promiseError = !(options?.promiseError === false)
     this.resourceError = !(options?.resourceError === false)
     this.ajaxError = !(options?.ajaxError === false)
     this.vueError = options?.vueError === true // 显式配置
-    const reportUrl = options.url // 上报错误地址
-    const appId = options.appID // 上报id
+    const reportUrl = options.reportUrl // 上报错误地址
+    const appID = options.appID // 上报id
     const extendsInfo = options.extendsInfo || {} // 扩展信息（一般用于系统个性化分析）
-    const param = { reportUrl, extendsInfo, appId }
+    const param = { reportUrl, extendsInfo, appID }
 
     if (this.jsError) {
       new JsError(param).handleError()
@@ -84,10 +72,9 @@ class MonitorJS {
 
   /**
    * 监听页面性能
-   * @param {*} options {pageId：页面标示,url：上报地址}
+   * @param {OptionsType} options {pageId：页面标示,url：上报地址}
    */
   monitorPerformance(options: OptionsType) {
-    options = options || {}
     // new MonitorNetworkSpeed(options).reportNetworkSpeed();
     const recordFunc = () => {
       new MonitorPerformance(options).record()
