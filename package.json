@@ -6,8 +6,8 @@
   "module": "lib/index.esm.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "dev": "rollup -c rollup.dev.config.js -w",
-    "build": "rm -fr lib && rollup -c rollup.pro.config.js"
+    "dev": "cross-env NODE_ENV=development rollup -c rollup.config.js -w",
+    "build": "cross-env NODE_ENV=production rm -fr lib && rollup -c rollup.config.js"
   },
   "keywords": [],
   "author": "",
@@ -22,6 +22,7 @@
     "@mitojs/web": "^2.1.18",
     "@typescript-eslint/eslint-plugin": "^4.28.4",
     "@typescript-eslint/parser": "^4.28.4",
+    "cross-env": "^7.0.3",
     "eslint": "^7.31.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
