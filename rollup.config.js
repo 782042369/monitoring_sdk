@@ -2,7 +2,7 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 16:15:37
  * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-20 19:59:11
+ * @LastEditTime: 2021-07-20 20:38:41
  * @Description:
  */
 import path from 'path'
@@ -13,6 +13,7 @@ import babel from 'rollup-plugin-babel'
 import { DEFAULT_EXTENSIONS } from '@babel/core'
 import { terser } from 'rollup-plugin-terser'
 import commonjs from 'rollup-plugin-commonjs' // commonjs模块转换插件
+import alias from '@rollup/plugin-alias'
 const getPath = (_path) => path.resolve(__dirname, _path)
 import packageJSON from './package.json'
 
@@ -22,6 +23,10 @@ const tsPlugin = ts({
   tsconfig: getPath('./jsconfig.json'), // 导入本地ts配置
   extensions,
 })
+const customResolver = resolve({
+  extensions: ['.mjs', '.js', '.jsx', '.json', '.sass', '.scss'],
+})
+const projectRootDir = path.resolve(__dirname)
 // eslint
 const esPlugin = eslint({
   throwOnError: true,
@@ -34,7 +39,16 @@ const esPlugin = eslint({
 const commonConf = {
   input: getPath('./src/index.ts'),
   plugins: [
-    resolve(extensions),
+    alias({
+      entries: [
+        {
+          find: '@',
+          replacement: getPath('src'),
+        },
+      ],
+      customResolver,
+    }),
+    resolve(),
     esPlugin,
     tsPlugin,
     babel({
@@ -57,25 +71,16 @@ const outputMap =
         {
           file: 'lib/index.js', // 通用模块
           format: 'umd',
-          plugins: [
-            terser({ compress: { drop_console: true, drop_debugger: true } }),
-          ],
           name: 'MonitorJS',
         },
         {
           file: packageJSON.main, // 通用模块
           format: 'umd',
-          plugins: [
-            terser({ compress: { drop_console: true, drop_debugger: true } }),
-          ],
           name: 'MonitorJS',
         },
         {
           file: packageJSON.module, // es6模块
           format: 'es',
-          plugins: [
-            terser({ compress: { drop_console: true, drop_debugger: true } }),
-          ],
         },
       ]
 
@@ -84,7 +89,8 @@ process.env.NODE_ENV !== 'development' &&
     commonjs({
       exclude: 'node_modules',
       include: 'src',
-    })
+    }),
+    terser({ compress: { drop_console: true, drop_debugger: true } })
   )
 
 const buildConf = (options) => Object.assign({}, commonConf, options)
