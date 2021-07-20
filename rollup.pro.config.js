@@ -2,7 +2,7 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 16:15:37
  * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-20 14:33:03
+ * @LastEditTime: 2021-07-20 14:40:43
  * @Description:
  */
 import path from 'path'
@@ -52,17 +52,23 @@ const outputMap = [
   {
     file: 'lib/index.js', // 通用模块
     format: 'umd',
-    plugins: [terser({ compress: { drop_console: true } })],
+    plugins: [
+      terser({ compress: { drop_console: true, drop_debugger: true } }),
+    ],
   },
   {
     file: packageJSON.main, // 通用模块
     format: 'umd',
-    plugins: [terser({ compress: { drop_console: true } })],
+    plugins: [
+      terser({ compress: { drop_console: true, drop_debugger: true } }),
+    ],
   },
   {
     file: packageJSON.module, // es6模块
     format: 'es',
-    plugins: [terser({ compress: { drop_console: true } })],
+    plugins: [
+      terser({ compress: { drop_console: true, drop_debugger: true } }),
+    ],
   },
 ]
 

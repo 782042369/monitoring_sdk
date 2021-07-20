@@ -2,7 +2,7 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 18:15:30
  * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-20 13:50:50
+ * @LastEditTime: 2021-07-20 15:09:15
  * @Description:
 -->
 <!DOCTYPE html>
@@ -13,19 +13,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>vue页面性能监控</title>
     <script src="../lib/index.js"></script>
-    <script src="../node_modules/vue/dist/vue.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.14/vue.min.js"></script>
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <div id="a">
-      <div id="a1">
-        <div id="a2">
-          <div id="a3">
-            <button onclick="fn()">按钮错误监听</button>
-          </div>
-        </div>
-      </div>
-    </div>
     <div id="app">
       <button @click="func2">性能监听</button>
       <br /><br />
@@ -61,7 +52,6 @@
     isPage: true,
     isResource: true,
   })
-  //*
   let vm = new Vue({
     el: '#app',
     data: {
@@ -69,7 +59,6 @@
       src3: 'https://pic.xiaohuochai.site/blog/chromePerformance2_error.png',
       src4: '',
     },
-
     created() {
       this.func1().then((ret) => {
         throw new Error('promise error 22222222222') //promise_error
@@ -92,6 +81,4 @@
       func2() {},
     },
   })
-  //*/
-  ss() //js_error
 </script>
