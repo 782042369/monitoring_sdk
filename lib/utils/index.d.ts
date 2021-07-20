@@ -19,7 +19,7 @@ export declare function objectIsNull(obj: any): boolean;
  */
 export declare function isObject(obj: any): boolean;
 export declare class MyDate extends Date {
-    format: any;
     constructor();
+    format(fmt: string): string;
 }
 export declare function getLocationHref(): string;

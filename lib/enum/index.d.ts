@@ -50,7 +50,11 @@ export declare enum ErrorLevelEnum {
     /**
      * 日志信息
      */
-    'INFO' = "Info"
+    'INFO' = "Info",
+    /**
+     * 用户自定义事件
+     */
+    'Custom' = "Custom"
 }
 /**
  * Ajax库枚举

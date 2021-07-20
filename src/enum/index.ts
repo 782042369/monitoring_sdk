@@ -2,7 +2,7 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 18:15:10
  * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-20 18:21:28
+ * @LastEditTime: 2021-07-20 20:06:00
  * @Description:
  */
 /**
@@ -61,6 +61,10 @@ export enum ErrorLevelEnum {
    * 日志信息
    */
   'INFO' = 'Info',
+  /**
+   * 用户自定义事件
+   */
+  'Custom' = 'Custom',
 }
 
 /**

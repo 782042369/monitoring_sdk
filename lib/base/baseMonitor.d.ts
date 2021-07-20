@@ -1,4 +1,5 @@
 import { DataProps, OptionsType } from '../type';
+import Breadcrumb from '../base/Breadcrumb';
 /**
  * 监控基类
  */
@@ -14,6 +15,7 @@ declare class BaseMonitor {
     extendsInfo: OptionsType['extendsInfo'];
     appID: OptionsType['appID'];
     selector: string;
+    Breadcrumb: Breadcrumb;
     /**
      * 上报错误地址
      * @param {*} params { reportUrl,extendsInfo }

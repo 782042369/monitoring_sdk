@@ -2,7 +2,7 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 18:15:10
  * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-20 19:32:43
+ * @LastEditTime: 2021-07-20 20:25:57
  * @Description:
  */
 import API from './api'
@@ -42,7 +42,7 @@ const TaskQueue: QueueProps = {
     }
     this.isStop = false
     const item = this.queues[0]
-    item.reportUrl && new API(item.reportUrl).report(item.data)
+    new API(item.reportUrl).report(item.data)
     this.queues.splice(0, 1)
     this.fire() // 递归
   },
