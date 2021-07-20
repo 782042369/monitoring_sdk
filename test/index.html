@@ -2,7 +2,7 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 18:15:30
  * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-20 13:34:37
+ * @LastEditTime: 2021-07-20 14:04:13
  * @Description:
 -->
 <!DOCTYPE html>
@@ -11,9 +11,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
+    <title>性能监控</title>
     <script src="../lib/index.js"></script>
-    <script src="../node_modules/vue/dist/vue.min.js"></script>
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
@@ -25,29 +24,10 @@
           </div>
         </div>
       </div>
-    </div>
-    <div id="app">
-      <button @click="func2">性能监听</button>
-      <br /><br />
       <img
-        src="https://pic.xiaohuochai.site/blog/chromePerformance1.png"
+        src="https://camo.githubusercontent.com/9f1292f0e9356dab9d9094bca540fd55b1981fa7/68747470733a2f2f75706c6f61642d696d616765732e6a69616e7368752e696f2f75706c6f61645f696d616765732f333239303032382d313534636437373333613061353438362e6a70673f696d6167654d6f6772322f6175746f2d6f7269656e742f7374726970253743696d61676556696577322f322f772f31323430"
         alt=""
-        width="100%"
       />
-      {{ message +'1'}}
-      <br /><br /><br /><br />
-      <img
-        src="https://pic.xiaohuochai.site/blog/browserRender5.png"
-        alt=""
-        width="100%"
-      />
-      {{ message +'2'}}
-      <br /><br /><br /><br />
-      <img :src="src3" alt="" width="100%" />
-      {{ message +'3'}}
-      <br /><br /><br /><br />
-      <img :src="src4" alt="" width="100%" />
-      {{ message +'4'}}
     </div>
   </body>
 </html>
@@ -56,42 +36,17 @@
   new MonitorJS().init({
     appID: '1111',
     url: 'http://baidu.com/api', //上报错误地址
-    vueError: true, //是否上报Vue错误
-    vue: Vue,
     isPage: true,
     isResource: true,
   })
-  //*
-  let vm = new Vue({
-    el: '#app',
-    data: {
-      message: '--------------------------------',
-      src3: 'https://pic.xiaohuochai.site/blog/chromePerformance2_error.png',
-      src4: '',
-    },
-
-    created() {
-      this.func1().then((ret) => {
-        throw new Error('promise error 22222222222') //promise_error
-      })
-      ss() //vue_error
-    },
-    mounted() {
-      setTimeout(() => {
-        this.src4 =
-          'https://camo.githubusercontent.com/9f1292f0e9356dab9d9094bca540fd55b1981fa7/68747470733a2f2f75706c6f61642d696d616765732e6a69616e7368752e696f2f75706c6f61645f696d616765732f333239303032382d313534636437373333613061353438362e6a70673f696d6167654d6f6772322f6175746f2d6f7269656e742f7374726970253743696d61676556696577322f322f772f31323430'
-      }, 5000)
-    },
-
-    methods: {
-      func1() {
-        return new Promise((resolve, reject) => {
-          resolve()
-        })
-      },
-      func2() {},
-    },
-  })
-  //*/
-  ss() //js_error
+  setTimeout(() => {
+    console.log(1)
+    new Promise((resolve, reject) => {
+      resolve()
+    }).then(() => {
+      throw new Error('promise error 22222222222') //promise_error
+    })
+    ss() //js_error
+  }, 0)
+  fn()
 </script>
