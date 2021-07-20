@@ -1,12 +1,10 @@
 import BaseMonitor from '../base/baseMonitor';
+import { ParamsType } from './type';
 /**
  * 捕获JS错误
  */
 declare class JSError extends BaseMonitor {
-    constructor(params: {
-        reportUrl: string;
-        extendsInfo: any;
-    });
+    constructor(params: ParamsType);
     /**
      * 注册onerror事件
      */

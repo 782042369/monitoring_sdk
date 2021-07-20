@@ -2,16 +2,18 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 18:33:32
  * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-19 18:33:32
+ * @LastEditTime: 2021-07-20 11:03:43
  * @Description:
  */
 import BaseMonitor from '../base/baseMonitor'
 import { ErrorCategoryEnum, ErrorLevelEnum } from '../base/baseConfig'
+import { ParamsType } from './type'
+
 /**
  * console.error异常
  */
 class ConsoleError extends BaseMonitor {
-  constructor(params: { reportUrl: string; extendsInfo: any }) {
+  constructor(params: ParamsType) {
     super(params)
   }
 
@@ -73,8 +75,8 @@ class ConsoleError extends BaseMonitor {
     try {
       this.level = level
       let params = [...args]
-      this.msg = params.join('\r\n') //换行符分割
-      this.url = location.href //当前地址
+      this.msg = params.join('\r\n') // 换行符分割
+      this.url = location.href // 当前地址
       this.category = category
       this.recordError()
     } catch (error) {
@@ -87,7 +89,7 @@ class ConsoleError extends BaseMonitor {
  * 初始化console事件
  */
 ;(function () {
-  //创建空console对象，避免JS报错
+  // 创建空console对象，避免JS报错
   if (!window.console) {
     ;(window as any).console = {}
   }

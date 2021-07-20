@@ -1,6 +1,7 @@
 export declare function checkUrl(url: string | undefined): boolean;
 export declare function isFunction(func: any): boolean;
 export declare function isArray(list: any): boolean;
+export declare function isUndefined(list: any): boolean;
 /**
  * 是否为null
  * @param {String} str

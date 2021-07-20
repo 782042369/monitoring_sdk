@@ -1,12 +1,10 @@
 import BaseMonitor from '../base/baseMonitor';
+import { ParamsType } from './type';
 /**
  * 捕获未处理的Promise异常
  */
 declare class PromiseError extends BaseMonitor {
-    constructor(params: {
-        reportUrl: string;
-        extendsInfo: any;
-    });
+    constructor(params: ParamsType);
     /**
      * 处理错误
      */

@@ -1,15 +1,10 @@
+import { ParamsType } from './type';
 /**
  * ajax error异常
  */
 declare class AjaxError {
-    params: {
-        reportUrl: string;
-        extendsInfo: {};
-    };
-    constructor(params: {
-        reportUrl: string;
-        extendsInfo: {};
-    });
+    params: ParamsType;
+    constructor(params: ParamsType);
     /**
      * 处理错误
      * @param type {*} ajax库类型

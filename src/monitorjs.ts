@@ -2,7 +2,7 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 16:17:00
  * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-20 10:22:13
+ * @LastEditTime: 2021-07-20 10:59:45
  * @Description:
  */
 
@@ -27,9 +27,7 @@ interface OptionsType {
   ajaxError?: boolean
   vueError?: boolean
   vue?: boolean
-  extendsInfo: {
-    [x: string]: any
-  }
+  extendsInfo: Record<string, any>
 }
 
 class MonitorJS {
@@ -50,21 +48,21 @@ class MonitorJS {
    * @param {*} options
    */
   init(options: OptionsType) {
-    if (!options.url || checkUrl(options.url)) {
+    if (!options?.url || !checkUrl(options.url)) {
       throw `url is error,${options.url}`
     }
-    if (!options.appID || checkUrl(options.url)) {
-      throw `url is error,${options.url}`
+    if (!options?.appID) {
+      throw `appID is error,${options.url}`
     }
     this.jsError = !(options?.jsError === false)
     this.promiseError = !(options?.promiseError === false)
     this.resourceError = !(options?.resourceError === false)
     this.ajaxError = !(options?.ajaxError === false)
-    this.vueError = options?.vueError === true //显式配置
-    const reportUrl = options.url //上报错误地址
-    const appID = options.appID // 上报id
-    const extendsInfo = options.extendsInfo || {} //扩展信息（一般用于系统个性化分析）
-    const param = { reportUrl, extendsInfo, appID }
+    this.vueError = options?.vueError === true // 显式配置
+    const reportUrl = options.url // 上报错误地址
+    const appId = options.appID // 上报id
+    const extendsInfo = options.extendsInfo || {} // 扩展信息（一般用于系统个性化分析）
+    const param = { reportUrl, extendsInfo, appId }
 
     if (this.jsError) {
       new JsError(param).handleError()

@@ -11,14 +11,16 @@ declare class BaseMonitor {
     col: string;
     errorObj: ObjectProps;
     reportUrl: string;
-    extendsInfo: any;
+    extendsInfo: Record<string, any>;
+    appId: string;
     /**
      * 上报错误地址
      * @param {*} params { reportUrl,extendsInfo }
      */
     constructor(params: {
         reportUrl: string;
-        extendsInfo: any;
+        extendsInfo: Record<string, any>;
+        appId: string;
     });
     /**
      * 记录错误信息

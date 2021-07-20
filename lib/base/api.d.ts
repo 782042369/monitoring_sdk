@@ -22,8 +22,6 @@ declare class API {
      * sendBeacon上报
      */
     reportByNavigator(data: DataProps): void;
-    formatParams(data: {
-        [x: string]: any;
-    }): string;
+    formatParams(data: Record<string, any>): string;
 }
 export default API;

@@ -1,12 +1,10 @@
 import BaseMonitor from '../base/baseMonitor';
+import { ParamsType } from './type';
 /**
  * 资源加载错误
  */
 declare class ResourceError extends BaseMonitor {
-    constructor(params: {
-        reportUrl: string;
-        extendsInfo: any;
-    });
+    constructor(params: ParamsType);
     /**
      * 注册onerror事件
      */

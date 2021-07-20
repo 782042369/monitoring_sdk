@@ -15,21 +15,27 @@ class BaseMonitor {
   col: string
   errorObj: ObjectProps
   reportUrl: string
-  extendsInfo: any
+  extendsInfo: Record<string, any>
+  appId: string
   /**
    * 上报错误地址
    * @param {*} params { reportUrl,extendsInfo }
    */
-  constructor(params: { reportUrl: string; extendsInfo: any }) {
-    this.category = ErrorCategoryEnum.UNKNOW_ERROR //错误类型
-    this.level = ErrorLevelEnum.INFO //错误等级
-    this.msg = '' //错误信息
-    this.url = '' //错误信息地址
-    this.line = '' //行数
-    this.col = '' //列数
-    this.errorObj = {} //错误堆栈
-    this.reportUrl = params.reportUrl //上报错误地址
-    this.extendsInfo = params.extendsInfo //扩展信息
+  constructor(params: {
+    reportUrl: string
+    extendsInfo: Record<string, any>
+    appId: string
+  }) {
+    this.category = ErrorCategoryEnum.UNKNOW_ERROR // 错误类型
+    this.level = ErrorLevelEnum.INFO // 错误等级
+    this.msg = '' // 错误信息
+    this.url = '' // 错误信息地址
+    this.line = '' // 行数
+    this.col = '' // 列数
+    this.errorObj = {} // 错误堆栈
+    this.reportUrl = params.reportUrl // 上报错误地址
+    this.extendsInfo = params.extendsInfo // 扩展信息
+    this.appId = params.appId // 应用id
   }
 
   /**
@@ -37,9 +43,9 @@ class BaseMonitor {
    */
   recordError() {
     this.handleRecordError()
-    //延迟记录日志
+    // 延迟记录日志
     setTimeout(() => {
-      TaskQueue.isStop && TaskQueue.fire() //停止则fire
+      TaskQueue.isStop && TaskQueue.fire() // 停止则fire
     }, 100)
   }
 
@@ -51,7 +57,7 @@ class BaseMonitor {
       if (!this.msg) {
         return
       }
-      //过滤掉错误上报地址
+      // 过滤掉错误上报地址
       if (
         this.reportUrl &&
         this.url &&
@@ -67,7 +73,7 @@ class BaseMonitor {
         errorInfo
       )
 
-      //记录日志
+      // 记录日志
       TaskQueue.add(this.reportUrl, errorInfo)
     } catch (error) {
       console.log(error)
@@ -80,7 +86,6 @@ class BaseMonitor {
    */
   handleErrorInfo() {
     let txt = 'errortype: ' + this.category + '\r\n'
-    console.log('this: ', this)
     txt += 'loginformation: ' + this.msg + '\r\n'
     txt += 'url: ' + encodeURIComponent(this.url) + '\r\n'
     switch (this.category) {
@@ -98,10 +103,11 @@ class BaseMonitor {
     const deviceInfo = this.getDeviceInfo()
     const extendsInfo = this.getExtendsInfo()
     const recordInfo = extendsInfo
-    recordInfo.category = this.category //错误分类
-    recordInfo.logType = this.level //错误级别
-    recordInfo.logInfo = txt //错误信息
-    recordInfo.deviceInfo = deviceInfo //设备信息
+    recordInfo.category = this.category // 错误分类
+    recordInfo.logType = this.level // 错误级别
+    recordInfo.logInfo = txt // 错误信息
+    recordInfo.deviceInfo = deviceInfo // 设备信息
+    recordInfo.appId = this.appId // 应用id
     return recordInfo
   }
 
@@ -114,16 +120,16 @@ class BaseMonitor {
       let extendsInfo = this.extendsInfo || {}
       let dynamicParams
       if (isFunction(extendsInfo.getDynamic)) {
-        dynamicParams = extendsInfo.getDynamic() //获取动态参数
+        dynamicParams = extendsInfo.getDynamic() // 获取动态参数
       }
-      //判断动态方法返回的参数是否是对象
+      // 判断动态方法返回的参数是否是对象
       if (isObject(dynamicParams)) {
         extendsInfo = { ...extendsInfo, ...dynamicParams }
       }
-      //遍历扩展信息，排除动态方法
+      // 遍历扩展信息，排除动态方法
       for (const key in extendsInfo) {
         if (!isFunction(extendsInfo[key])) {
-          //排除获取动态方法
+          // 排除获取动态方法
           ret[key] = extendsInfo[key]
         }
       }

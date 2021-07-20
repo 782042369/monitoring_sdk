@@ -9,9 +9,7 @@ interface OptionsType {
     ajaxError?: boolean;
     vueError?: boolean;
     vue?: boolean;
-    extendsInfo: {
-        [x: string]: any;
-    };
+    extendsInfo: Record<string, any>;
 }
 declare class MonitorJS {
     jsError: boolean;

@@ -45,7 +45,7 @@ let TaskQueue: QueueProps = {
     let item = this.queues[0]
     item.reportUrl && new API(item.reportUrl).report(item.data)
     this.queues.splice(0, 1)
-    this.fire() //递归
+    this.fire() // 递归
   },
 }
 

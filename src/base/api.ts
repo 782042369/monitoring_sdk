@@ -1,3 +1,10 @@
+/*
+ * @Author: 杨宏旋
+ * @Date: 2021-07-19 18:15:10
+ * @LastEditors: 杨宏旋
+ * @LastEditTime: 2021-07-20 11:00:04
+ * @Description:
+ */
 import { checkUrl } from '../util'
 import { DataProps } from './typpe'
 /**
@@ -44,7 +51,7 @@ class API {
     try {
       const xhr = new XMLHttpRequest()
       xhr.open('POST', this.url, true)
-      //xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
       xhr.setRequestHeader('Content-Type', 'application/json')
       xhr.send(dataStr)
     } catch (error) {
@@ -83,7 +90,7 @@ class API {
   /*
    *格式化参数
    */
-  formatParams(data: { [x: string]: any }) {
+  formatParams(data: Record<string, any>) {
     const arr = []
     for (const name in data) {
       arr.push(encodeURIComponent(name) + '=' + encodeURIComponent(data[name]))

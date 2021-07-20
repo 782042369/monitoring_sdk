@@ -2,16 +2,18 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 16:36:31
  * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-19 17:48:58
+ * @LastEditTime: 2021-07-20 11:04:22
  * @Description:
  */
 import BaseMonitor from '../base/baseMonitor'
 import { ErrorCategoryEnum, ErrorLevelEnum } from '../base/baseConfig'
+import { ParamsType } from './type'
+
 /**
  * 资源加载错误
  */
 class ResourceError extends BaseMonitor {
-  constructor(params: { reportUrl: string; extendsInfo: any }) {
+  constructor(params: ParamsType) {
     super(params)
   }
 

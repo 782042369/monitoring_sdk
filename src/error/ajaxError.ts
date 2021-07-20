@@ -4,13 +4,13 @@ import {
   AjaxLibEnum,
   ErrorLevelEnum,
 } from '../base/baseConfig'
-
+import { ParamsType } from './type'
 /**
  * ajax error异常
  */
 class AjaxError {
-  params: { reportUrl: string; extendsInfo: {} }
-  constructor(params: { reportUrl: string; extendsInfo: {} }) {
+  params: ParamsType
+  constructor(params: ParamsType) {
     this.params = params
   }
   /**
@@ -36,7 +36,11 @@ export default AjaxError
  * Axios类库 错误信息处理(如果不配置，可以统一通过XHR接受错误信息)
  */
 class AxiosError extends BaseMonitor {
-  constructor(params: { reportUrl: string; extendsInfo: any }) {
+  constructor(params: {
+    reportUrl: string
+    extendsInfo: Record<string, any>
+    appId: string
+  }) {
     super(params)
   }
 
@@ -55,7 +59,11 @@ class AxiosError extends BaseMonitor {
  * 获取HTTP错误信息
  */
 class XHRError extends BaseMonitor {
-  constructor(params: { reportUrl: string; extendsInfo: any }) {
+  constructor(params: {
+    reportUrl: string
+    extendsInfo: Record<string, any>
+    appId: string
+  }) {
     super(params)
   }
 

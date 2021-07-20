@@ -1,6 +1,4 @@
-declare let DeviceInfo: {
-    getDeviceInfo(params?: any): {
-        [x: string]: string;
-    };
+declare const DeviceInfo: {
+    getDeviceInfo(params?: any): Record<string, string | number>;
 };
 export default DeviceInfo;

@@ -2,17 +2,18 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 16:36:31
  * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-19 17:49:14
+ * @LastEditTime: 2021-07-20 11:10:21
  * @Description:
  */
 import BaseMonitor from '../base/baseMonitor'
 import { ErrorCategoryEnum, ErrorLevelEnum } from '../base/baseConfig'
+import type { ParamsType } from './type'
 
 /**
  * vue错误
  */
 class VueError extends BaseMonitor {
-  constructor(params: { reportUrl: string; extendsInfo: any }) {
+  constructor(params: ParamsType) {
     super(params)
   }
 

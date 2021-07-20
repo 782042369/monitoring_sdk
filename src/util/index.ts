@@ -2,14 +2,16 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 16:25:42
  * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-19 17:54:27
+ * @LastEditTime: 2021-07-20 10:40:07
  * @Description:
  */
+
 export function checkUrl(url: string | undefined): boolean {
   if (!url) {
     return false
   }
-  const urlRule = /^[hH][tT][tT][pP]([sS]?):\/\//
+  const urlRule =
+    /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/
   return urlRule.test(url)
 }
 function type(obj: any) {
@@ -23,12 +25,16 @@ export function isFunction(func: any) {
 export function isArray(list: any) {
   return type(list) === 'Array'
 }
+
+export function isUndefined(list: any) {
+  return type(list) === 'Undefined'
+}
 /**
  * 是否为null
  * @param {String} str
  */
 export function isNull(str: string) {
-  return str == undefined || str == '' || str == null
+  return str === undefined || str === '' || str === null
 }
 
 /**
@@ -54,14 +60,14 @@ export class MyDate extends Date {
 }
 MyDate.prototype.format = function (fmt: string) {
   const o: any = {
-    'M+': this.getMonth() + 1, //月份
-    'd+': this.getDate(), //日
-    'h+': this.getHours() % 12 == 0 ? 12 : this.getHours() % 12, //小时
-    'H+': this.getHours(), //小时
-    'm+': this.getMinutes(), //分
-    's+': this.getSeconds(), //秒
-    'q+': Math.floor((this.getMonth() + 3) / 3), //季度
-    S: this.getMilliseconds(), //毫秒
+    'M+': this.getMonth() + 1, // 月份
+    'd+': this.getDate(), // 日
+    'h+': this.getHours() % 12 === 0 ? 12 : this.getHours() % 12, // 小时
+    'H+': this.getHours(), // 小时
+    'm+': this.getMinutes(), // 分
+    's+': this.getSeconds(), // 秒
+    'q+': Math.floor((this.getMonth() + 3) / 3), // 季度
+    S: this.getMilliseconds(), // 毫秒
   }
   const week: any = {
     '0': '/u65e5',
@@ -92,7 +98,7 @@ MyDate.prototype.format = function (fmt: string) {
     if (new RegExp('(' + k + ')').test(fmt)) {
       fmt = fmt.replace(
         RegExp.$1,
-        RegExp.$1.length == 1 ? o[k] : ('00' + o[k]).substr(('' + o[k]).length)
+        RegExp.$1.length === 1 ? o[k] : ('00' + o[k]).substr(('' + o[k]).length)
       )
     }
   }

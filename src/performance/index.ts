@@ -18,13 +18,13 @@ class MonitorPerformance extends BaseMonitor {
     super(options)
     options.isPage = options.isPage !== false
     options.isResource = options.isResource !== false
-    this.isPage = options.isPage //是否上报页面性能数据
-    this.isResource = options.isResource //是否上报页面资源数据
+    this.isPage = options.isPage // 是否上报页面性能数据
+    this.isResource = options.isResource // 是否上报页面资源数据
     this.usefulType = this.getSourceType(options)
     this.outTime = 50
     this.config = {
-      resourceList: [], //资源列表
-      performance: {}, //页面性能列表
+      resourceList: [], // 资源列表
+      performance: {}, // 页面性能列表
     }
     this.category = ErrorCategoryEnum.PERFORMANCE
     this.pageId = options.pageId || ''
@@ -36,13 +36,13 @@ class MonitorPerformance extends BaseMonitor {
    * @param {*} options
    */
   getSourceType(options: any) {
-    const usefulType = [] //'navigation'
-    options.isRScript !== false && usefulType.push('script') //资源数据细分，是否上报script数据
-    options.isRCSS !== false && usefulType.push('css') //资源数据细分，是否上报CSS数据
-    options.isRFetch !== false && usefulType.push('fetch') //资源数据细分，是否上报Fetch数据
-    options.isRXHR !== false && usefulType.push('xmlhttprequest') //资源数据细分，是否上报XHR数据
-    options.isRLink !== false && usefulType.push('link') //资源数据细分，是否上报Link数据
-    options.isRIMG !== false && usefulType.push('img') //资源数据细分，是否上报IMG数据
+    const usefulType = [] // 'navigation'
+    options.isRScript !== false && usefulType.push('script') // 资源数据细分，是否上报script数据
+    options.isRCSS !== false && usefulType.push('css') // 资源数据细分，是否上报CSS数据
+    options.isRFetch !== false && usefulType.push('fetch') // 资源数据细分，是否上报Fetch数据
+    options.isRXHR !== false && usefulType.push('xmlhttprequest') // 资源数据细分，是否上报XHR数据
+    options.isRLink !== false && usefulType.push('link') // 资源数据细分，是否上报Link数据
+    options.isRIMG !== false && usefulType.push('img') // 资源数据细分，是否上报IMG数据
     return usefulType
   }
 
@@ -75,7 +75,7 @@ class MonitorPerformance extends BaseMonitor {
         pageId: this.pageId,
       }
       localStorage.setItem('page_performance', JSON.stringify(data))
-      //发送监控数据
+      // 发送监控数据
       new API(this.url).report(data)
       this.clearPerformance()
     } catch (error) {

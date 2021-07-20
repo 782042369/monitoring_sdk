@@ -2,7 +2,7 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 16:15:37
  * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-20 10:23:16
+ * @LastEditTime: 2021-07-20 11:15:45
  * @Description:
  */
 import path from 'path'
@@ -37,16 +37,16 @@ const commonConf = {
   plugins: [
     resolve(extensions),
     esPlugin,
-    commonjs({
-      exclude: 'node_modules',
-      include: 'src',
-    }),
+    // commonjs({
+    //   exclude: 'node_modules',
+    //   include: 'src',
+    // }),
     tsPlugin,
     babel({
       exclude: 'node_modules/**',
       extensions,
     }),
-    terser({ compress: { drop_console: false } }),
+    // terser({ compress: { drop_console: false } }),
   ],
 }
 // 需要导出的模块类型
