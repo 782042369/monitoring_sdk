@@ -2,7 +2,7 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 16:15:37
  * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-20 13:44:42
+ * @LastEditTime: 2021-07-20 14:33:03
  * @Description:
  */
 import path from 'path'
@@ -30,7 +30,6 @@ const esPlugin = eslint({
   exclude: ['node_modules/**', 'lib/**'],
   fix: true,
 })
-
 // 基础配置
 const commonConf = {
   input: getPath('./src/index.ts'),
@@ -53,6 +52,7 @@ const outputMap = [
   {
     file: 'lib/index.js', // 通用模块
     format: 'umd',
+    plugins: [terser({ compress: { drop_console: true } })],
   },
   {
     file: packageJSON.main, // 通用模块
