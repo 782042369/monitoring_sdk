@@ -2,7 +2,7 @@ import { ErrorLevelEnum, ErrorCategoryEnum } from '../enum'
 import DeviceInfo from '../device'
 import { isFunction, isObject } from '../utils'
 import TaskQueue from './taskQueue'
-import { ObjectProps } from './typpe'
+import { DataProps, OptionsType } from '../type'
 /**
  * 监控基类
  */
@@ -13,19 +13,19 @@ class BaseMonitor {
   url: string
   line: string
   col: string
-  errorObj: ObjectProps
-  reportUrl: string
-  extendsInfo: Record<string, any>
-  appID: string
+  errorObj: DataProps
+  reportUrl: OptionsType['reportUrl']
+  extendsInfo: OptionsType['extendsInfo']
+  appID: OptionsType['appID']
   selector: string
   /**
    * 上报错误地址
    * @param {*} params { reportUrl,extendsInfo }
    */
   constructor(params: {
-    reportUrl: string
-    extendsInfo: Record<string, any>
-    appID: string
+    reportUrl: OptionsType['reportUrl']
+    extendsInfo: OptionsType['extendsInfo']
+    appID: OptionsType['appID']
   }) {
     this.category = ErrorCategoryEnum.UNKNOW_ERROR // 错误类型
     this.level = ErrorLevelEnum.INFO // 错误等级
@@ -87,7 +87,7 @@ class BaseMonitor {
    * @param {*} extendsInfo
    */
   handleErrorInfo() {
-    const txt: Record<string, any> = {
+    const txt: DataProps = {
       loginformation: this.msg,
       url: encodeURIComponent(this.url),
     }
@@ -121,7 +121,7 @@ class BaseMonitor {
    */
   getExtendsInfo() {
     try {
-      const ret: ObjectProps = {}
+      const ret: DataProps = {}
       let extendsInfo = this.extendsInfo || {}
       let dynamicParams
       if (isFunction(extendsInfo.getDynamic)) {

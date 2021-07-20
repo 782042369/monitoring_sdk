@@ -7,6 +7,7 @@ import { ErrorLevelEnum, ErrorCategoryEnum } from '../enum/index.js'
 import API from '../base/api.js'
 import { MyDate } from '../utils'
 import { OptionsType } from '../type'
+import { DataProps } from '../type'
 
 class MonitorPerformance extends BaseMonitor {
   isPage: any
@@ -45,9 +46,9 @@ class MonitorPerformance extends BaseMonitor {
    * @param {*} options
    */
   getSourceType(options: {
-    reportUrl: string
-    appID: string
-    extendsInfo?: Record<string, any>
+    reportUrl: OptionsType['reportUrl']
+    appID: OptionsType['appID']
+    extendsInfo?: DataProps
     isPage?: boolean
     isResource?: boolean
     isRScript?: boolean

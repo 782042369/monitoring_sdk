@@ -1,4 +1,4 @@
-import { DataProps } from './typpe';
+import { DataProps } from '../type';
 /**
  * 数据持久化
  */
@@ -17,6 +17,6 @@ declare class API {
      * 通过img方式上报信息
      */
     reportByImg(data: DataProps): void;
-    formatParams(data: Record<string, any>): string;
+    formatParams(data: DataProps): string;
 }
 export default API;

@@ -1,3 +1,5 @@
+import { DataProps } from '../type'
+
 /**
  * 页面监控
  */
@@ -9,7 +11,7 @@ const pagePerformance = {
         return
       }
       const t = window.performance.timing
-      const times: Record<string, any> = {}
+      const times: DataProps = {}
       const loadTime = t.loadEventEnd - t.loadEventStart
       if (loadTime < 0) {
         setTimeout(() => {
@@ -57,13 +59,13 @@ const pagePerformance = {
       console.info('该浏览器不支持performance.getEntries方法')
       return
     }
-    const entryTimesList: Record<string, any>[] = []
+    const entryTimesList: DataProps[] = []
     const entryList = window.performance.getEntries()
     if (!entryList || entryList.length === 0) {
       return entryTimesList
     }
-    entryList.forEach((item: Record<string, any>) => {
-      const templeObj: Record<string, any> = {}
+    entryList.forEach((item: DataProps) => {
+      const templeObj: DataProps = {}
       if (usefulType.indexOf(item.initiatorType) > -1) {
         // 请求资源路径
         templeObj.name = item.name

@@ -1,4 +1,4 @@
-import { ObjectProps } from './typpe';
+import { DataProps, OptionsType } from '../type';
 /**
  * 监控基类
  */
@@ -9,19 +9,19 @@ declare class BaseMonitor {
     url: string;
     line: string;
     col: string;
-    errorObj: ObjectProps;
-    reportUrl: string;
-    extendsInfo: Record<string, any>;
-    appID: string;
+    errorObj: DataProps;
+    reportUrl: OptionsType['reportUrl'];
+    extendsInfo: OptionsType['extendsInfo'];
+    appID: OptionsType['appID'];
     selector: string;
     /**
      * 上报错误地址
      * @param {*} params { reportUrl,extendsInfo }
      */
     constructor(params: {
-        reportUrl: string;
-        extendsInfo: Record<string, any>;
-        appID: string;
+        reportUrl: OptionsType['reportUrl'];
+        extendsInfo: OptionsType['extendsInfo'];
+        appID: OptionsType['appID'];
     });
     /**
      * 记录错误信息
@@ -35,11 +35,11 @@ declare class BaseMonitor {
      * 处理错误信息
      * @param {*} extendsInfo
      */
-    handleErrorInfo(): ObjectProps;
+    handleErrorInfo(): DataProps;
     /**
      * 获取扩展信息
      */
-    getExtendsInfo(): ObjectProps;
+    getExtendsInfo(): DataProps;
     /**
      * 获取设备信息
      */

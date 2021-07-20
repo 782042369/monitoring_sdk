@@ -1,5 +1,6 @@
 import BaseMonitor from '../base/baseMonitor';
 import { OptionsType } from '../type';
+import { DataProps } from '../type';
 declare class MonitorPerformance extends BaseMonitor {
     isPage: any;
     isResource: any;
@@ -18,9 +19,9 @@ declare class MonitorPerformance extends BaseMonitor {
      * @param {*} options
      */
     getSourceType(options: {
-        reportUrl: string;
-        appID: string;
-        extendsInfo?: Record<string, any>;
+        reportUrl: OptionsType['reportUrl'];
+        appID: OptionsType['appID'];
+        extendsInfo?: DataProps;
         isPage?: boolean;
         isResource?: boolean;
         isRScript?: boolean;

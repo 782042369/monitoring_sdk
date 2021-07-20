@@ -2,11 +2,11 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 18:15:10
  * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-20 13:15:05
+ * @LastEditTime: 2021-07-20 19:31:14
  * @Description:
  */
 import { checkUrl } from '../utils'
-import { DataProps } from './typpe'
+import { DataProps } from '../type'
 /**
  * 数据持久化
  */
@@ -84,7 +84,7 @@ class API {
   /*
    *格式化参数
    */
-  formatParams(data: Record<string, any>) {
+  formatParams(data: DataProps) {
     const arr = []
     for (const name in data) {
       arr.push(`${encodeURIComponent(name)}=${encodeURIComponent(data[name])}`)

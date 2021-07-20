@@ -1,6 +1,8 @@
 import BaseMonitor from '../base/baseMonitor'
 import { ErrorCategoryEnum, AjaxLibEnum, ErrorLevelEnum } from '../enum'
 import type { ParamsType } from './type'
+import { OptionsType } from '../type'
+
 /**
  * ajax error异常
  */
@@ -33,9 +35,9 @@ export default AjaxError
  */
 class AxiosError extends BaseMonitor {
   constructor(params: {
-    reportUrl: string
-    extendsInfo: Record<string, any>
-    appID: string
+    reportUrl: OptionsType['reportUrl']
+    extendsInfo: OptionsType['extendsInfo']
+    appID: OptionsType['appID']
   }) {
     super(params)
   }
@@ -56,9 +58,9 @@ class AxiosError extends BaseMonitor {
  */
 class XHRError extends BaseMonitor {
   constructor(params: {
-    reportUrl: string
-    extendsInfo: Record<string, any>
-    appID: string
+    reportUrl: OptionsType['reportUrl']
+    extendsInfo: OptionsType['extendsInfo']
+    appID: OptionsType['appID']
   }) {
     super(params)
   }

@@ -2,11 +2,13 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 18:15:10
  * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-20 19:03:45
+ * @LastEditTime: 2021-07-20 19:32:43
  * @Description:
  */
 import API from './api'
-import { DataProps, QueueProps } from './typpe'
+import { QueueProps } from './typpe'
+import { OptionsType, DataProps } from '../type'
+
 /**
  * 消息队列
  */
@@ -26,7 +28,7 @@ const TaskQueue: QueueProps = {
    * @param {*} reportUrl 上报url
    * @param {*} data 上报数据
    */
-  add(reportUrl: string, data: DataProps) {
+  add(reportUrl: OptionsType['reportUrl'], data: DataProps) {
     this.queues.push({ reportUrl, data })
   },
 
