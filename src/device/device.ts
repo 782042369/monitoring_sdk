@@ -32,7 +32,7 @@ const DeviceInfo = (() => {
         }
         const infoTemp: Record<string, number | string> = {}
         for (const i in info) {
-          params.info.forEach(function (item: string) {
+          params.info.forEach((item: string) => {
             if (item.toLowerCase() === i.toLowerCase()) {
               item = i
               infoTemp[item] = info[item]

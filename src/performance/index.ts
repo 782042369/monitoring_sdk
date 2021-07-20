@@ -1,10 +1,10 @@
 /**
  * 监控工具
  */
-import pagePerformance from './performance'
+import pagePerformance from './performance.js'
 import BaseMonitor from '../base/baseMonitor'
-import { ErrorLevelEnum, ErrorCategoryEnum } from '../base/baseConfig'
-import API from '../base/api'
+import { ErrorLevelEnum, ErrorCategoryEnum } from '../base/baseConfig.js'
+import API from '../base/api.js'
 import { MyDate } from '../util'
 
 class MonitorPerformance extends BaseMonitor {
@@ -13,9 +13,24 @@ class MonitorPerformance extends BaseMonitor {
   usefulType: string[]
   outTime: number
   config: any
-  pageId: any
-  constructor(options: any) {
-    super(options)
+  constructor(options: {
+    isPage: boolean
+    isResource: boolean
+    url: string
+    appID: string
+    jsError?: boolean
+    promiseError?: boolean
+    resourceError?: boolean
+    ajaxError?: boolean
+    vueError?: boolean
+    vue?: boolean
+    extendsInfo: Record<string, any>
+  }) {
+    super({
+      reportUrl: options.appID,
+      extendsInfo: options.extendsInfo,
+      appId: options.appID,
+    })
     options.isPage = options.isPage !== false
     options.isResource = options.isResource !== false
     this.isPage = options.isPage // 是否上报页面性能数据
@@ -27,7 +42,6 @@ class MonitorPerformance extends BaseMonitor {
       performance: {}, // 页面性能列表
     }
     this.category = ErrorCategoryEnum.PERFORMANCE
-    this.pageId = options.pageId || ''
     this.url = options.url || ''
   }
 
@@ -35,7 +49,25 @@ class MonitorPerformance extends BaseMonitor {
    * 获取需要上报资源数据类型
    * @param {*} options
    */
-  getSourceType(options: any) {
+  getSourceType(options: {
+    isPage?: boolean
+    isResource?: boolean
+    url?: string
+    appID?: string
+    jsError?: boolean | undefined
+    promiseError?: boolean | undefined
+    resourceError?: boolean | undefined
+    ajaxError?: boolean | undefined
+    vueError?: boolean | undefined
+    vue?: boolean | undefined
+    extendsInfo?: Record<string, any>
+    isRScript?: any
+    isRCSS?: any
+    isRFetch?: any
+    isRXHR?: any
+    isRLink?: any
+    isRIMG?: any
+  }) {
     const usefulType = [] // 'navigation'
     options.isRScript !== false && usefulType.push('script') // 资源数据细分，是否上报script数据
     options.isRCSS !== false && usefulType.push('css') // 资源数据细分，是否上报CSS数据
@@ -72,18 +104,17 @@ class MonitorPerformance extends BaseMonitor {
         category: this.category,
         logType: ErrorLevelEnum.INFO,
         logInfo: JSON.stringify(result),
-        pageId: this.pageId,
       }
       localStorage.setItem('page_performance', JSON.stringify(data))
       // 发送监控数据
       new API(this.url).report(data)
       this.clearPerformance()
     } catch (error) {
-      console.log('性能信息上报异常', error)
+      console.info('性能信息上报异常', error)
     }
   }
 
-  randomString(len: number = 10) {
+  randomString(len: number | undefined = 10) {
     const $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz123456789'
     const maxPos = $chars.length
     let pwd = ''
@@ -109,14 +140,17 @@ class MonitorPerformance extends BaseMonitor {
    * 获得Uv
    */
   markUv() {
-    const date = new Date()
+    const date = new MyDate()
     let psMarkUv = localStorage.getItem('ps_markUv') || ''
     const datatime: any = localStorage.getItem('ps_markUvTime') || ''
-    const today: any = new MyDate().format('yyyy/MM/dd 23:59:59')
+    const today = date.format('yyyy/MM/dd 23:59:59')
     if ((!psMarkUv && !datatime) || date.getTime() > datatime * 1) {
       psMarkUv = this.randomString()
       localStorage.setItem('ps_markUv', psMarkUv)
-      localStorage.setItem('ps_markUvTime', new Date(today).getTime() + '')
+      localStorage.setItem(
+        'ps_markUvTime',
+        JSON.stringify(new Date(today).getTime())
+      )
     }
     return psMarkUv
   }

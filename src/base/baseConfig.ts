@@ -38,27 +38,6 @@ export class ErrorCategoryEnum {
   }
 
   /**
-   * 控制台错误console.info
-   */
-  static get CONSOLE_INFO() {
-    return 'console_info'
-  }
-
-  /**
-   * 控制台错误console.warn
-   */
-  static get CONSOLE_WARN() {
-    return 'console_warn'
-  }
-
-  /**
-   * 控制台错误console.error
-   */
-  static get CONSOLE_ERROR() {
-    return 'console_error'
-  }
-
-  /**
    * 跨域js错误
    */
   static get CROSS_SCRIPT_ERROR() {
@@ -80,7 +59,7 @@ export class ErrorCategoryEnum {
   }
 
   /**
-   * 网速上报
+   * 接口请求速度上报
    */
   static get NETWORK_SPEED() {
     return 'network_speed'

@@ -2,7 +2,7 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 18:15:10
  * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-20 11:00:04
+ * @LastEditTime: 2021-07-20 13:15:05
  * @Description:
  */
 import { checkUrl } from '../util'
@@ -17,12 +17,10 @@ class API {
   }
   /**
    * 上报信息 （默认方式）
-   * isFetch ：是否优先通过fetch上报
    */
   report(data: DataProps) {
     if (!checkUrl(this.url)) {
-      console.log('上报信息url地址格式不正确,url=', this.url)
-      return
+      throw `上报信息url地址格式不正确,url=${this.url}`
     }
     this.reportByImg(data)
   }
@@ -46,7 +44,7 @@ class API {
         return
       }
     } catch (error) {
-      console.log('fetch请求异常', error)
+      console.info('fetch请求异常', error)
     }
     try {
       const xhr = new XMLHttpRequest()
@@ -55,7 +53,7 @@ class API {
       xhr.setRequestHeader('Content-Type', 'application/json')
       xhr.send(dataStr)
     } catch (error) {
-      console.log(error)
+      console.info(error)
     }
   }
 
@@ -64,28 +62,24 @@ class API {
    */
   reportByImg(data: DataProps) {
     if (!checkUrl(this.url)) {
-      console.log('上报信息url地址格式不正确,url=', this.url)
-      return
+      throw `上报信息url地址格式不正确,url=${this.url}`
     }
     try {
       const img = new Image()
-      img.src =
-        this.url +
-        '/up.gif?v=' +
-        new Date().getTime() +
-        '&' +
-        this.formatParams(data)
+      img.src = `${
+        this.url
+      }/up.gif?v=${new Date().getTime()}&${this.formatParams(data)}`
     } catch (error) {
-      console.log(error)
+      console.info(error)
     }
   }
 
-  /**
-   * sendBeacon上报
-   */
-  reportByNavigator(data: DataProps) {
-    navigator.sendBeacon && navigator.sendBeacon(this.url, data)
-  }
+  // /**
+  //  * sendBeacon上报
+  //  */
+  // reportByNavigator(data: DataProps) {
+  //   navigator.sendBeacon && navigator.sendBeacon(this.url, data)
+  // }
 
   /*
    *格式化参数
@@ -93,7 +87,7 @@ class API {
   formatParams(data: Record<string, any>) {
     const arr = []
     for (const name in data) {
-      arr.push(encodeURIComponent(name) + '=' + encodeURIComponent(data[name]))
+      arr.push(`${encodeURIComponent(name)}=${encodeURIComponent(data[name])}`)
     }
     return arr.join('&')
   }

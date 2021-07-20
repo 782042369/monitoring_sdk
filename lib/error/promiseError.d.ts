@@ -1,5 +1,5 @@
 import BaseMonitor from '../base/baseMonitor';
-import { ParamsType } from './type';
+import type { ParamsType } from './type';
 /**
  * 捕获未处理的Promise异常
  */

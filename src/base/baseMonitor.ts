@@ -17,6 +17,7 @@ class BaseMonitor {
   reportUrl: string
   extendsInfo: Record<string, any>
   appId: string
+  selector: string
   /**
    * 上报错误地址
    * @param {*} params { reportUrl,extendsInfo }
@@ -36,6 +37,7 @@ class BaseMonitor {
     this.reportUrl = params.reportUrl // 上报错误地址
     this.extendsInfo = params.extendsInfo // 扩展信息
     this.appId = params.appId // 应用id
+    this.selector = '' // 触发错误的元素
   }
 
   /**
@@ -63,20 +65,20 @@ class BaseMonitor {
         this.url &&
         this.url.toLowerCase().indexOf(this.reportUrl.toLowerCase()) >= 0
       ) {
-        console.log('统计错误接口异常', this.msg)
+        console.info('统计错误接口异常', this.msg)
         return
       }
       const errorInfo = this.handleErrorInfo()
 
       console.log(
-        '\n````````````````````` ' + this.category + ' `````````````````````\n',
+        `------------------------ ${this.category} ------------------------\n`,
         errorInfo
       )
 
       // 记录日志
       TaskQueue.add(this.reportUrl, errorInfo)
     } catch (error) {
-      console.log(error)
+      console.info(error)
     }
   }
 
@@ -85,19 +87,21 @@ class BaseMonitor {
    * @param {*} extendsInfo
    */
   handleErrorInfo() {
-    let txt = 'errortype: ' + this.category + '\r\n'
-    txt += 'loginformation: ' + this.msg + '\r\n'
-    txt += 'url: ' + encodeURIComponent(this.url) + '\r\n'
+    const txt: Record<string, any> = {
+      errortype: this.category,
+      loginformation: this.msg,
+      url: encodeURIComponent(this.url),
+    }
     switch (this.category) {
       case ErrorCategoryEnum.JS_ERROR:
-        txt += 'errorline: ' + this.line + '\r\n'
-        txt += 'errorcol: ' + this.col + '\r\n'
-        if (this.errorObj && this.errorObj.stack) {
-          txt += 'errorstack: ' + this.errorObj.stack + '\r\n'
+        txt.errorline = this.line
+        txt.errorcol = this.col
+        if (this?.errorObj?.stack) {
+          txt.errorstack = this.errorObj.stack
         }
         break
       default:
-        txt += 'errorother: ' + JSON.stringify(this.errorObj) + '\r\n'
+        txt.errorother = JSON.stringify(this.errorObj)
         break
     }
     const deviceInfo = this.getDeviceInfo()
@@ -105,9 +109,10 @@ class BaseMonitor {
     const recordInfo = extendsInfo
     recordInfo.category = this.category // 错误分类
     recordInfo.logType = this.level // 错误级别
-    recordInfo.logInfo = txt // 错误信息
+    recordInfo.logInfo = JSON.stringify(txt) // 错误信息
     recordInfo.deviceInfo = deviceInfo // 设备信息
     recordInfo.appId = this.appId // 应用id
+    this.selector && (recordInfo.selector = this.selector)
     return recordInfo
   }
 
@@ -135,7 +140,7 @@ class BaseMonitor {
       }
       return ret
     } catch (error) {
-      console.log('call getExtendsInfo error', error)
+      console.info('call getExtendsInfo error', error)
       return {}
     }
   }
@@ -148,7 +153,7 @@ class BaseMonitor {
       const deviceInfo = DeviceInfo.getDeviceInfo()
       return JSON.stringify(deviceInfo)
     } catch (error) {
-      console.log(error)
+      console.info(error)
       return ''
     }
   }

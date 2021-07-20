@@ -23,18 +23,6 @@ export declare class ErrorCategoryEnum {
      */
     static get AJAX_ERROR(): string;
     /**
-     * 控制台错误console.info
-     */
-    static get CONSOLE_INFO(): string;
-    /**
-     * 控制台错误console.warn
-     */
-    static get CONSOLE_WARN(): string;
-    /**
-     * 控制台错误console.error
-     */
-    static get CONSOLE_ERROR(): string;
-    /**
      * 跨域js错误
      */
     static get CROSS_SCRIPT_ERROR(): string;
@@ -47,7 +35,7 @@ export declare class ErrorCategoryEnum {
      */
     static get PERFORMANCE(): string;
     /**
-     * 网速上报
+     * 接口请求速度上报
      */
     static get NETWORK_SPEED(): string;
 }

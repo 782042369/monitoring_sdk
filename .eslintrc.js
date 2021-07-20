@@ -2,7 +2,7 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 16:18:12
  * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-20 10:26:35
+ * @LastEditTime: 2021-07-20 12:48:05
  * @Description:
  */
 const path = require('path')
@@ -21,8 +21,10 @@ module.exports = {
     tsconfigRootDir: resolve('./'),
     sourceType: 'module',
   },
+  extends: ['plugin:prettier/recommended'],
   // plugins: ['prettier'],
   rules: {
+    'prettier/prettier': 'error',
     indent: ['off', 2],
     'no-unused-vars': 'error',
     'no-restricted-globals': ['error', ...DOMGlobals, ...NodeGlobals],
@@ -33,5 +35,9 @@ module.exports = {
     'no-useless-concat': 1, // 禁止不必要的字符串字面量或模板字面量的连接
     'prefer-const': 1, // 要求使用 const 声明那些声明后不再被修改的变量.如果一个变量从不重新分配，使用const声明更好。const 声明告诉读者，“这个变量永远不会被重新分配，”减少认知负荷并提高可维护性。
     eqeqeq: 1, // 要求使用 === 和 !==
+    'arrow-parens': ['error', 'always'],
+    'prefer-arrow-callback': 1, // 要求回调函数使用箭头函数
+    // 要求使用模板字面量而非字符串连接
+    'prefer-template': 1,
   },
 }

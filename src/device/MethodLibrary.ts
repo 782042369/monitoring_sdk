@@ -194,7 +194,7 @@ const MethodLibrary = (function () {
         s += ''
         for (i = 0, l = s.length; i < l; i++) {
           n = s.charCodeAt(i).toString(16)
-          o += n.length < 2 ? '0' + n : n
+          o += n.length < 2 ? `0${n}` : n
         }
         return o
       }
@@ -474,14 +474,7 @@ const MethodLibrary = (function () {
         _this.engine = 'Blink'
       }
 
-      return (
-        _this.browser +
-        '（版本: ' +
-        _this.browserVersion +
-        '&nbsp;&nbsp;内核: ' +
-        _this.engine +
-        '）'
-      )
+      return `${_this.browser}（版本: ${_this.browserVersion}&nbsp;&nbsp;内核: ${_this.engine}）`
     },
   }
 })()

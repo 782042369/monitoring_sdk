@@ -42,7 +42,7 @@ class VueError extends BaseMonitor {
         this.category = ErrorCategoryEnum.VUE_ERROR
         this.recordError()
       } catch (error) {
-        console.log('vue错误异常', error)
+        console.info('vue错误异常', error)
       }
     }
   }

@@ -2,12 +2,12 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 18:33:32
  * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-20 11:03:43
+ * @LastEditTime: 2021-07-20 12:56:57
  * @Description:
  */
 import BaseMonitor from '../base/baseMonitor'
 import { ErrorCategoryEnum, ErrorLevelEnum } from '../base/baseConfig'
-import { ParamsType } from './type'
+import type { ParamsType } from './type'
 
 /**
  * console.error异常
@@ -80,7 +80,7 @@ class ConsoleError extends BaseMonitor {
       this.category = category
       this.recordError()
     } catch (error) {
-      console.log('console统计错误异常', level, error)
+      console.info('console统计错误异常', level, error)
     }
   }
 }

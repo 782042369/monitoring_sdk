@@ -7,7 +7,6 @@ declare class API {
     constructor(url: string);
     /**
      * 上报信息 （默认方式）
-     * isFetch ：是否优先通过fetch上报
      */
     report(data: DataProps): void;
     /**
@@ -18,10 +17,6 @@ declare class API {
      * 通过img方式上报信息
      */
     reportByImg(data: DataProps): void;
-    /**
-     * sendBeacon上报
-     */
-    reportByNavigator(data: DataProps): void;
     formatParams(data: Record<string, any>): string;
 }
 export default API;

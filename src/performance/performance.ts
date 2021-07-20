@@ -5,14 +5,14 @@ const pagePerformance = {
   getTiming() {
     try {
       if (!window.performance || !window.performance.timing) {
-        console.log('你的浏览器不支持 performance 操作')
+        console.info('你的浏览器不支持 performance 操作')
         return
       }
       const t = window.performance.timing
-      const times: any = {}
+      const times: Record<string, any> = {}
       const loadTime = t.loadEventEnd - t.loadEventStart
       if (loadTime < 0) {
-        setTimeout(function () {
+        setTimeout(() => {
           pagePerformance.getTiming()
         }, 200)
         return
@@ -47,24 +47,23 @@ const pagePerformance = {
       times.loadPageTime = (t.loadEventEnd - t.navigationStart).toFixed(2)
 
       return times
-    } catch (e) {
-      console.log(e)
+    } catch (error) {
+      console.info(error)
     }
   },
 
-  getEntries(usefulType: any) {
-    usefulType = usefulType || []
+  getEntries(usefulType: any[] = []) {
     if (!window.performance || !window.performance.getEntries) {
-      console.log('该浏览器不支持performance.getEntries方法')
+      console.info('该浏览器不支持performance.getEntries方法')
       return
     }
-    const entryTimesList: any = []
+    const entryTimesList: Record<string, any>[] = []
     const entryList = window.performance.getEntries()
     if (!entryList || entryList.length === 0) {
       return entryTimesList
     }
-    entryList.forEach((item: any) => {
-      const templeObj: any = {}
+    entryList.forEach((item: Record<string, any>) => {
+      const templeObj: Record<string, any> = {}
       if (usefulType.indexOf(item.initiatorType) > -1) {
         // 请求资源路径
         templeObj.name = item.name

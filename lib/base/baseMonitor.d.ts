@@ -13,6 +13,7 @@ declare class BaseMonitor {
     reportUrl: string;
     extendsInfo: Record<string, any>;
     appId: string;
+    selector: string;
     /**
      * 上报错误地址
      * @param {*} params { reportUrl,extendsInfo }

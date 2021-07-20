@@ -2,7 +2,7 @@
   "name": "monitor-sdk",
   "version": "1.0.0",
   "description": "",
-  "main": "lib/index.js",
+  "main": "lib/index.min.js",
   "module": "lib/index.esm.js",
   "scripts": {
     "dev": "set NODE_ENV=developemnt && rollup -c rollup.config.js -w",
@@ -20,6 +20,9 @@
     "@babel/preset-env": "^7.14.7",
     "@babel/preset-typescript": "^7.14.5",
     "@typescript-eslint/parser": "^4.28.3",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "prettier-eslint": "^12.0.0",
     "rollup": "^2.53.2",
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-commonjs": "^10.1.0",

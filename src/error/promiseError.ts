@@ -2,12 +2,12 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 16:36:31
  * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-20 11:04:12
+ * @LastEditTime: 2021-07-20 13:14:37
  * @Description:
  */
 import BaseMonitor from '../base/baseMonitor'
 import { ErrorCategoryEnum, ErrorLevelEnum } from '../base/baseConfig'
-import { ParamsType } from './type'
+import type { ParamsType } from './type'
 
 /**
  * 捕获未处理的Promise异常
@@ -29,7 +29,7 @@ class PromiseError extends BaseMonitor {
             return
           }
           // 判断当前被捕获的异常url，是否是异常处理url，防止死循环
-          if (event.reason.config && event.reason.config.url) {
+          if (event?.reason?.config?.url) {
             this.url = event.reason.config.url
           }
           this.level = ErrorLevelEnum.WARN
@@ -37,7 +37,7 @@ class PromiseError extends BaseMonitor {
           this.msg = event.reason
           this.recordError()
         } catch (error) {
-          console.log(error)
+          console.info(error)
         }
       },
       true

@@ -2,7 +2,7 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 16:25:42
  * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-20 10:40:07
+ * @LastEditTime: 2021-07-20 12:50:35
  * @Description:
  */
 
@@ -81,7 +81,7 @@ MyDate.prototype.format = function (fmt: string) {
   if (/(y+)/.test(fmt)) {
     fmt = fmt.replace(
       RegExp.$1,
-      (this.getFullYear() + '').substr(4 - RegExp.$1.length)
+      `${String(this.getFullYear())}`.substr(4 - RegExp.$1.length)
     )
   }
   if (/(E+)/.test(fmt)) {
@@ -91,14 +91,16 @@ MyDate.prototype.format = function (fmt: string) {
         ? RegExp.$1.length > 2
           ? '/u661f/u671f'
           : '/u5468'
-        : '') + week[this.getDay() + '']
+        : '') + week[`${String(this.getDay())}`]
     )
   }
   for (const k in o) {
-    if (new RegExp('(' + k + ')').test(fmt)) {
+    if (new RegExp(`(${k})`).test(fmt)) {
       fmt = fmt.replace(
         RegExp.$1,
-        RegExp.$1.length === 1 ? o[k] : ('00' + o[k]).substr(('' + o[k]).length)
+        RegExp.$1.length === 1
+          ? o[k]
+          : `00${o[k]}`.substr(`${String(o[k])}`.length)
       )
     }
   }

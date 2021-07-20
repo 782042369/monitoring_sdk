@@ -2,7 +2,7 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 16:15:37
  * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-20 11:15:45
+ * @LastEditTime: 2021-07-20 12:36:10
  * @Description:
  */
 import path from 'path'
@@ -37,27 +37,32 @@ const commonConf = {
   plugins: [
     resolve(extensions),
     esPlugin,
-    // commonjs({
-    //   exclude: 'node_modules',
-    //   include: 'src',
-    // }),
+    commonjs({
+      exclude: 'node_modules',
+      include: 'src',
+    }),
     tsPlugin,
     babel({
       exclude: 'node_modules/**',
       extensions,
     }),
-    // terser({ compress: { drop_console: false } }),
   ],
 }
 // 需要导出的模块类型
 const outputMap = [
   {
-    file: packageJSON.main, // 通用模块
+    file: 'lib/index.js', // 通用模块
     format: 'umd',
   },
   // {
+  //   file: packageJSON.main, // 通用模块
+  //   format: 'umd',
+  //   plugins: [terser({ compress: { drop_console: true } })],
+  // },
+  // {
   //   file: packageJSON.module, // es6模块
   //   format: 'es',
+  //   plugins: [terser({ compress: { drop_console: true } })],
   // },
 ]
 

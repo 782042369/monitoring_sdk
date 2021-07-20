@@ -4,7 +4,7 @@ import {
   AjaxLibEnum,
   ErrorLevelEnum,
 } from '../base/baseConfig'
-import { ParamsType } from './type'
+import type { ParamsType } from './type'
 /**
  * ajax error异常
  */
@@ -45,7 +45,7 @@ class AxiosError extends BaseMonitor {
   }
 
   handleError(error: { config: { url: string } }) {
-    if (error && error.config && error.config.url) {
+    if (error?.config?.url) {
       this.url = error.config.url
     }
     this.level = ErrorLevelEnum.WARN
@@ -89,7 +89,7 @@ class XHRError extends BaseMonitor {
           this.recordError()
         }
       } catch (error) {
-        console.log(error)
+        console.info(error)
       }
     }
     XMLHttpRequest.prototype.send = function () {
