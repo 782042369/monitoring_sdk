@@ -86,7 +86,6 @@ class MonitorPerformance extends BaseMonitor {
         resourceList: this.config.resourceList,
         markUser: this.markUser(),
         markUv: this.markUv(),
-        deviceInfo: this.getDeviceInfo(),
       }
       const extendsInfo = this.getExtendsInfo()
       const data = {
@@ -94,6 +93,7 @@ class MonitorPerformance extends BaseMonitor {
         category: this.category,
         logType: ErrorLevelEnum.INFO,
         logInfo: JSON.stringify(result),
+        deviceInfo: this.getDeviceInfo(),
       }
       localStorage.setItem('page_performance', JSON.stringify(data))
       // 发送监控数据

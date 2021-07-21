@@ -2,13 +2,12 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 18:15:10
  * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-21 11:32:23
+ * @LastEditTime: 2021-07-21 12:45:54
  * @Description:
  */
 /**
  * 错误类型枚举
  */
-/* eslint-disable */
 
 export enum ErrorCategoryEnum {
   /**

@@ -37,7 +37,6 @@ class PromiseError extends BaseMonitor {
           this.level = ErrorLevelEnum.WARN
           this.category = ErrorCategoryEnum.PROMISE_ERROR
           this.msg = event.reason
-          console.log('this: ', this)
           this.recordError()
         } catch (error) {
           console.info(error)

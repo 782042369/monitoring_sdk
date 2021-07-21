@@ -2,7 +2,7 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 18:15:30
  * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-21 12:26:45
+ * @LastEditTime: 2021-07-21 13:01:25
  * @Description:
 -->
 <!DOCTYPE html>
@@ -13,7 +13,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>请求库错误上报测试</title>
     <script src="../lib/index.js"></script>
-    <!-- <link rel="stylesheet" href="./style.css" /> -->
+    <script>
+      new MonitorJS().init({
+        appID: '1111',
+        reportUrl: 'http://baidu.com/api', //上报错误地址
+        isPage: true,
+      })
+    </script>
   </head>
   <body>
     <button onclick="xhrfn()">原生xhr上报</button>
@@ -25,11 +31,6 @@
 <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.js"></script>
 <script>
-  new MonitorJS().init({
-    appID: '1111',
-    reportUrl: 'http://baidu.com/api', //上报错误地址
-    isPage: true,
-  })
   // 各个请求库的  错误上报测试
   const fetchfn = async () => {
     await Promise.all([

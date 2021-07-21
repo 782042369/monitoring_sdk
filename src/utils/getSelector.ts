@@ -5,7 +5,7 @@ import { isArray } from '.'
  * @Author: 杨宏旋
  * @Date: 2020-05-31 22:47:24
  * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-20 19:21:11
+ * @LastEditTime: 2021-07-21 12:47:33
  * @Description:
  */
 function getSelectors(path: any) {

@@ -2,7 +2,7 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 16:18:12
  * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-20 19:19:31
+ * @LastEditTime: 2021-07-21 12:47:17
  * @Description:
  */
 const path = require('path')
@@ -46,5 +46,7 @@ module.exports = {
     'prefer-arrow-callback': 1, // 要求回调函数使用箭头函数
     'prefer-template': 1, // 要求使用模板字面量而非字符串连接
     '@typescript-eslint/no-unused-vars': 'off',
+    'no-debugger': process.env.NODE_ENV !== 'development' ? 'error' : 'off',
+    'no-useless-escape': 'off',
   },
 }

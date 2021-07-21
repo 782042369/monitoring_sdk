@@ -1,4 +1,3 @@
-/* eslint-disable no-useless-escape */
 /* eslint-disable no-duplicate-case */
 import VariableLibrary from './VariableLibrary'
 

@@ -2,7 +2,7 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 18:15:30
  * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-20 16:38:12
+ * @LastEditTime: 2021-07-21 13:01:54
  * @Description:
 -->
 <!DOCTYPE html>
@@ -14,6 +14,15 @@
     <title>vue页面性能监控</title>
     <script src="../lib/index.js"></script>
     <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.14/vue.min.js"></script>
+    <script>
+      new MonitorJS().init({
+        appID: '1111',
+        reportUrl: 'http://baidu.com/api', //上报错误地址
+        isPage: true,
+        vueError: true, //是否上报Vue错误
+        vue: Vue,
+      })
+    </script>
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
@@ -42,15 +51,7 @@
     </div>
   </body>
 </html>
-<!-- <script src="./1.js"></script> -->
 <script>
-  new MonitorJS().init({
-    appID: '1111',
-    reportUrl: 'http://baidu.com/api', //上报错误地址
-    vueError: true, //是否上报Vue错误
-    vue: Vue,
-    isPage: true,
-  })
   let vm = new Vue({
     el: '#app',
     data: {
