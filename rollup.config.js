@@ -2,12 +2,12 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 16:15:37
  * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-20 20:38:41
+ * @LastEditTime: 2021-07-21 15:45:48
  * @Description:
  */
 import path from 'path'
 import resolve from 'rollup-plugin-node-resolve' // 依赖引用插件
-import { eslint } from 'rollup-plugin-eslint' // eslint插件
+import eslint from '@rollup/plugin-eslint' // eslint插件
 import ts from 'rollup-plugin-typescript2'
 import babel from 'rollup-plugin-babel'
 import { DEFAULT_EXTENSIONS } from '@babel/core'
@@ -54,7 +54,30 @@ const commonConf = {
     babel({
       exclude: 'node_modules/**',
       extensions: [...DEFAULT_EXTENSIONS, ...extensions],
+      exclude: 'node_modules/**',
+      runtimeHelpers: true,
+      presets: [
+        [
+          '@babel/preset-env',
+          {
+            /* Babel 会在 Rollup 有机会做处理之前，将我们的模块转成 CommonJS，导致 Rollup 的一些处理失败 */
+            modules: false,
+          },
+          '@babel/preset-typescript',
+        ],
+      ],
+      plugins: [
+        [
+          '@babel/plugin-transform-runtime',
+          {
+            regenerator: true,
+          },
+        ],
+      ],
     }),
+    commonjs(),
+    process.env.NODE_ENV !== 'development' &&
+      terser({ compress: { drop_console: true, drop_debugger: true } }),
   ],
 }
 // 需要导出的模块类型
@@ -83,18 +106,7 @@ const outputMap =
           format: 'es',
         },
       ]
-
-process.env.NODE_ENV !== 'development' &&
-  commonConf.plugins.push(
-    commonjs({
-      exclude: 'node_modules',
-      include: 'src',
-    }),
-    terser({ compress: { drop_console: true, drop_debugger: true } })
-  )
-
 const buildConf = (options) => Object.assign({}, commonConf, options)
-
 export default outputMap.map((output) =>
   buildConf({
     output: { name: packageJSON.name, ...output },

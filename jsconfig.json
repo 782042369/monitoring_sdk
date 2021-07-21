@@ -1,10 +1,3 @@
-/*
- * @Author: 杨宏旋
- * @Date: 2021-07-19 16:17:36
- * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-20 20:32:10
- * @Description:
- */
 {
   "compilerOptions": {
     "baseUrl": ".",
@@ -13,7 +6,6 @@
     "target": "esnext", // 编译目标
     "module": "esnext", // 模块类型
     "moduleResolution": "node",
-    "allowJs": false, // 是否编辑js文件
     "strict": true, // 严格模式
     "noUnusedLocals": true, // 未使用变量报错
     "experimentalDecorators": true, // 启动装饰器
