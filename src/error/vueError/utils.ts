@@ -2,7 +2,7 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-20 17:27:51
  * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-20 17:31:21
+ * @LastEditTime: 2021-07-21 11:41:53
  * @Description:
  */
 import { ViewModel } from './type'
@@ -12,7 +12,6 @@ export function vue3VmHandler(vm: ViewModel) {
   if (vm.$root === vm) {
     componentName = 'root'
   } else {
-    console.log(vm.$options)
     const name_2 = vm.$options && vm.$options.name
     componentName = name_2 ? `component <${name_2}>` : 'anonymous component'
   }

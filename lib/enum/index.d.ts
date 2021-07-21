@@ -60,6 +60,15 @@ export declare enum ErrorLevelEnum {
  * Ajax库枚举
  */
 export declare enum AjaxLibEnum {
-    'AXIOS' = "axios",
-    'DEFAULT' = "default"
+    'XHR' = "xhr",
+    'FETCH' = "fetch"
+}
+/**
+ * Ajax请求方式枚举
+ */
+export declare enum AjaxMethodEnum {
+    'GET' = "get",
+    'POST' = "post",
+    'DELETE' = "delete",
+    'PUT' = "put"
 }

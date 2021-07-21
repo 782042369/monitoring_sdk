@@ -1,5 +1,10 @@
 import BaseMonitor from '../base/baseMonitor'
-import { ErrorCategoryEnum, AjaxLibEnum, ErrorLevelEnum } from '../enum'
+import {
+  ErrorCategoryEnum,
+  AjaxLibEnum,
+  AjaxMethodEnum,
+  ErrorLevelEnum,
+} from '../enum'
 import type { ParamsType } from './type'
 import { OptionsType } from '../type'
 
@@ -16,43 +21,10 @@ class AjaxError {
    * @param type {*} ajax库类型
    * @param error{*} 错误信息
    */
-  handleError(type: string, err?: any) {
-    switch (type) {
-      case AjaxLibEnum.AXIOS:
-        new AxiosError(this.params).handleError(err)
-        break
-      default:
-        new XHRError(this.params).handleError()
-        break
-    }
+  handleError() {
+    new XHRError(this.params)
   }
 }
-
-export default AjaxError
-
-/**
- * Axios类库 错误信息处理(如果不配置，可以统一通过XHR接受错误信息)
- */
-class AxiosError extends BaseMonitor {
-  constructor(params: {
-    reportUrl: OptionsType['reportUrl']
-    extendsInfo: OptionsType['extendsInfo']
-    appID: OptionsType['appID']
-  }) {
-    super(params)
-  }
-
-  handleError(error: { config: { url: string } }) {
-    if (error?.config?.url) {
-      this.url = error.config.url
-    }
-    this.level = ErrorLevelEnum.WARN
-    this.category = ErrorCategoryEnum.AJAX_ERROR
-    this.msg = JSON.stringify(error)
-    this.recordError()
-  }
-}
-
 /**
  * 获取HTTP错误信息
  */
@@ -63,48 +35,155 @@ class XHRError extends BaseMonitor {
     appID: OptionsType['appID']
   }) {
     super(params)
-  }
-
-  /**
-   * 获取错误信息
-   */
-  handleError() {
-    if (!window.XMLHttpRequest) {
-      return
+    if (window.XMLHttpRequest) {
+      this.handleXhrError()
     }
-    const xhrSend: any = XMLHttpRequest.prototype.send
-    const _handleEvent = (event: any) => {
+    // eslint-disable-next-line no-extra-boolean-cast
+    if (!!window.fetch) {
+      this.handleFetchError()
+    }
+  }
+  /**
+   *
+   * @param type 接口类型
+   * @param startTime 请求开始事件
+   * @param self 接口参数
+   * @param ajaxlib AjaxLibEnum
+   */
+  _handleEvent =
+    (
+      type: 'error' | 'load' | 'abort',
+      startTime: number,
+      self: {
+        statusText: string
+        status: number
+        response: any
+      },
+      ajaxlib: AjaxLibEnum,
+      logData: {
+        method: string
+        url: string
+      }
+    ) =>
+    () => {
       try {
-        if (event?.currentTarget?.status !== 200) {
-          this.level = ErrorLevelEnum.WARN
-          this.category = ErrorCategoryEnum.AJAX_ERROR
-          this.msg = event.target.response
-          this.url = event.target.responseURL
-          this.errorObj = {
-            status: event.target.status,
-            statusText: event.target.statusText,
-          }
-          this.recordError()
+        const duration = Date.now() - startTime
+        this.level = ErrorLevelEnum.WARN
+        this.category = ErrorCategoryEnum.AJAX_ERROR
+        this.msg = self.response || ErrorCategoryEnum.AJAX_ERROR
+        this.url = logData.url // 请求路径
+        this.errorObj = {
+          status: self.status, // 状态码
+          statusText: self.statusText, // 状态
+          duration, // 请求用时
+          type, // 状态
+          method: logData.method.toLowerCase(), // 请求方式
+          ajaxlib,
         }
+        console.log('this.errorObj: ', this.errorObj)
+        this.recordError()
       } catch (error) {
         console.info(error)
       }
     }
-    XMLHttpRequest.prototype.send = function () {
-      if (this.addEventListener) {
-        this.addEventListener('error', _handleEvent)
-        this.addEventListener('load', _handleEvent)
-        this.addEventListener('abort', _handleEvent)
-      } else {
-        const tempStateChange: any = this.onreadystatechange
-        this.onreadystatechange = function (event) {
-          tempStateChange.apply(this, arguments)
-          if (this.readyState === 4) {
-            _handleEvent(event)
-          }
+  /**
+   * 获取XMLHttpRequest 错误信息
+   */
+  handleXhrError() {
+    const self = this
+    // 原生 XMLHttpRequest 监听
+    const oldOpen = XMLHttpRequest.prototype.open
+    ;(XMLHttpRequest as any).prototype.open = function (
+      method: AjaxMethodEnum,
+      url: string
+    ) {
+      if (!url.match(/up.gif/) && !url.match(/sockjs/)) {
+        this.logData = {
+          method: method || AjaxMethodEnum.GET,
+          url,
         }
+      }
+      return oldOpen.apply(this, arguments as any)
+    }
+    const xhrSend: any = XMLHttpRequest.prototype.send
+    ;(XMLHttpRequest as any).prototype.send = function () {
+      if (this.addEventListener && this.logData) {
+        const startTime = Date.now() //在发送之前记录一下开始的时间
+        ;['error', 'load', 'abort'].map((ele: any) => {
+          this.addEventListener(
+            ele,
+            self._handleEvent(
+              ele,
+              startTime,
+              this,
+              AjaxLibEnum.XHR,
+              this.logData
+            )
+          )
+        })
       }
       return xhrSend.apply(this, arguments)
     }
   }
+  handleFetchError() {
+    const self = this
+    const originFetch = window.fetch
+    ;(window as any).fetch = function (...args: any) {
+      const logData: {
+        method: AjaxMethodEnum
+        url: string
+      } = {
+        method: AjaxMethodEnum.GET,
+        url: '',
+      }
+      logData.method = args?.[1]?.method || AjaxMethodEnum.GET
+      logData.url = args[0]
+      const startTime = Date.now() //在发送之前记录一下开始的时间
+      return originFetch
+        .apply(this, args)
+        .then((res) => {
+          const tempRes = res.clone()
+          if (res.ok) {
+            self._handleEvent(
+              'load',
+              startTime,
+              {
+                status: tempRes.status || 200,
+                statusText: JSON.stringify(res) || '',
+                response: res,
+              },
+              AjaxLibEnum.FETCH,
+              logData
+            )()
+          } else {
+            self._handleEvent(
+              'error',
+              startTime,
+              {
+                status: tempRes.status || 500,
+                statusText: JSON.stringify(res) || '',
+                response: res,
+              },
+              AjaxLibEnum.FETCH,
+              logData
+            )()
+          }
+        })
+        .catch((error) => {
+          self._handleEvent(
+            'error',
+            startTime,
+            {
+              status: 500,
+              statusText: error || '',
+              response: error,
+            },
+            AjaxLibEnum.FETCH,
+            logData
+          )()
+          throw error
+        })
+    }
+  }
 }
+export default AjaxError

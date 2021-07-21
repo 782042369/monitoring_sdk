@@ -2,7 +2,7 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 18:15:10
  * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-20 20:06:00
+ * @LastEditTime: 2021-07-21 11:32:23
  * @Description:
  */
 /**
@@ -71,6 +71,15 @@ export enum ErrorLevelEnum {
  * Ajax库枚举
  */
 export enum AjaxLibEnum {
-  'AXIOS' = 'axios',
-  'DEFAULT' = 'default',
+  'XHR' = 'xhr',
+  'FETCH' = 'fetch',
+}
+/**
+ * Ajax请求方式枚举
+ */
+export enum AjaxMethodEnum {
+  'GET' = 'get',
+  'POST' = 'post',
+  'DELETE' = 'delete',
+  'PUT' = 'put',
 }

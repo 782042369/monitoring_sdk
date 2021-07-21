@@ -10,6 +10,6 @@ declare class AjaxError {
      * @param type {*} ajax库类型
      * @param error{*} 错误信息
      */
-    handleError(type: string, err?: any): void;
+    handleError(): void;
 }
 export default AjaxError;

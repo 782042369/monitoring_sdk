@@ -3,7 +3,7 @@ import DeviceInfo from '../device'
 import { isFunction, isObject } from '../utils'
 import TaskQueue from './taskQueue'
 import { DataProps, OptionsType } from '../type'
-import Breadcrumb from '../base/Breadcrumb'
+// import Breadcrumb from '../base/Breadcrumb'
 
 /**
  * 监控基类
@@ -20,7 +20,7 @@ class BaseMonitor {
   extendsInfo: OptionsType['extendsInfo']
   appID: OptionsType['appID']
   selector: string
-  Breadcrumb: Breadcrumb
+  // Breadcrumb: Breadcrumb
   /**
    * 上报错误地址
    * @param {*} params { reportUrl,extendsInfo }
@@ -41,7 +41,7 @@ class BaseMonitor {
     this.extendsInfo = params.extendsInfo // 扩展信息
     this.appID = params.appID // 应用id
     this.selector = '' // 触发错误的元素
-    this.Breadcrumb = new Breadcrumb()
+    // this.Breadcrumb = new Breadcrumb()
   }
 
   /**
@@ -73,14 +73,15 @@ class BaseMonitor {
         return
       }
       const errorInfo = this.handleErrorInfo()
-      this.Breadcrumb.push({
-        category: errorInfo.category,
-        data: errorInfo.logInfo,
-        time: errorInfo.time,
-        level: errorInfo.logType,
-      })
-      console.log('this.Breadcrumb: ', this.Breadcrumb)
-      console.log(
+      console.info('errorInfo: ', errorInfo)
+      // this.Breadcrumb.push({
+      //   category: errorInfo.category,
+      //   data: errorInfo.logInfo,
+      //   time: errorInfo.time,
+      //   level: errorInfo.logType,
+      // })
+      // console.log('this.Breadcrumb: ', this.Breadcrumb)
+      console.info(
         `------------------------ ${this.category} ------------------------\n`,
         errorInfo
       )

@@ -2,7 +2,7 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-20 15:06:58
  * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-20 17:34:23
+ * @LastEditTime: 2021-07-21 11:41:46
  * @Description:
  */
 import BaseMonitor from '../../base/baseMonitor'
@@ -40,7 +40,6 @@ function handleVueError(
         return
     }
   }
-  console.log('data: ', data)
   return data
 
   // breadcrumb.push({

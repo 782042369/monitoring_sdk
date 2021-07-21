@@ -14,7 +14,6 @@ import {
   VueError,
 } from './error'
 import MonitorPerformance from './performance'
-import { AjaxLibEnum } from './enum'
 import { checkUrl } from './utils'
 import { OptionsType } from './type'
 
@@ -62,7 +61,7 @@ class MonitorJS {
       new ResourceError(param).handleError()
     }
     if (this.ajaxError) {
-      new AjaxError(param).handleError(AjaxLibEnum.DEFAULT)
+      new AjaxError(param).handleError()
     }
     if (this.vueError && options.vue) {
       new VueError(param).handleError(options.vue)
