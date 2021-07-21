@@ -50,42 +50,40 @@ class XHRError extends BaseMonitor {
    * @param self 接口参数
    * @param ajaxlib AjaxLibEnum
    */
-  _handleEvent =
-    (
-      type: 'error' | 'load' | 'abort',
-      startTime: number,
-      self: {
-        statusText: string
-        status: number
-        response: any
-      },
-      ajaxlib: AjaxLibEnum,
-      logData: {
-        method: string
-        url: string
-      }
-    ) =>
-    () => {
-      try {
-        const duration = Date.now() - startTime
-        this.level = ErrorLevelEnum.WARN
-        this.category = ErrorCategoryEnum.AJAX_ERROR
-        this.msg = self.response || ErrorCategoryEnum.AJAX_ERROR
-        this.url = location.href // 请求路径
-        this.errorObj = {
-          status: self.status, // 状态码
-          statusText: self.statusText, // 状态
-          duration, // 请求用时
-          type, // 状态
-          method: logData.method.toLowerCase(), // 请求方式
-          ajaxlib,
-          path: logData.url,
-        }
-        this.recordError()
-      } catch (error) {
-        console.info(error)
-      }
+  _handleEvent(
+    type: 'error' | 'load' | 'abort',
+    startTime: number,
+    self: {
+      statusText: string
+      status: number
+      response: any
+    },
+    ajaxlib: AjaxLibEnum,
+    logData: {
+      method: string
+      url: string
     }
+  ) {
+    try {
+      const duration = Date.now() - startTime
+      this.level = ErrorLevelEnum.WARN
+      this.category = ErrorCategoryEnum.AJAX_ERROR
+      this.msg = self.response || ErrorCategoryEnum.AJAX_ERROR
+      this.url = location.href // 请求路径
+      this.errorObj = {
+        status: self.status, // 状态码
+        statusText: self.statusText, // 状态
+        duration, // 请求用时
+        type, // 状态
+        method: logData.method.toLowerCase(), // 请求方式
+        ajaxlib,
+        path: logData.url,
+      }
+      this.recordError()
+    } catch (error) {
+      console.info(error)
+    }
+  }
   /**
    * 获取XMLHttpRequest 错误信息
    */
@@ -110,8 +108,7 @@ class XHRError extends BaseMonitor {
       if (this.addEventListener && this.logData) {
         const startTime = Date.now() //在发送之前记录一下开始的时间
         ;['error', 'load', 'abort'].map((ele: any) => {
-          this.addEventListener(
-            ele,
+          this.addEventListener(ele, () => {
             self._handleEvent(
               ele,
               startTime,
@@ -119,7 +116,7 @@ class XHRError extends BaseMonitor {
               AjaxLibEnum.XHR,
               this.logData
             )
-          )
+          })
         })
       }
       return xhrSend.apply(this, arguments)
@@ -139,35 +136,21 @@ class XHRError extends BaseMonitor {
       logData.method = args?.[1]?.method || AjaxMethodEnum.GET
       logData.url = args[0]
       const startTime = Date.now() //在发送之前记录一下开始的时间
-      return originFetch
+      originFetch
         .apply(this, args)
         .then((res) => {
           const tempRes = res.clone()
-          if (res.ok) {
-            self._handleEvent(
-              'load',
-              startTime,
-              {
-                status: tempRes.status || 200,
-                statusText: JSON.stringify(res) || '',
-                response: res,
-              },
-              AjaxLibEnum.FETCH,
-              logData
-            )()
-          } else {
-            self._handleEvent(
-              'error',
-              startTime,
-              {
-                status: tempRes.status || 500,
-                statusText: JSON.stringify(res) || '',
-                response: res,
-              },
-              AjaxLibEnum.FETCH,
-              logData
-            )()
-          }
+          self._handleEvent(
+            res.ok ? 'load' : 'error',
+            startTime,
+            {
+              status: tempRes.status || res.ok ? 200 : 500,
+              statusText: JSON.stringify(res) || '',
+              response: res,
+            },
+            AjaxLibEnum.FETCH,
+            logData
+          )
         })
         .catch((error) => {
           self._handleEvent(
@@ -180,7 +163,7 @@ class XHRError extends BaseMonitor {
             },
             AjaxLibEnum.FETCH,
             logData
-          )()
+          )
           throw error
         })
     }

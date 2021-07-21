@@ -102,13 +102,13 @@ class BaseMonitor {
       loginformation: this.msg,
       url: encodeURIComponent(this.url),
     }
+    if (this?.errorObj?.stack) {
+      txt.errorstack = this.errorObj.stack
+    }
     switch (this.category) {
       case ErrorCategoryEnum.JS_ERROR:
         txt.errorline = this.line
         txt.errorcol = this.col
-        if (this?.errorObj?.stack) {
-          txt.errorstack = this.errorObj.stack
-        }
         break
       default:
         txt.errorother = JSON.stringify(this.errorObj)
