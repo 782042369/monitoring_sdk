@@ -3,8 +3,8 @@ import { DataProps } from '../type';
  * 数据持久化
  */
 declare class API {
-    url: string;
-    constructor(url: string);
+    reportUrl: string;
+    constructor(reportUrl: string);
     /**
      * 上报信息 （默认方式）
      */

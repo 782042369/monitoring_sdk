@@ -2,7 +2,7 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 18:15:10
  * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-20 19:31:14
+ * @LastEditTime: 2021-07-21 12:29:08
  * @Description:
  */
 import { checkUrl } from '../utils'
@@ -11,16 +11,16 @@ import { DataProps } from '../type'
  * 数据持久化
  */
 class API {
-  url: string
-  constructor(url: string) {
-    this.url = url
+  reportUrl: string
+  constructor(reportUrl: string) {
+    this.reportUrl = reportUrl
   }
   /**
    * 上报信息 （默认方式）
    */
   report(data: DataProps) {
-    if (!checkUrl(this.url)) {
-      throw `上报信息url地址格式不正确,url=${this.url}`
+    if (!checkUrl(this.reportUrl)) {
+      throw `上报信息url地址格式不正确,reportUrl=${this.reportUrl}`
     }
     this.reportByImg(data)
   }
@@ -32,7 +32,7 @@ class API {
     const dataStr = JSON.stringify(data)
     try {
       if (fetch) {
-        fetch(this.url, {
+        fetch(this.reportUrl, {
           headers: {
             'Content-Type': 'application/json',
           },
@@ -48,7 +48,7 @@ class API {
     }
     try {
       const xhr = new XMLHttpRequest()
-      xhr.open('POST', this.url, true)
+      xhr.open('POST', this.reportUrl, true)
       // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
       xhr.setRequestHeader('Content-Type', 'application/json')
       xhr.send(dataStr)
@@ -61,13 +61,13 @@ class API {
    * 通过img方式上报信息
    */
   reportByImg(data: DataProps) {
-    if (!checkUrl(this.url)) {
-      throw `上报信息url地址格式不正确,url=${this.url}`
+    if (!checkUrl(this.reportUrl)) {
+      throw `上报信息url地址格式不正确,reportUrl=${this.reportUrl}`
     }
     try {
       const img = new Image()
       img.src = `${
-        this.url
+        this.reportUrl
       }/up.gif?v=${new Date().getTime()}&${this.formatParams(data)}`
     } catch (error) {
       console.info(error)
@@ -78,7 +78,7 @@ class API {
   //  * sendBeacon上报
   //  */
   // reportByNavigator(data: DataProps) {
-  //   navigator.sendBeacon && navigator.sendBeacon(this.url, data)
+  //   navigator.sendBeacon && navigator.sendBeacon(this.reportUrl, data)
   // }
 
   /*

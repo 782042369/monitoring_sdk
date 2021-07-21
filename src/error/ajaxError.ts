@@ -71,7 +71,7 @@ class XHRError extends BaseMonitor {
         this.level = ErrorLevelEnum.WARN
         this.category = ErrorCategoryEnum.AJAX_ERROR
         this.msg = self.response || ErrorCategoryEnum.AJAX_ERROR
-        this.url = logData.url // 请求路径
+        this.url = location.href // 请求路径
         this.errorObj = {
           status: self.status, // 状态码
           statusText: self.statusText, // 状态
@@ -79,6 +79,7 @@ class XHRError extends BaseMonitor {
           type, // 状态
           method: logData.method.toLowerCase(), // 请求方式
           ajaxlib,
+          path: logData.url,
         }
         console.log('this.errorObj: ', this.errorObj)
         this.recordError()
