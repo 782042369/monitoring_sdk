@@ -81,7 +81,6 @@ class XHRError extends BaseMonitor {
           ajaxlib,
           path: logData.url,
         }
-        console.log('this.errorObj: ', this.errorObj)
         this.recordError()
       } catch (error) {
         console.info(error)
