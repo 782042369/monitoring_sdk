@@ -100,7 +100,6 @@ class BaseMonitor {
   handleErrorInfo() {
     const txt: DataProps = {
       loginformation: this.msg,
-      url: encodeURIComponent(this.url),
     }
     if (this?.errorObj?.stack) {
       txt.errorstack = this.errorObj.stack
@@ -118,13 +117,25 @@ class BaseMonitor {
     const selector = lastEvent ? getSelector(lastEvent.path) : '' // 代表最后一个操作的元素
     const deviceInfo = this.getDeviceInfo()
     const extendsInfo = this.getExtendsInfo()
-    const recordInfo = extendsInfo
-    recordInfo.category = this.category // 错误分类
-    recordInfo.level = this.level // 错误级别
-    recordInfo.logInfo = JSON.stringify(txt) // 错误信息
-    recordInfo.deviceInfo = deviceInfo // 设备信息
-    recordInfo.appID = this.appID // 应用id
-    recordInfo.time = new Date().getTime()
+    const recordInfo: {
+      category: string
+      level: string
+      deviceInfo: string
+      appID: string
+      time: number
+      url: string
+      logInfo: string
+      selector?: string
+    } = {
+      ...extendsInfo,
+      category: this.category, // 错误分类
+      level: this.level, // 错误级别
+      deviceInfo: deviceInfo, // 设备信息
+      appID: this.appID, // 应用id
+      time: new Date().getTime(), // 发送时间
+      url: encodeURIComponent(this?.url || location.href), // url 地址
+      logInfo: JSON.stringify(txt), // 错误信息
+    }
     selector && (recordInfo.selector = selector)
     return recordInfo
   }

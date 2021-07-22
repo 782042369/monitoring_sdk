@@ -34,7 +34,16 @@ declare class BaseMonitor {
      * 处理错误信息
      * @param {*} extendsInfo
      */
-    handleErrorInfo(): DataProps;
+    handleErrorInfo(): {
+        category: string;
+        level: string;
+        deviceInfo: string;
+        appID: string;
+        time: number;
+        url: string;
+        logInfo: string;
+        selector?: string | undefined;
+    };
     /**
      * 获取扩展信息
      */

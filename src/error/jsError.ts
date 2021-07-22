@@ -2,7 +2,7 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 16:36:31
  * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-22 11:11:50
+ * @LastEditTime: 2021-07-22 11:29:23
  * @Description:
  */
 import BaseMonitor from '../base/baseMonitor'
@@ -22,7 +22,7 @@ class JSError extends BaseMonitor {
   handleError() {
     window.onerror = (msg: any, url: any, line: any, col: any, error: any) => {
       try {
-        this.level = ErrorLevelEnum.WARN
+        this.level = ErrorLevelEnum.ERROR
         this.category = ErrorCategoryEnum.JS_ERROR
         this.msg = msg
         this.url = url
