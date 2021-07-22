@@ -2,11 +2,12 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 18:15:10
  * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-21 12:29:08
+ * @LastEditTime: 2021-07-22 10:55:50
  * @Description:
  */
+import { DataProps } from '../types'
 import { checkUrl } from '../utils'
-import { DataProps } from '../type'
+
 /**
  * 数据持久化
  */
@@ -77,7 +78,7 @@ class API {
   // /**
   //  * sendBeacon上报
   //  */
-  // reportByNavigator(data: DataProps) {
+  // reportByNavigator(data:DataProps) {
   //   navigator.sendBeacon && navigator.sendBeacon(this.reportUrl, data)
   // }
 

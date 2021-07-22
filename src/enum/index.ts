@@ -2,7 +2,7 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 18:15:10
  * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-21 12:45:54
+ * @LastEditTime: 2021-07-22 10:38:43
  * @Description:
  */
 /**
@@ -42,6 +42,10 @@ export enum ErrorCategoryEnum {
    * 性能上报
    */
   'PERFORMANCE' = 'performance',
+
+  'CONSOLE_INFO' = 'console_info',
+  'CONSOLE_WARN' = 'console_warn',
+  'CONSOLE_ERROR' = 'console_error',
 }
 
 /**

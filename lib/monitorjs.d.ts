@@ -1,4 +1,4 @@
-import { OptionsType } from './type';
+import { OptionsType } from './types';
 declare class MonitorJS {
     jsError: boolean;
     promiseError: boolean;

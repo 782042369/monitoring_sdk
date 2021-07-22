@@ -5,7 +5,7 @@ import { isArray } from '.'
  * @Author: 杨宏旋
  * @Date: 2020-05-31 22:47:24
  * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-21 12:47:33
+ * @LastEditTime: 2021-07-22 11:17:03
  * @Description:
  */
 function getSelectors(path: any) {
@@ -14,7 +14,7 @@ function getSelectors(path: any) {
     .filter((element: (Window & typeof globalThis) | Document) => {
       return element !== document && element !== window
     })
-    .map((element: { id: any; nodeName: string; className: any }) => {
+    .map((element: { id: string; nodeName: string; className: string }) => {
       let selector = ''
       if (element.id) {
         return `${element.nodeName.toLowerCase()}#${element.id}`

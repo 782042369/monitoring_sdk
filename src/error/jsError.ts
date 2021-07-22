@@ -2,14 +2,12 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 16:36:31
  * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-21 13:02:18
+ * @LastEditTime: 2021-07-22 11:11:50
  * @Description:
  */
 import BaseMonitor from '../base/baseMonitor'
 import { ErrorCategoryEnum, ErrorLevelEnum } from '../enum'
-import type { ParamsType } from './type'
-import getSelector from '../utils/getSelector'
-import getLastEvent from '../utils/getLastEvent'
+import { ParamsType } from '../types'
 /**
  * 捕获JS错误
  */
@@ -23,8 +21,6 @@ class JSError extends BaseMonitor {
    */
   handleError() {
     window.onerror = (msg: any, url: any, line: any, col: any, error: any) => {
-      const lastEvent: any = getLastEvent() // 最后一个交互事件
-      const selector = lastEvent ? getSelector(lastEvent.path) : '' // 代表最后一个操作的元素
       try {
         this.level = ErrorLevelEnum.WARN
         this.category = ErrorCategoryEnum.JS_ERROR
@@ -33,7 +29,6 @@ class JSError extends BaseMonitor {
         this.line = line
         this.col = col
         this.errorObj = error
-        this.selector = selector
         this.recordError()
       } catch (error) {
         console.info('js错误异常', error)

@@ -1,4 +1,4 @@
-import { QueueProps } from './typpe';
+import { QueueProps } from '../types';
 /**
  * 消息队列
  */

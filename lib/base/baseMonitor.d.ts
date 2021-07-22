@@ -1,4 +1,4 @@
-import { DataProps, OptionsType } from '../type';
+import { OptionsType, DataProps } from '../types';
 /**
  * 监控基类
  */
@@ -13,7 +13,6 @@ declare class BaseMonitor {
     reportUrl: OptionsType['reportUrl'];
     extendsInfo: OptionsType['extendsInfo'];
     appID: OptionsType['appID'];
-    selector: string;
     /**
      * 上报错误地址
      * @param {*} params { reportUrl,extendsInfo }

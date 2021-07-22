@@ -2,8 +2,10 @@ import { ErrorLevelEnum, ErrorCategoryEnum } from '../enum'
 import DeviceInfo from '../device'
 import { isFunction, isObject } from '../utils'
 import TaskQueue from './taskQueue'
-import { DataProps, OptionsType } from '../type'
 // import Breadcrumb from '../base/Breadcrumb'
+import { OptionsType, DataProps } from '../types'
+import getSelector from '../utils/getSelector'
+import getLastEvent from '../utils/getLastEvent'
 
 /**
  * 监控基类
@@ -19,7 +21,6 @@ class BaseMonitor {
   reportUrl: OptionsType['reportUrl']
   extendsInfo: OptionsType['extendsInfo']
   appID: OptionsType['appID']
-  selector: string
   // Breadcrumb: Breadcrumb
   /**
    * 上报错误地址
@@ -40,7 +41,6 @@ class BaseMonitor {
     this.reportUrl = params.reportUrl // 上报错误地址
     this.extendsInfo = params.extendsInfo // 扩展信息
     this.appID = params.appID // 应用id
-    this.selector = '' // 触发错误的元素
     // this.Breadcrumb = new Breadcrumb()
   }
 
@@ -114,6 +114,8 @@ class BaseMonitor {
         txt.errorother = JSON.stringify(this.errorObj)
         break
     }
+    const lastEvent: any = getLastEvent() // 最后一个交互事件
+    const selector = lastEvent ? getSelector(lastEvent.path) : '' // 代表最后一个操作的元素
     const deviceInfo = this.getDeviceInfo()
     const extendsInfo = this.getExtendsInfo()
     const recordInfo = extendsInfo
@@ -123,7 +125,7 @@ class BaseMonitor {
     recordInfo.deviceInfo = deviceInfo // 设备信息
     recordInfo.appID = this.appID // 应用id
     recordInfo.time = new Date().getTime()
-    this.selector && (recordInfo.selector = this.selector)
+    selector && (recordInfo.selector = selector)
     return recordInfo
   }
 

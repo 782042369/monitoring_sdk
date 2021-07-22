@@ -2,15 +2,14 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-20 15:06:58
  * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-21 11:41:46
+ * @LastEditTime: 2021-07-22 10:59:53
  * @Description:
  */
+import { ParamsType, ViewModel } from '../../types'
 import BaseMonitor from '../../base/baseMonitor'
 import { ErrorCategoryEnum, ErrorLevelEnum } from '../../enum'
-import type { ParamsType } from '../type'
 import { isString, getLocationHref } from '../../utils'
 import { getBigVersion, vue2VmHandler, vue3VmHandler } from './utils'
-import { ViewModel } from './type'
 
 /**
  * vue错误

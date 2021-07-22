@@ -2,7 +2,7 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 16:17:00
  * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-20 19:01:49
+ * @LastEditTime: 2021-07-22 10:54:02
  * @Description:
  */
 
@@ -15,8 +15,7 @@ import {
 } from './error'
 import MonitorPerformance from './performance'
 import { checkUrl } from './utils'
-import { OptionsType } from './type'
-
+import { OptionsType } from './types'
 class MonitorJS {
   jsError: boolean
   promiseError: boolean

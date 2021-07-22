@@ -1,5 +1,5 @@
 import BaseMonitor from '../base/baseMonitor';
-import type { ParamsType } from './type';
+import { ParamsType } from '../types';
 /**
  * 捕获JS错误
  */

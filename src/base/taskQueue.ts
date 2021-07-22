@@ -2,13 +2,11 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 18:15:10
  * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-20 20:25:57
+ * @LastEditTime: 2021-07-22 10:54:42
  * @Description:
  */
 import API from './api'
-import { QueueProps } from './typpe'
-import { OptionsType, DataProps } from '../type'
-
+import { OptionsType, DataProps, QueueProps } from '../types'
 /**
  * 消息队列
  */

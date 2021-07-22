@@ -16,12 +16,11 @@
     "declarationMap": false, // 生成定义sourceMap
     "declarationDir": "./lib/types", // 定义文件输出目录
     "lib": ["esnext", "dom"],  // 导入库类型定义
-    "types": ["node"] // 导入指定类型包
+    "types": ["node"], // 导入指定类型包+
+    "typeRoots": ["./node_modules/@types/", "src/types"],
   },
-  "include": [
-    "src/*"  // 导入目录
-  ],
+  "include": ["src/*"],
   "paths": {
     "@/*": ["./src/*"]
-  }
+  },
 }

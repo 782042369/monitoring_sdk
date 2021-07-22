@@ -2,7 +2,7 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 16:18:12
  * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-21 12:47:17
+ * @LastEditTime: 2021-07-22 10:42:35
  * @Description:
  */
 const path = require('path')
@@ -11,6 +11,11 @@ const DOMGlobals = ['window', 'document']
 const NodeGlobals = ['module', 'require']
 
 module.exports = {
+  globals: {
+    document: true,
+    localStorage: true,
+    window: true,
+  },
   env: {
     browser: true,
     es6: true,
@@ -45,8 +50,30 @@ module.exports = {
     'arrow-parens': ['error', 'always'],
     'prefer-arrow-callback': 1, // 要求回调函数使用箭头函数
     'prefer-template': 1, // 要求使用模板字面量而非字符串连接
-    '@typescript-eslint/no-unused-vars': 'off',
     'no-debugger': process.env.NODE_ENV !== 'development' ? 'error' : 'off',
     'no-useless-escape': 'off',
+    '@typescript-eslint/no-var-requires': 'off',
+    '@typescript-eslint/no-inferrable-types': 'off',
+    '@typescript-eslint/naming-convention': 'off',
+    '@typescript-eslint/no-unnecessary-type-assertion': 'off',
+    '@typescript-eslint/no-unused-vars': 'off',
+    '@typescript-eslint/no-useless-constructor': 'off',
+    '@typescript-eslint/no-use-before-define': 'off',
+    '@typescript-eslint/no-unsafe-assignment': 'off',
+    '@typescript-eslint/no-unsafe-member-access': 'off',
+    '@typescript-eslint/no-unsafe-call': 'off',
+    '@typescript-eslint/no-unsafe-return': 'off',
+    '@typescript-eslint/restrict-template-expressions': 'off',
+    '@typescript-eslint/await-thenable': 'off',
+    '@typescript-eslint/unbound-method': 'off',
+    '@typescript-eslint/restrict-plus-operands': 'off',
+    '@typescript-eslint/no-floating-promises': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/ban-types': 'off',
+    '@typescript-eslint/ban-ts-comment': 'off',
+    '@typescript-eslint/no-namespace': 'off',
+    '@typescript-eslint/no-misused-promises': 'off',
+    '@typescript-eslint/prefer-regexp-exec': 'off',
   },
 }

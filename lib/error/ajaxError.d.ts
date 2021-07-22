@@ -1,4 +1,4 @@
-import type { ParamsType } from './type';
+import { ParamsType } from '../types';
 /**
  * ajax error异常
  */

@@ -33,7 +33,10 @@ export declare enum ErrorCategoryEnum {
     /**
      * 性能上报
      */
-    'PERFORMANCE' = "performance"
+    'PERFORMANCE' = "performance",
+    'CONSOLE_INFO' = "console_info",
+    'CONSOLE_WARN' = "console_warn",
+    'CONSOLE_ERROR' = "console_error"
 }
 /**
  * 错误level枚举
