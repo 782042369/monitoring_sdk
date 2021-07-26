@@ -2,11 +2,11 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 16:36:31
  * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-20 11:00:59
+ * @LastEditTime: 2021-07-22 15:07:52
  * @Description:
  */
-import VariableLibrary from './VariableLibrary'
 import MethodLibrary from './MethodLibrary'
+import { DataProps } from 'src/types'
 
 const DeviceInfo = (() => {
   // 逻辑层
@@ -14,7 +14,7 @@ const DeviceInfo = (() => {
     return {
       DeviceInfoObj(params: { domain: any; info?: any }) {
         params = params || { domain: '' }
-        const info: Record<string, number | string> = {
+        const info: Record<string, number | string | DataProps> = {
           deviceType: MethodLibrary.getDeviceType(), // 设备类型
           OS: MethodLibrary.getOS(), // 操作系统
           OSVersion: MethodLibrary.getOSVersion(), // 操作系统版本
@@ -25,12 +25,11 @@ const DeviceInfo = (() => {
           orientation: MethodLibrary.getOrientationStatu(), // 横竖屏
           browserInfo: MethodLibrary.getBrowserInfo(), // 浏览器信息
           fingerprint: MethodLibrary.createFingerprint(params.domain), // 浏览器指纹
-          userAgent: VariableLibrary.navigator.userAgent, // 包含 appCodeName,appName,appVersion,language,platform 等
         }
         if (!params.info || params.info.length === 0) {
           return info
         }
-        const infoTemp: Record<string, number | string> = {}
+        const infoTemp: Record<string, number | string | DataProps> = {}
         for (const i in info) {
           params.info.forEach((item: string) => {
             if (item.toLowerCase() === i.toLowerCase()) {

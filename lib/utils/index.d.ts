@@ -24,3 +24,12 @@ export declare class MyDate extends Date {
     format(fmt: string): string;
 }
 export declare function getLocationHref(): string;
+export declare function randomString(len?: number): string;
+/**
+ * 获得markpage
+ */
+export declare function markUser(): string;
+/**
+ * 获得Uv
+ */
+export declare function markUv(): string;

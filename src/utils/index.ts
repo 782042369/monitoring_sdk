@@ -2,7 +2,7 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 16:25:42
  * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-22 11:04:05
+ * @LastEditTime: 2021-07-22 15:05:39
  * @Description:
  */
 
@@ -112,4 +112,44 @@ export class MyDate extends Date {
 export function getLocationHref() {
   if (typeof document === 'undefined' || document.location === null) return ''
   return document.location.href
+}
+export function randomString(len: number = 10) {
+  const $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz123456789'
+  const maxPos = $chars.length
+  let pwd = ''
+  for (let i = 0; i < len; i++) {
+    pwd = pwd + $chars.charAt(Math.floor(Math.random() * maxPos))
+  }
+  return pwd + new Date().getTime()
+}
+
+/**
+ * 获得markpage
+ */
+export function markUser() {
+  let psMarkUser = localStorage.getItem('ps_markUser') || ''
+  if (!psMarkUser) {
+    psMarkUser = randomString()
+    localStorage.setItem('ps_markUser', psMarkUser)
+  }
+  return psMarkUser
+}
+
+/**
+ * 获得Uv
+ */
+export function markUv() {
+  const date = new MyDate()
+  let psMarkUv = localStorage.getItem('ps_markUv') || ''
+  const datatime: any = localStorage.getItem('ps_markUvTime') || ''
+  const today = date.format('yyyy/MM/dd 23:59:59')
+  if ((!psMarkUv && !datatime) || date.getTime() > datatime * 1) {
+    psMarkUv = randomString()
+    localStorage.setItem('ps_markUv', psMarkUv)
+    localStorage.setItem(
+      'ps_markUvTime',
+      JSON.stringify(new Date(today).getTime())
+    )
+  }
+  return psMarkUv
 }

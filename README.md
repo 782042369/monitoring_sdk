@@ -12,7 +12,7 @@
   VUE
   new MonitorJS().init({
     appID: '1111',
-    url: 'http://baidu.com/api', //上报错误地址
+    url: 'http://127.0.0.1:7070/api', //上报错误地址
     vueError: true, // 是否上报Vue错误
     vue: Vue,
     isPage: true,
@@ -21,7 +21,7 @@
   JS
     new MonitorJS().init({
     appID: '1111',
-    url: 'http://baidu.com/api', //上报错误地址
+    url: 'http://127.0.0.1:7070/api', //上报错误地址
     isPage: true,
     isResource: true,
   })

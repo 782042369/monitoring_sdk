@@ -1,6 +1,6 @@
 import { ErrorLevelEnum, ErrorCategoryEnum } from '../enum'
 import DeviceInfo from '../device'
-import { isFunction, isObject } from '../utils'
+import { isFunction, isObject, markUser, markUv } from '../utils'
 import TaskQueue from './taskQueue'
 // import Breadcrumb from '../base/Breadcrumb'
 import { OptionsType, DataProps } from '../types'
@@ -11,7 +11,7 @@ import getLastEvent from '../utils/getLastEvent'
  * 监控基类
  */
 class BaseMonitor {
-  category: string
+  category: ErrorCategoryEnum
   level: string
   msg: string
   url: string
@@ -125,6 +125,8 @@ class BaseMonitor {
       time: number
       url: string
       logInfo: string
+      markUser: string
+      markUv: string
       selector?: string
     } = {
       ...extendsInfo,
@@ -135,6 +137,8 @@ class BaseMonitor {
       time: new Date().getTime(), // 发送时间
       url: encodeURIComponent(this?.url || location.href), // url 地址
       logInfo: JSON.stringify(txt), // 错误信息
+      markUser: markUser(), // 用户
+      markUv: markUv(), // uv
     }
     selector && (recordInfo.selector = selector)
     return recordInfo

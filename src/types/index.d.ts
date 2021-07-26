@@ -3,10 +3,11 @@
 /*
  * @Author: 杨宏旋
  * @Date: 2021-07-22 10:39:11
- * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-22 11:06:20
- * @Description:
+ * @LastEditors: yanghongxuan
+ * @LastEditTime: 2021-07-26 19:11:32
+ * @Description:-
  */
+import { ErrorCategoryEnum, ErrorLevelEnum } from '../enum'
 export declare type DataProps = Record<string, any>
 export declare interface OptionsType {
   isPage: boolean
@@ -42,7 +43,17 @@ export declare interface QueueProps {
   isStop: boolean
   queues: {
     reportUrl: OptionsType['reportUrl']
-    data: DataProps
+    data: {
+      category: ErrorCategoryEnum
+      level: ErrorLevelEnum
+      deviceInfo: string
+      appID: OptionsType['appID']
+      time: number
+      url: string
+      logInfo: string
+      markUser: string
+      markUv: string
+    }
   }[]
   add(reportUrl: OptionsType['reportUrl'], data: DataProps): void
   fire(): void

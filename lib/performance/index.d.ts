@@ -35,15 +35,6 @@ declare class MonitorPerformance extends BaseMonitor {
      * @param {*} options  {pageId ：页面标示,url ：上报地址}
      */
     record(): void;
-    randomString(len?: number | undefined): string;
-    /**
-     * 获得markpage
-     */
-    markUser(): string;
-    /**
-     * 获得Uv
-     */
-    markUv(): string;
     clearPerformance(): void;
 }
 export default MonitorPerformance;

@@ -2,7 +2,7 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 18:15:10
  * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-22 10:38:43
+ * @LastEditTime: 2021-07-22 12:14:34
  * @Description:
  */
 /**
@@ -42,10 +42,6 @@ export enum ErrorCategoryEnum {
    * 性能上报
    */
   'PERFORMANCE' = 'performance',
-
-  'CONSOLE_INFO' = 'console_info',
-  'CONSOLE_WARN' = 'console_warn',
-  'CONSOLE_ERROR' = 'console_error',
 }
 
 /**
@@ -55,19 +51,19 @@ export enum ErrorLevelEnum {
   /**
    * 错误信息
    */
-  'ERROR' = 'Error',
+  'ERROR' = 'error',
   /**
    * 警告信息
    */
-  'WARN' = 'Warning',
+  'WARN' = 'warning',
   /**
    * 日志信息
    */
-  'INFO' = 'Info',
+  'INFO' = 'info',
   /**
    * 用户自定义事件
    */
-  'Custom' = 'Custom',
+  'Custom' = 'custom',
 }
 
 /**

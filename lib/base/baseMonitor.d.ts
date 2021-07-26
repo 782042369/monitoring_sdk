@@ -1,9 +1,10 @@
+import { ErrorCategoryEnum } from '../enum';
 import { OptionsType, DataProps } from '../types';
 /**
  * 监控基类
  */
 declare class BaseMonitor {
-    category: string;
+    category: ErrorCategoryEnum;
     level: string;
     msg: string;
     url: string;
@@ -42,6 +43,8 @@ declare class BaseMonitor {
         time: number;
         url: string;
         logInfo: string;
+        markUser: string;
+        markUv: string;
         selector?: string | undefined;
     };
     /**

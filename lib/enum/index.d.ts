@@ -33,10 +33,7 @@ export declare enum ErrorCategoryEnum {
     /**
      * 性能上报
      */
-    'PERFORMANCE' = "performance",
-    'CONSOLE_INFO' = "console_info",
-    'CONSOLE_WARN' = "console_warn",
-    'CONSOLE_ERROR' = "console_error"
+    'PERFORMANCE' = "performance"
 }
 /**
  * 错误level枚举
@@ -45,19 +42,19 @@ export declare enum ErrorLevelEnum {
     /**
      * 错误信息
      */
-    'ERROR' = "Error",
+    'ERROR' = "error",
     /**
      * 警告信息
      */
-    'WARN' = "Warning",
+    'WARN' = "warning",
     /**
      * 日志信息
      */
-    'INFO' = "Info",
+    'INFO' = "info",
     /**
      * 用户自定义事件
      */
-    'Custom' = "Custom"
+    'Custom' = "custom"
 }
 /**
  * Ajax库枚举

@@ -72,6 +72,10 @@ declare const MethodLibrary: {
     getNetwork(): any;
     getLanguage(): any;
     createFingerprint(domain: string): string;
-    getBrowserInfo(): string;
+    getBrowserInfo(): {
+        type: any;
+        version: any;
+        engine: any;
+    };
 };
 export default MethodLibrary;

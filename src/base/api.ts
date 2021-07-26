@@ -1,12 +1,13 @@
 /*
  * @Author: 杨宏旋
  * @Date: 2021-07-19 18:15:10
- * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-22 10:55:50
+ * @LastEditors: yanghongxuan
+ * @LastEditTime: 2021-07-26 19:09:49
  * @Description:
  */
-import { DataProps } from '../types'
 import { checkUrl } from '../utils'
+import { DataProps, OptionsType } from '../types'
+import { ErrorLevelEnum, ErrorCategoryEnum } from './../enum/index'
 
 /**
  * 数据持久化
@@ -19,7 +20,17 @@ class API {
   /**
    * 上报信息 （默认方式）
    */
-  report(data: DataProps) {
+  report(data: {
+    category: ErrorCategoryEnum
+    level: ErrorLevelEnum
+    deviceInfo: string
+    appID: OptionsType['appID']
+    time: number
+    url: string
+    logInfo: string
+    markUser: string
+    markUv: string
+  }) {
     if (!checkUrl(this.reportUrl)) {
       throw `上报信息url地址格式不正确,reportUrl=${this.reportUrl}`
     }
@@ -29,7 +40,17 @@ class API {
   /**
    * 发送消息
    */
-  sendInfo(data: DataProps) {
+  sendInfo(data: {
+    category: ErrorCategoryEnum
+    level: ErrorLevelEnum
+    deviceInfo: string
+    appID: OptionsType['appID']
+    time: 1627297413007
+    url: string
+    logInfo: string
+    markUser: string
+    markUv: string
+  }) {
     const dataStr = JSON.stringify(data)
     try {
       if (fetch) {
@@ -61,7 +82,17 @@ class API {
   /**
    * 通过img方式上报信息
    */
-  reportByImg(data: DataProps) {
+  reportByImg(data: {
+    category: ErrorCategoryEnum
+    level: ErrorLevelEnum
+    deviceInfo: string
+    appID: OptionsType['appID']
+    time: number
+    url: string
+    logInfo: string
+    markUser: string
+    markUv: string
+  }) {
     if (!checkUrl(this.reportUrl)) {
       throw `上报信息url地址格式不正确,reportUrl=${this.reportUrl}`
     }

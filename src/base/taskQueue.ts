@@ -1,12 +1,13 @@
 /*
  * @Author: 杨宏旋
  * @Date: 2021-07-19 18:15:10
- * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-22 10:54:42
+ * @LastEditors: yanghongxuan
+ * @LastEditTime: 2021-07-26 19:11:45
  * @Description:
  */
 import API from './api'
-import { OptionsType, DataProps, QueueProps } from '../types'
+import { OptionsType, QueueProps } from '../types'
+import { ErrorCategoryEnum, ErrorLevelEnum } from '../enum'
 /**
  * 消息队列
  */
@@ -20,13 +21,25 @@ const TaskQueue: QueueProps = {
    * 待处理消息列表
    */
   queues: [],
-
   /**
    * 添加消息
    * @param {*} reportUrl 上报url
    * @param {*} data 上报数据
    */
-  add(reportUrl: OptionsType['reportUrl'], data: DataProps) {
+  add(
+    reportUrl: OptionsType['reportUrl'],
+    data: {
+      category: ErrorCategoryEnum
+      level: ErrorLevelEnum
+      deviceInfo: string
+      appID: OptionsType['appID']
+      time: number
+      url: string
+      logInfo: string
+      markUser: string
+      markUv: string
+    }
+  ) {
     this.queues.push({ reportUrl, data })
   },
 
