@@ -1,5 +1,5 @@
 import BaseMonitor from '../base/baseMonitor';
-import { ParamsType } from '../types';
+import { ParamsType } from 'types';
 /**
  * 资源加载错误
  */

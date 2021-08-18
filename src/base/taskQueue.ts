@@ -2,12 +2,33 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 18:15:10
  * @LastEditors: yanghongxuan
- * @LastEditTime: 2021-07-26 19:11:45
+ * @LastEditTime: 2021-08-18 15:42:26
  * @Description:
  */
 import API from './api'
-import { OptionsType, QueueProps } from '../types'
+import { OptionsType, DataProps } from 'types'
 import { ErrorCategoryEnum, ErrorLevelEnum } from '../enum'
+interface QueueProps {
+  isStop: boolean
+  queues: {
+    reportUrl: OptionsType['reportUrl']
+    data: {
+      category: ErrorCategoryEnum
+      level: ErrorLevelEnum
+      deviceInfo: string
+      appID: OptionsType['appID']
+      time: number
+      url: string
+      logInfo: string
+      markUser: string
+      markUv: string
+    }
+  }[]
+  // eslint-disable-next-line no-unused-vars
+  add(reportUrl: OptionsType['reportUrl'], data: DataProps): void
+  fire(): void
+}
+
 /**
  * 消息队列
  */

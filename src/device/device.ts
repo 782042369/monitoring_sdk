@@ -1,12 +1,12 @@
 /*
  * @Author: 杨宏旋
  * @Date: 2021-07-19 16:36:31
- * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-22 15:07:52
+ * @LastEditors: yanghongxuan
+ * @LastEditTime: 2021-08-18 15:40:06
  * @Description:
  */
 import MethodLibrary from './MethodLibrary'
-import { DataProps } from 'src/types'
+import { DataProps } from 'types'
 
 const DeviceInfo = (() => {
   // 逻辑层

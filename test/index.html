@@ -1,8 +1,8 @@
 <!--
  * @Author: 杨宏旋
  * @Date: 2021-07-19 18:15:30
- * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-22 15:06:52
+ * @LastEditors: yanghongxuan
+ * @LastEditTime: 2021-07-27 10:41:16
  * @Description:
 -->
 <!DOCTYPE html>
@@ -48,6 +48,9 @@
       throw new Error('promise error 22222222222') //promise_error
     })
     ss() //js_error
+  }, 0)
+  setTimeout(() => {
+    fetch('http://127.0.0.1/mycode/php/crossdomain/index.php')
   }, 0)
   fn()
 </script>

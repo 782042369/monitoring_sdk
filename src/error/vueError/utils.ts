@@ -6,7 +6,7 @@
  * @Description:
  */
 
-import { ViewModel } from '../../types'
+import { ViewModel } from 'types'
 
 export function vue3VmHandler(vm: ViewModel) {
   let componentName = ''

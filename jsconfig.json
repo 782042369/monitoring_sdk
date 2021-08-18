@@ -15,12 +15,12 @@
     "declaration": true, // 生成定义文件
     "declarationMap": false, // 生成定义sourceMap
     "declarationDir": "./lib/types", // 定义文件输出目录
-    "lib": ["esnext", "dom"],  // 导入库类型定义
+    "lib": ["esnext", "dom"], // 导入库类型定义
     "types": ["node"], // 导入指定类型包+
-    "typeRoots": ["./node_modules/@types/", "src/types"],
+    "typeRoots": ["./node_modules/@types/", "./types"]
   },
-  "include": ["src/*"],
+  "include": ["src/*", "types/enum"],
   "paths": {
     "@/*": ["./src/*"]
-  },
+  }
 }

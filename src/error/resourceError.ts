@@ -7,7 +7,7 @@
  */
 import BaseMonitor from '../base/baseMonitor'
 import { ErrorCategoryEnum, ErrorLevelEnum } from '../enum'
-import { ParamsType } from '../types'
+import { ParamsType } from 'types'
 /**
  * 资源加载错误
  */

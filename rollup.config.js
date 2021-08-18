@@ -1,8 +1,8 @@
 /*
  * @Author: 杨宏旋
  * @Date: 2021-07-19 16:15:37
- * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-21 15:45:48
+ * @LastEditors: yanghongxuan
+ * @LastEditTime: 2021-08-18 15:39:39
  * @Description:
  */
 import path from 'path'
@@ -16,6 +16,7 @@ import commonjs from 'rollup-plugin-commonjs' // commonjs模块转换插件
 import alias from '@rollup/plugin-alias'
 const getPath = (_path) => path.resolve(__dirname, _path)
 import packageJSON from './package.json'
+import copy from 'rollup-plugin-copy'
 
 const extensions = ['.js', '.ts', '.tsx']
 // ts
@@ -78,6 +79,9 @@ const commonConf = {
     commonjs(),
     process.env.NODE_ENV !== 'development' &&
       terser({ compress: { drop_console: true, drop_debugger: true } }),
+    copy({
+      targets: [{ src: 'types', dest: 'lib' }],
+    }),
   ],
 }
 // 需要导出的模块类型

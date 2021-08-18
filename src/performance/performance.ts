@@ -1,4 +1,4 @@
-import { DataProps } from '../types'
+import { DataProps } from 'types'
 
 /**
  * 页面监控

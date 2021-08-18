@@ -5,7 +5,7 @@ import {
   AjaxMethodEnum,
   ErrorLevelEnum,
 } from '../enum'
-import { OptionsType, ParamsType } from '../types'
+import { OptionsType, ParamsType } from 'types'
 /**
  * ajax error异常
  */

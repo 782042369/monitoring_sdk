@@ -2,11 +2,11 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 18:15:10
  * @LastEditors: yanghongxuan
- * @LastEditTime: 2021-07-26 19:09:49
+ * @LastEditTime: 2021-08-18 15:41:03
  * @Description:
  */
 import { checkUrl } from '../utils'
-import { DataProps, OptionsType } from '../types'
+import { DataProps, OptionsType } from 'types'
 import { ErrorLevelEnum, ErrorCategoryEnum } from './../enum/index'
 
 /**

@@ -6,7 +6,7 @@ import BaseMonitor from '../base/baseMonitor'
 import { ErrorLevelEnum, ErrorCategoryEnum } from '../enum/index.js'
 import API from '../base/api.js'
 import { markUser, markUv, MyDate } from '../utils'
-import { DataProps, OptionsType } from '../types'
+import { DataProps, OptionsType } from 'types'
 
 class MonitorPerformance extends BaseMonitor {
   isPage: any

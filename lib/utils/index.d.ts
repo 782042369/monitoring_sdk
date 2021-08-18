@@ -1,4 +1,4 @@
-import { DataProps } from '../types';
+import { DataProps } from 'types';
 export declare function checkUrl(url: string | undefined): boolean;
 export declare function isFunction(func: DataProps): boolean;
 export declare function isArray(list: DataProps): boolean;
