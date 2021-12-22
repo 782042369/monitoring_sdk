@@ -1,18 +1,20 @@
 {
   "name": "monitor-sdk",
   "version": "1.0.0",
-  "description": "",
+  "description": "web monitor sdk",
   "main": "lib/index.min.js",
   "module": "lib/index.esm.js",
-  "types": "dist/index.d.ts",
+  "types": "lib/index.d.ts",
   "scripts": {
     "dev": "cross-env NODE_ENV=development rollup -c rollup.config.js -w",
     "build": "cross-env NODE_ENV=production rm -fr lib && rollup -c rollup.config.js",
     "commit": "node commit/git-commit.js",
     "commitlint": "commitlint -e"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "monitor-sdk"
+  ],
+  "author": "yanghongxuan",
   "license": "ISC",
   "dependencies": {
     "typescript": "^4.3.5"

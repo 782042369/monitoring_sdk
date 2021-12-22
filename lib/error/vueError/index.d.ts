@@ -1,4 +1,4 @@
-import { ParamsType } from 'types';
+import { ParamsType } from '../../types';
 import BaseMonitor from '../../base/baseMonitor';
 declare class VueError extends BaseMonitor {
     constructor(params: ParamsType);

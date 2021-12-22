@@ -2,12 +2,12 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-22 10:39:11
  * @LastEditors: yanghongxuan
- * @LastEditTime: 2021-08-18 15:42:29
+ * @LastEditTime: 2021-12-22 15:36:48
  * @Description: 全局声明
  */
 import { ErrorCategoryEnum, ErrorLevelEnum } from '../src/enum'
-declare type DataProps = Record<string, any>
-declare interface OptionsType {
+export type DataProps = Record<string, any>
+export type OptionsType = {
   isPage: boolean
   isResource: boolean
   reportUrl: string
@@ -20,12 +20,12 @@ declare interface OptionsType {
   vue?: boolean
   extendsInfo: DataProps
 }
-declare interface ParamsType {
+export type ParamsType = {
   reportUrl: OptionsType['reportUrl']
   extendsInfo: OptionsType['extendsInfo']
   appID: OptionsType['appID']
 }
-declare interface ViewModel extends DataProps {
+export type ViewModel = DataProps & {
   $root: Record<string, unknown>
   $options: {
     [key: string]: any

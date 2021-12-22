@@ -4,8 +4,8 @@ import { isArray } from '.'
 /*
  * @Author: 杨宏旋
  * @Date: 2020-05-31 22:47:24
- * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-22 11:17:03
+ * @LastEditors: yanghongxuan
+ * @LastEditTime: 2021-12-22 15:22:34
  * @Description:
  */
 function getSelectors(path: any) {
@@ -33,7 +33,7 @@ export default function (pathsOrTarget: any) {
     return getSelectors(pathsOrTarget)
   } else {
     // 也有可有是一个对象
-    const path = []
+    const path: any[] = []
     while (pathsOrTarget) {
       path.push(pathsOrTarget)
       pathsOrTarget = pathsOrTarget.parentNode

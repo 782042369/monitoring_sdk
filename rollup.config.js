@@ -2,7 +2,7 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 16:15:37
  * @LastEditors: yanghongxuan
- * @LastEditTime: 2021-08-18 15:39:39
+ * @LastEditTime: 2021-12-22 15:39:48
  * @Description:
  */
 import path from 'path'
@@ -14,10 +14,11 @@ import { DEFAULT_EXTENSIONS } from '@babel/core'
 import { terser } from 'rollup-plugin-terser'
 import commonjs from 'rollup-plugin-commonjs' // commonjs模块转换插件
 import alias from '@rollup/plugin-alias'
-const getPath = (_path) => path.resolve(__dirname, _path)
 import packageJSON from './package.json'
 import copy from 'rollup-plugin-copy'
 
+const getPath = (_path) => path.resolve(__dirname, _path)
+const projectRootDir = path.resolve(__dirname)
 const extensions = ['.js', '.ts', '.tsx']
 // ts
 const tsPlugin = ts({
@@ -27,7 +28,6 @@ const tsPlugin = ts({
 const customResolver = resolve({
   extensions: ['.mjs', '.js', '.jsx', '.json', '.sass', '.scss'],
 })
-const projectRootDir = path.resolve(__dirname)
 // eslint
 const esPlugin = eslint({
   throwOnError: true,
@@ -80,7 +80,7 @@ const commonConf = {
     process.env.NODE_ENV !== 'development' &&
       terser({ compress: { drop_console: true, drop_debugger: true } }),
     copy({
-      targets: [{ src: 'types', dest: 'lib' }],
+      targets: [{ src: 'src/types', dest: 'lib' }],
     }),
   ],
 }

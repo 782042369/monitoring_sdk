@@ -2,12 +2,12 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 16:36:31
  * @LastEditors: yanghongxuan
- * @LastEditTime: 2021-07-27 10:29:17
+ * @LastEditTime: 2021-12-22 15:26:44
  * @Description:
  */
 import BaseMonitor from '../base/baseMonitor'
 import { ErrorCategoryEnum, ErrorLevelEnum } from '../enum'
-import { ParamsType } from 'types'
+import { ParamsType } from '../types'
 /**
  * 资源加载错误
  */
@@ -41,7 +41,7 @@ class ResourceError extends BaseMonitor {
           this.url = location.href
           this.errorObj = {
             ...target,
-            src: target.src || target.href,
+            src: (target as any).src || (target as any).href,
           }
           this.recordError()
         } catch (error) {

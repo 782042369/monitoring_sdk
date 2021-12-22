@@ -1,8 +1,8 @@
 /*
  * @Author: 杨宏旋
  * @Date: 2021-07-19 16:18:12
- * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-22 10:42:35
+ * @LastEditors: yanghongxuan
+ * @LastEditTime: 2021-12-22 14:57:35
  * @Description:
  */
 const path = require('path')
@@ -19,6 +19,7 @@ module.exports = {
   env: {
     browser: true,
     es6: true,
+    node: true,
   },
   parser: '@typescript-eslint/parser', // 配置ts解析器
   parserOptions: {

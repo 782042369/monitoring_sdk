@@ -1,4 +1,4 @@
-import { DataProps, OptionsType } from 'types';
+import { DataProps, OptionsType } from '../types';
 import { ErrorLevelEnum, ErrorCategoryEnum } from './../enum/index';
 /**
  * 数据持久化

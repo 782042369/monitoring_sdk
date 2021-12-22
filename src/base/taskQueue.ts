@@ -6,7 +6,7 @@
  * @Description:
  */
 import API from './api'
-import { OptionsType, DataProps } from 'types'
+import { OptionsType, DataProps } from '../types'
 import { ErrorCategoryEnum, ErrorLevelEnum } from '../enum'
 interface QueueProps {
   isStop: boolean

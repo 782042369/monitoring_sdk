@@ -1,5 +1,5 @@
 import { ErrorCategoryEnum } from '../enum';
-import { OptionsType, DataProps } from 'types';
+import { OptionsType, DataProps } from '../types';
 /**
  * 监控基类
  */

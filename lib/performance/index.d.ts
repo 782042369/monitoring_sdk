@@ -1,5 +1,5 @@
 import BaseMonitor from '../base/baseMonitor';
-import { DataProps, OptionsType } from 'types';
+import { DataProps, OptionsType } from '../types';
 declare class MonitorPerformance extends BaseMonitor {
     isPage: any;
     isResource: any;

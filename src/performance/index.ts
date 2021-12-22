@@ -6,7 +6,7 @@ import BaseMonitor from '../base/baseMonitor'
 import { ErrorLevelEnum, ErrorCategoryEnum } from '../enum/index.js'
 import API from '../base/api.js'
 import { markUser, markUv, MyDate } from '../utils'
-import { DataProps, OptionsType } from 'types'
+import { DataProps, OptionsType } from '../types'
 
 class MonitorPerformance extends BaseMonitor {
   isPage: any
@@ -57,7 +57,7 @@ class MonitorPerformance extends BaseMonitor {
     isRLink?: boolean
     isRIMG?: boolean
   }) {
-    const usefulType = [] // 'navigation'
+    const usefulType: string[] = [] // 'navigation'
     options.isRScript !== false && usefulType.push('script') // 资源数据细分，是否上报script数据
     options.isRCSS !== false && usefulType.push('css') // 资源数据细分，是否上报CSS数据
     options.isRFetch !== false && usefulType.push('fetch') // 资源数据细分，是否上报Fetch数据

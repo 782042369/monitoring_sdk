@@ -6,7 +6,7 @@
  * @Description:
  */
 import MethodLibrary from './MethodLibrary'
-import { DataProps } from 'types'
+import { DataProps } from '../types'
 
 const DeviceInfo = (() => {
   // 逻辑层

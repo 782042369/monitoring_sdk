@@ -2,10 +2,10 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-20 15:06:58
  * @LastEditors: yanghongxuan
- * @LastEditTime: 2021-08-18 15:37:43
+ * @LastEditTime: 2021-12-22 15:36:16
  * @Description:
  */
-import { ParamsType, ViewModel } from 'types'
+import { ParamsType, ViewModel } from '../../types'
 import BaseMonitor from '../../base/baseMonitor'
 import { ErrorCategoryEnum, ErrorLevelEnum } from '../../enum'
 import { isString, getLocationHref } from '../../utils'

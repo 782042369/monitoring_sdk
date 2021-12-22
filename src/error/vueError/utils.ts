@@ -1,12 +1,12 @@
 /*
  * @Author: 杨宏旋
  * @Date: 2021-07-20 17:27:51
- * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-22 11:00:05
+ * @LastEditors: yanghongxuan
+ * @LastEditTime: 2021-12-22 15:36:19
  * @Description:
  */
 
-import { ViewModel } from 'types'
+import { ViewModel } from '../../types'
 
 export function vue3VmHandler(vm: ViewModel) {
   let componentName = ''

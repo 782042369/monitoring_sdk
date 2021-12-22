@@ -6,7 +6,7 @@
  * @Description:
  */
 
-import { DataProps } from 'types'
+import { DataProps } from '../types'
 
 export function checkUrl(url: string | undefined): boolean {
   if (!url) {

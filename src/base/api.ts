@@ -2,11 +2,11 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 18:15:10
  * @LastEditors: yanghongxuan
- * @LastEditTime: 2021-08-18 15:41:03
+ * @LastEditTime: 2021-12-22 15:33:15
  * @Description:
  */
 import { checkUrl } from '../utils'
-import { DataProps, OptionsType } from 'types'
+import { DataProps, OptionsType } from '../types'
 import { ErrorLevelEnum, ErrorCategoryEnum } from './../enum/index'
 
 /**
@@ -117,7 +117,7 @@ class API {
    *格式化参数
    */
   formatParams(data: DataProps) {
-    const arr = []
+    const arr: string[] = []
     for (const name in data) {
       arr.push(`${encodeURIComponent(name)}=${encodeURIComponent(data[name])}`)
     }

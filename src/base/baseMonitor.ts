@@ -3,7 +3,7 @@ import DeviceInfo from '../device'
 import { isFunction, isObject, markUser, markUv } from '../utils'
 import TaskQueue from './taskQueue'
 // import Breadcrumb from '../base/Breadcrumb'
-import { OptionsType, DataProps } from 'types'
+import { OptionsType, DataProps } from '../types'
 import getSelector from '../utils/getSelector'
 import getLastEvent from '../utils/getLastEvent'
 
