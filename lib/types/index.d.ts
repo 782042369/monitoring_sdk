@@ -2,10 +2,9 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-22 10:39:11
  * @LastEditors: yanghongxuan
- * @LastEditTime: 2021-12-22 15:36:48
+ * @LastEditTime: 2021-12-22 15:47:30
  * @Description: 全局声明
  */
-import { ErrorCategoryEnum, ErrorLevelEnum } from '../src/enum'
 export type DataProps = Record<string, any>
 export type OptionsType = {
   isPage: boolean
