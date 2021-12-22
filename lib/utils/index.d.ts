@@ -28,7 +28,7 @@ export declare function randomString(len?: number): string;
 /**
  * 获得markpage
  */
-export declare function markUser(): string;
+export declare function markUser(userID?: string | number): string;
 /**
  * 获得Uv
  */

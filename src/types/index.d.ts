@@ -2,7 +2,7 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-22 10:39:11
  * @LastEditors: yanghongxuan
- * @LastEditTime: 2021-12-22 15:47:30
+ * @LastEditTime: 2021-12-22 17:35:51
  * @Description: 全局声明
  */
 export type DataProps = Record<string, any>
@@ -16,8 +16,9 @@ export type OptionsType = {
   resourceError?: boolean
   ajaxError?: boolean
   vueError?: boolean
-  vue?: boolean
   extendsInfo: DataProps
+  vue?: boolean
+  userID?: number | string
 }
 export type ParamsType = {
   reportUrl: OptionsType['reportUrl']

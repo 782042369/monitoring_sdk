@@ -1,8 +1,8 @@
 /*
  * @Author: 杨宏旋
  * @Date: 2021-07-19 16:25:42
- * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-22 15:05:39
+ * @LastEditors: yanghongxuan
+ * @LastEditTime: 2021-12-22 17:40:16
  * @Description:
  */
 
@@ -126,7 +126,10 @@ export function randomString(len: number = 10) {
 /**
  * 获得markpage
  */
-export function markUser() {
+export function markUser(userID?: string | number) {
+  if (userID) {
+    return String(userID)
+  }
   let psMarkUser = localStorage.getItem('ps_markUser') || ''
   if (!psMarkUser) {
     psMarkUser = randomString()

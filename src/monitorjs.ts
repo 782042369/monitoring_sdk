@@ -2,7 +2,7 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 16:17:00
  * @LastEditors: yanghongxuan
- * @LastEditTime: 2021-12-22 15:39:07
+ * @LastEditTime: 2021-12-22 17:43:48
  * @Description:
  */
 
@@ -48,7 +48,7 @@ class MonitorJS {
     const reportUrl = options.reportUrl // 上报错误地址
     const appID = options.appID // 上报id
     const extendsInfo = options.extendsInfo || {} // 扩展信息（一般用于系统个性化分析）
-    const param = { reportUrl, extendsInfo, appID }
+    const param = { reportUrl, extendsInfo, appID, userID: options.userID }
 
     if (this.jsError) {
       new JsError(param).handleError()

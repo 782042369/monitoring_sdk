@@ -92,7 +92,7 @@ class MonitorPerformance extends BaseMonitor {
         logInfo: JSON.stringify(result),
         deviceInfo: this.getDeviceInfo(),
         appID: this.appID,
-        markUser: markUser(), // 用户
+        markUser: markUser(this.userID), // 用户
         markUv: markUv(), // uv
         level: ErrorLevelEnum.INFO,
         time: new Date().getTime(), // 发送时间

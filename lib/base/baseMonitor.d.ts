@@ -14,6 +14,7 @@ declare class BaseMonitor {
     reportUrl: OptionsType['reportUrl'];
     extendsInfo: OptionsType['extendsInfo'];
     appID: OptionsType['appID'];
+    userID?: OptionsType['userID'];
     /**
      * 上报错误地址
      * @param {*} params { reportUrl,extendsInfo }
@@ -22,6 +23,7 @@ declare class BaseMonitor {
         reportUrl: OptionsType['reportUrl'];
         extendsInfo: OptionsType['extendsInfo'];
         appID: OptionsType['appID'];
+        userID?: OptionsType['appID'];
     });
     /**
      * 记录错误信息
@@ -43,9 +45,10 @@ declare class BaseMonitor {
         time: number;
         url: string;
         logInfo: string;
-        markUser: string;
+        markUser: string | number;
         markUv: string;
         selector?: string | undefined;
+        preUrl?: string | undefined;
     };
     /**
      * 获取扩展信息

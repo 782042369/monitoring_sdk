@@ -21,6 +21,7 @@ class BaseMonitor {
   reportUrl: OptionsType['reportUrl']
   extendsInfo: OptionsType['extendsInfo']
   appID: OptionsType['appID']
+  userID?: OptionsType['userID']
   // Breadcrumb: Breadcrumb
   /**
    * 上报错误地址
@@ -30,6 +31,7 @@ class BaseMonitor {
     reportUrl: OptionsType['reportUrl']
     extendsInfo: OptionsType['extendsInfo']
     appID: OptionsType['appID']
+    userID?: OptionsType['appID']
   }) {
     this.category = ErrorCategoryEnum.UNKNOW_ERROR // 错误类型
     this.level = ErrorLevelEnum.INFO // 错误等级
@@ -41,6 +43,9 @@ class BaseMonitor {
     this.reportUrl = params.reportUrl // 上报错误地址
     this.extendsInfo = params.extendsInfo // 扩展信息
     this.appID = params.appID // 应用id
+    if (params.userID !== undefined) {
+      this.userID = params.userID // 用户id
+    }
     // this.Breadcrumb = new Breadcrumb()
   }
 
@@ -125,9 +130,10 @@ class BaseMonitor {
       time: number
       url: string
       logInfo: string
-      markUser: string
+      markUser: string | number
       markUv: string
       selector?: string
+      preUrl?: string
     } = {
       ...extendsInfo,
       category: this.category, // 错误分类
@@ -137,8 +143,9 @@ class BaseMonitor {
       time: new Date().getTime(), // 发送时间
       url: encodeURIComponent(this?.url || location.href), // url 地址
       logInfo: JSON.stringify(txt), // 错误信息
-      markUser: markUser(), // 用户
+      markUser: markUser(this.userID), // 用户
       markUv: markUv(), // uv
+      preUrl: document.referrer,
     }
     selector && (recordInfo.selector = selector)
     return recordInfo
