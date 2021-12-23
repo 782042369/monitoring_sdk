@@ -1,17 +1,15 @@
 import { OptionsType, DataProps } from '../types';
-import { ErrorCategoryEnum, ErrorLevelEnum } from '../enum';
+import { ErrorCategoryEnum } from '../enum';
 interface QueueProps {
     isStop: boolean;
     queues: {
         reportUrl: OptionsType['reportUrl'];
         data: {
             category: ErrorCategoryEnum;
-            level: ErrorLevelEnum;
-            deviceInfo: string;
+            device: string;
             appID: OptionsType['appID'];
-            time: number;
             url: string;
-            logInfo: string;
+            log: string;
             markUser: string;
             markUv: string;
         };

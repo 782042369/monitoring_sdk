@@ -2,11 +2,11 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 16:36:31
  * @LastEditors: yanghongxuan
- * @LastEditTime: 2021-12-22 15:26:44
+ * @LastEditTime: 2021-12-22 18:16:58
  * @Description:
  */
 import BaseMonitor from '../base/baseMonitor'
-import { ErrorCategoryEnum, ErrorLevelEnum } from '../enum'
+import { ErrorCategoryEnum } from '../enum'
 import { ParamsType } from '../types'
 /**
  * 资源加载错误
@@ -36,7 +36,6 @@ class ResourceError extends BaseMonitor {
           if (!isElementTarget) {
             return // js error不再处理
           }
-          this.level = ErrorLevelEnum.ERROR
           this.msg = `加载 ${target.tagName} 资源错误`
           this.url = location.href
           this.errorObj = {

@@ -2,12 +2,12 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 18:15:10
  * @LastEditors: yanghongxuan
- * @LastEditTime: 2021-12-22 17:39:54
+ * @LastEditTime: 2021-12-23 09:57:43
  * @Description:
  */
 import { checkUrl } from '../utils'
 import { DataProps, OptionsType } from '../types'
-import { ErrorLevelEnum, ErrorCategoryEnum } from './../enum/index'
+import { ErrorCategoryEnum } from './../enum/index'
 
 /**
  * 数据持久化
@@ -22,12 +22,10 @@ class API {
    */
   report(data: {
     category: ErrorCategoryEnum
-    level: ErrorLevelEnum
-    deviceInfo: string
+    device: string
     appID: OptionsType['appID']
-    time: number
     url: string
-    logInfo: string
+    log: string
     markUser: string
     markUv: string
   }) {
@@ -42,12 +40,10 @@ class API {
    */
   sendInfo(data: {
     category: ErrorCategoryEnum
-    level: ErrorLevelEnum
-    deviceInfo: string
+    device: string
     appID: OptionsType['appID']
-    time: 1627297413007
     url: string
-    logInfo: string
+    log: string
     markUser: string
     markUv: string
   }) {
@@ -84,12 +80,10 @@ class API {
    */
   reportByImg(data: {
     category: ErrorCategoryEnum
-    level: ErrorLevelEnum
-    deviceInfo: string
+    device: string
     appID: OptionsType['appID']
-    time: number
     url: string
-    logInfo: string
+    log: string
     markUser: string
     markUv: string
   }) {

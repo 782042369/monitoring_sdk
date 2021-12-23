@@ -2,12 +2,12 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-20 15:06:58
  * @LastEditors: yanghongxuan
- * @LastEditTime: 2021-12-22 15:36:16
+ * @LastEditTime: 2021-12-22 18:17:01
  * @Description:
  */
 import { ParamsType, ViewModel } from '../../types'
 import BaseMonitor from '../../base/baseMonitor'
-import { ErrorCategoryEnum, ErrorLevelEnum } from '../../enum'
+import { ErrorCategoryEnum } from '../../enum'
 import { isString, getLocationHref } from '../../utils'
 import { getBigVersion, vue2VmHandler, vue3VmHandler } from './utils'
 
@@ -45,7 +45,6 @@ function handleVueError(
   //   type: BREADCRUMBTYPES.VUE,
   //   category: breadcrumb.getCategory(BREADCRUMBTYPES.VUE),
   //   data: data,
-  //   level: breadcrumbLevel,
   // })
   // transportData.send(data)
 }
@@ -63,7 +62,6 @@ class VueError extends BaseMonitor {
     }
     Vue.config.errorHandler = (error: Error, vm: ViewModel, info: string) => {
       try {
-        this.level = ErrorLevelEnum.WARN
         this.msg = JSON.stringify(handleVueError(error, vm, info, Vue))
         this.category = ErrorCategoryEnum.VUE_ERROR
         this.recordError()

@@ -5,7 +5,6 @@ import { OptionsType, DataProps } from '../types';
  */
 declare class BaseMonitor {
     category: ErrorCategoryEnum;
-    level: string;
     msg: string;
     url: string;
     line: string;
@@ -39,12 +38,10 @@ declare class BaseMonitor {
      */
     handleErrorInfo(): {
         category: string;
-        level: string;
-        deviceInfo: string;
+        device: string;
         appID: string;
-        time: number;
         url: string;
-        logInfo: string;
+        log: string;
         markUser: string | number;
         markUv: string;
         selector?: string | undefined;

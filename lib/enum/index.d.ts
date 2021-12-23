@@ -36,27 +36,6 @@ export declare enum ErrorCategoryEnum {
     'PERFORMANCE' = "performance"
 }
 /**
- * 错误level枚举
- */
-export declare enum ErrorLevelEnum {
-    /**
-     * 错误信息
-     */
-    'ERROR' = "error",
-    /**
-     * 警告信息
-     */
-    'WARN' = "warning",
-    /**
-     * 日志信息
-     */
-    'INFO' = "info",
-    /**
-     * 用户自定义事件
-     */
-    'Custom' = "custom"
-}
-/**
  * Ajax库枚举
  */
 export declare enum AjaxLibEnum {

@@ -2,24 +2,22 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 18:15:10
  * @LastEditors: yanghongxuan
- * @LastEditTime: 2021-08-18 15:42:26
+ * @LastEditTime: 2021-12-23 09:57:50
  * @Description:
  */
 import API from './api'
 import { OptionsType, DataProps } from '../types'
-import { ErrorCategoryEnum, ErrorLevelEnum } from '../enum'
+import { ErrorCategoryEnum } from '../enum'
 interface QueueProps {
   isStop: boolean
   queues: {
     reportUrl: OptionsType['reportUrl']
     data: {
       category: ErrorCategoryEnum
-      level: ErrorLevelEnum
-      deviceInfo: string
+      device: string
       appID: OptionsType['appID']
-      time: number
       url: string
-      logInfo: string
+      log: string
       markUser: string
       markUv: string
     }
@@ -51,12 +49,10 @@ const TaskQueue: QueueProps = {
     reportUrl: OptionsType['reportUrl'],
     data: {
       category: ErrorCategoryEnum
-      level: ErrorLevelEnum
-      deviceInfo: string
+      device: string
       appID: OptionsType['appID']
-      time: number
       url: string
-      logInfo: string
+      log: string
       markUser: string
       markUv: string
     }

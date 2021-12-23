@@ -1,11 +1,11 @@
 /*
  * @Author: 杨宏旋
  * @Date: 2021-07-20 17:55:46
- * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-20 20:15:16
+ * @LastEditors: yanghongxuan
+ * @LastEditTime: 2021-12-23 09:57:54
  * @Description:
  */
-import { ErrorCategoryEnum, ErrorLevelEnum } from '../enum'
+import { ErrorCategoryEnum } from '../enum'
 
 interface BreadcrumbPushData {
   /**
@@ -13,8 +13,6 @@ interface BreadcrumbPushData {
    */
   category: ErrorCategoryEnum
   data: any
-  time: number
-  level: ErrorLevelEnum
 }
 
 export default class Breadcrumb {

@@ -1,10 +1,5 @@
 import BaseMonitor from '../base/baseMonitor'
-import {
-  ErrorCategoryEnum,
-  AjaxLibEnum,
-  AjaxMethodEnum,
-  ErrorLevelEnum,
-} from '../enum'
+import { ErrorCategoryEnum, AjaxLibEnum, AjaxMethodEnum } from '../enum'
 import { OptionsType, ParamsType } from '../types'
 /**
  * ajax error异常
@@ -52,11 +47,10 @@ class XHRError extends BaseMonitor {
     type: 'error' | 'load' | 'abort',
     startTime: number,
     self: {
-      statusText: string
       status: number
       response: any
     },
-    ajaxlib: AjaxLibEnum,
+    lib: AjaxLibEnum,
     logData: {
       method: string
       url: string
@@ -64,16 +58,14 @@ class XHRError extends BaseMonitor {
   ) {
     try {
       const duration = Date.now() - startTime
-      this.level = ErrorLevelEnum.WARN
       this.category = ErrorCategoryEnum.AJAX_ERROR
-      this.msg = self.response || ErrorCategoryEnum.AJAX_ERROR
+      this.msg = ErrorCategoryEnum.AJAX_ERROR
       this.errorObj = {
         status: self.status, // 状态码
-        statusText: self.statusText, // 状态
         duration, // 请求用时
         type, // 状态
         method: logData.method.toLowerCase(), // 请求方式
-        ajaxlib,
+        lib,
         path: logData.url,
       }
       this.recordError()
@@ -142,7 +134,6 @@ class XHRError extends BaseMonitor {
             startTime,
             {
               status: tempRes.status || res.ok ? 200 : 500,
-              statusText: JSON.stringify(res) || '',
               response: res,
             },
             AjaxLibEnum.FETCH,
@@ -155,7 +146,6 @@ class XHRError extends BaseMonitor {
             startTime,
             {
               status: 500,
-              statusText: error || '',
               response: error,
             },
             AjaxLibEnum.FETCH,

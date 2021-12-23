@@ -3,9 +3,9 @@
  */
 import pagePerformance from './performance.js'
 import BaseMonitor from '../base/baseMonitor'
-import { ErrorLevelEnum, ErrorCategoryEnum } from '../enum/index.js'
+import { ErrorCategoryEnum } from '../enum/index.js'
 import API from '../base/api.js'
-import { markUser, markUv, MyDate } from '../utils'
+import { markUser, markUv } from '../utils'
 import { DataProps, OptionsType } from '../types'
 
 class MonitorPerformance extends BaseMonitor {
@@ -80,7 +80,6 @@ class MonitorPerformance extends BaseMonitor {
         this.config.resourceList = pagePerformance.getEntries(this.usefulType)
       }
       const result = {
-        curTime: new MyDate().format('yyyy-MM-dd HH:mm:ss'),
         performance: this.config.performance,
         resourceList: this.config.resourceList,
       }
@@ -88,15 +87,12 @@ class MonitorPerformance extends BaseMonitor {
       const data = {
         ...extendsInfo,
         category: this.category,
-        logType: ErrorLevelEnum.INFO,
-        logInfo: JSON.stringify(result),
-        deviceInfo: this.getDeviceInfo(),
+        log: JSON.stringify(result),
+        device: this.getDeviceInfo(),
         appID: this.appID,
         markUser: markUser(this.userID), // 用户
         markUv: markUv(), // uv
-        level: ErrorLevelEnum.INFO,
-        time: new Date().getTime(), // 发送时间
-        url: encodeURIComponent(this?.url || location.href), // url 地址
+        url: this?.url || location.href, // url 地址
       }
       localStorage.setItem('page_performance', JSON.stringify(data))
       // 发送监控数据

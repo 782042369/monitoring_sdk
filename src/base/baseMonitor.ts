@@ -1,4 +1,4 @@
-import { ErrorLevelEnum, ErrorCategoryEnum } from '../enum'
+import { ErrorCategoryEnum } from '../enum'
 import DeviceInfo from '../device'
 import { isFunction, isObject, markUser, markUv } from '../utils'
 import TaskQueue from './taskQueue'
@@ -12,7 +12,6 @@ import getLastEvent from '../utils/getLastEvent'
  */
 class BaseMonitor {
   category: ErrorCategoryEnum
-  level: string
   msg: string
   url: string
   line: string
@@ -34,7 +33,6 @@ class BaseMonitor {
     userID?: OptionsType['appID']
   }) {
     this.category = ErrorCategoryEnum.UNKNOW_ERROR // 错误类型
-    this.level = ErrorLevelEnum.INFO // 错误等级
     this.msg = '' // 错误信息
     this.url = '' // 错误信息地址
     this.line = '' // 行数
@@ -82,8 +80,6 @@ class BaseMonitor {
       // this.Breadcrumb.push({
       //   category: errorInfo.category,
       //   data: errorInfo.logInfo,
-      //   time: errorInfo.time,
-      //   level: errorInfo.logType,
       // })
       // console.log('this.Breadcrumb: ', this.Breadcrumb)
       console.info(
@@ -115,7 +111,7 @@ class BaseMonitor {
         txt.errorcol = this.col
         break
       default:
-        txt.errorother = JSON.stringify(this.errorObj)
+        txt.errorother = this.errorObj
         break
     }
     const lastEvent: any = getLastEvent() // 最后一个交互事件
@@ -124,12 +120,10 @@ class BaseMonitor {
     const extendsInfo = this.getExtendsInfo()
     const recordInfo: {
       category: string
-      level: string
-      deviceInfo: string
+      device: string
       appID: string
-      time: number
       url: string
-      logInfo: string
+      log: string
       markUser: string | number
       markUv: string
       selector?: string
@@ -137,12 +131,10 @@ class BaseMonitor {
     } = {
       ...extendsInfo,
       category: this.category, // 错误分类
-      level: this.level, // 错误级别
-      deviceInfo: deviceInfo, // 设备信息
+      device: deviceInfo, // 设备信息
       appID: this.appID, // 应用id
-      time: new Date().getTime(), // 发送时间
-      url: encodeURIComponent(this?.url || location.href), // url 地址
-      logInfo: JSON.stringify(txt), // 错误信息
+      url: this?.url || location.href, // url 地址
+      log: JSON.stringify(txt), // 错误信息
       markUser: markUser(this.userID), // 用户
       markUv: markUv(), // uv
       preUrl: document.referrer,
