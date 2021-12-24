@@ -1,43 +1,43 @@
 /*
  * @Author: 杨宏旋
  * @Date: 2021-07-19 18:15:10
- * @LastEditors: 杨宏旋
- * @LastEditTime: 2021-07-22 12:14:34
+ * @LastEditors: yanghongxuan
+ * @LastEditTime: 2021-12-24 15:05:46
  * @Description:
  */
 /**
- * 错误类型枚举
+ * 日志类型枚举
  */
 
-export enum ErrorCategoryEnum {
+export enum CategoryEnum {
   /**
-   * js 错误
+   * js 日志
    */
-  'JS_ERROR' = 'js_error',
+  'JS' = 'js',
   /**
-   * 资源引用错误
+   * 资源引用日志
    */
-  'RESOURCE_ERROR' = 'resource_error',
+  'RESOURCE' = 'resource',
   /**
-   * Vue错误
+   * Vue日志
    */
-  'VUE_ERROR' = 'vue_error',
+  'VUE' = 'vue',
   /**
-   * promise 错误
+   * promise 日志
    */
-  'PROMISE_ERROR' = 'promise_error',
+  'PROMISE' = 'promise',
   /**
-   * ajax异步请求错误
+   * ajax异步请求日志
    */
-  'AJAX_ERROR' = 'ajax_error',
+  'AJAX' = 'ajax',
   /**
-   * 跨域js错误
+   * 跨域js日志
    */
-  'CROSS_SCRIPT_ERROR' = 'cross_srcipt_error',
+  'CROSS_SCRIPT' = 'cross_srcipt',
   /**
    * 未知异常
    */
-  'UNKNOW_ERROR' = 'unknow_error',
+  'UNKNOW' = 'unknow',
   /**
    * 性能上报
    */

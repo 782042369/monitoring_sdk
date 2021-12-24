@@ -1,5 +1,5 @@
 import BaseMonitor from '../base/baseMonitor'
-import { ErrorCategoryEnum, AjaxLibEnum, AjaxMethodEnum } from '../enum'
+import { CategoryEnum, AjaxLibEnum, AjaxMethodEnum } from '../enum'
 import { OptionsType, ParamsType } from '../types'
 /**
  * ajax error异常
@@ -58,8 +58,8 @@ class XHRError extends BaseMonitor {
   ) {
     try {
       const duration = Date.now() - startTime
-      this.category = ErrorCategoryEnum.AJAX_ERROR
-      this.msg = ErrorCategoryEnum.AJAX_ERROR
+      this.category = CategoryEnum.AJAX
+      this.msg = CategoryEnum.AJAX
       this.errorObj = {
         status: self.status, // 状态码
         duration, // 请求用时

@@ -3,10 +3,10 @@
  */
 import pagePerformance from './performance.js'
 import BaseMonitor from '../base/baseMonitor'
-import { ErrorCategoryEnum } from '../enum/index.js'
+import { CategoryEnum } from '../enum/index.js'
 import API from '../base/api.js'
 import { markUser, markUv } from '../utils'
-import { DataProps, OptionsType } from '../types'
+import { OptionsType } from '../types'
 
 class MonitorPerformance extends BaseMonitor {
   isPage: any
@@ -14,16 +14,11 @@ class MonitorPerformance extends BaseMonitor {
   usefulType: string[]
   outTime: number
   config: any
-  constructor(options: {
-    reportUrl: OptionsType['reportUrl']
-    extendsInfo: OptionsType['extendsInfo']
-    appID: OptionsType['appID']
-    isPage: OptionsType['isPage']
-    isResource: OptionsType['isResource']
-  }) {
+  constructor(options: OptionsType) {
     super({
       reportUrl: options.reportUrl,
       appID: options.appID,
+      userID: options.userID,
       extendsInfo: options.extendsInfo,
     })
     options.isPage = options.isPage !== false
@@ -36,7 +31,7 @@ class MonitorPerformance extends BaseMonitor {
       resourceList: [], // 资源列表
       performance: {}, // 页面性能列表
     }
-    this.category = ErrorCategoryEnum.PERFORMANCE
+    this.category = CategoryEnum.PERFORMANCE
     this.reportUrl = options.reportUrl || ''
   }
 
@@ -45,23 +40,15 @@ class MonitorPerformance extends BaseMonitor {
    * @param {*} options
    */
   getSourceType(options: {
-    reportUrl: OptionsType['reportUrl']
-    appID: OptionsType['appID']
-    extendsInfo?: DataProps
-    isPage?: boolean
-    isResource?: boolean
     isRScript?: boolean
     isRCSS?: boolean
-    isRFetch?: any
-    isRXHR?: boolean
     isRLink?: boolean
     isRIMG?: boolean
   }) {
     const usefulType: string[] = [] // 'navigation'
+    // http请求类的数据不走这里上报
     options.isRScript !== false && usefulType.push('script') // 资源数据细分，是否上报script数据
     options.isRCSS !== false && usefulType.push('css') // 资源数据细分，是否上报CSS数据
-    options.isRFetch !== false && usefulType.push('fetch') // 资源数据细分，是否上报Fetch数据
-    options.isRXHR !== false && usefulType.push('xmlhttprequest') // 资源数据细分，是否上报XHR数据
     options.isRLink !== false && usefulType.push('link') // 资源数据细分，是否上报Link数据
     options.isRIMG !== false && usefulType.push('img') // 资源数据细分，是否上报IMG数据
     return usefulType
@@ -77,7 +64,10 @@ class MonitorPerformance extends BaseMonitor {
         this.config.performance = pagePerformance.getTiming()
       }
       if (this.isResource) {
-        this.config.resourceList = pagePerformance.getEntries(this.usefulType)
+        this.config.resourceList = pagePerformance.getEntries(
+          this.usefulType,
+          this.reportUrl
+        )
       }
       const result = {
         performance: this.config.performance,
@@ -96,6 +86,7 @@ class MonitorPerformance extends BaseMonitor {
       }
       localStorage.setItem('page_performance', JSON.stringify(data))
       // 发送监控数据
+      console.log(' window.performance.timing: ', window.performance.timing)
       new API(this.reportUrl).report(data)
       this.clearPerformance()
     } catch (error) {

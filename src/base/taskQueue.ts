@@ -7,13 +7,13 @@
  */
 import API from './api'
 import { OptionsType, DataProps } from '../types'
-import { ErrorCategoryEnum } from '../enum'
+import { CategoryEnum } from '../enum'
 interface QueueProps {
   isStop: boolean
   queues: {
     reportUrl: OptionsType['reportUrl']
     data: {
-      category: ErrorCategoryEnum
+      category: CategoryEnum
       device: string
       appID: OptionsType['appID']
       url: string
@@ -48,7 +48,7 @@ const TaskQueue: QueueProps = {
   add(
     reportUrl: OptionsType['reportUrl'],
     data: {
-      category: ErrorCategoryEnum
+      category: CategoryEnum
       device: string
       appID: OptionsType['appID']
       url: string

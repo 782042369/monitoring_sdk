@@ -1,10 +1,10 @@
-import { ErrorCategoryEnum } from '../enum';
+import { CategoryEnum } from '../enum';
 import { OptionsType, DataProps } from '../types';
 /**
  * 监控基类
  */
 declare class BaseMonitor {
-    category: ErrorCategoryEnum;
+    category: CategoryEnum;
     msg: string;
     url: string;
     line: string;
@@ -22,7 +22,7 @@ declare class BaseMonitor {
         reportUrl: OptionsType['reportUrl'];
         extendsInfo: OptionsType['extendsInfo'];
         appID: OptionsType['appID'];
-        userID?: OptionsType['appID'];
+        userID?: OptionsType['userID'];
     });
     /**
      * 记录错误信息

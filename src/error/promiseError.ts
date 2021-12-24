@@ -6,7 +6,7 @@
  * @Description:
  */
 import BaseMonitor from '../base/baseMonitor'
-import { ErrorCategoryEnum } from '../enum'
+import { CategoryEnum } from '../enum'
 import { ParamsType } from '../types'
 
 /**
@@ -32,7 +32,7 @@ class PromiseError extends BaseMonitor {
           if (event?.reason?.config?.url) {
             this.url = event.reason.config.url
           }
-          this.category = ErrorCategoryEnum.PROMISE_ERROR
+          this.category = CategoryEnum.PROMISE
           this.msg = event.reason
           this.errorObj = event.reason
           this.recordError()

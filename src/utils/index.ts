@@ -2,7 +2,7 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 16:25:42
  * @LastEditors: yanghongxuan
- * @LastEditTime: 2021-12-22 17:40:16
+ * @LastEditTime: 2021-12-24 11:29:35
  * @Description:
  */
 
@@ -155,4 +155,12 @@ export function markUv() {
     )
   }
   return psMarkUv
+}
+export function firstIn(): number {
+  const flag = sessionStorage.getItem('ps_first')
+  if (!flag) {
+    sessionStorage.setItem('ps_first', '1')
+    return 1
+  }
+  return 0
 }

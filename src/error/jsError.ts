@@ -6,7 +6,7 @@
  * @Description:
  */
 import BaseMonitor from '../base/baseMonitor'
-import { ErrorCategoryEnum } from '../enum'
+import { CategoryEnum } from '../enum'
 import { ParamsType } from '../types'
 /**
  * 捕获JS错误
@@ -22,7 +22,7 @@ class JSError extends BaseMonitor {
   handleError() {
     window.onerror = (msg: any, url: any, line: any, col: any, error: any) => {
       try {
-        this.category = ErrorCategoryEnum.JS_ERROR
+        this.category = CategoryEnum.JS
         this.msg = msg
         this.url = url
         this.line = line

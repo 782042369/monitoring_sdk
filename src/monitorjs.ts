@@ -2,7 +2,7 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 16:17:00
  * @LastEditors: yanghongxuan
- * @LastEditTime: 2021-12-22 17:43:48
+ * @LastEditTime: 2021-12-24 16:58:36
  * @Description:
  */
 
@@ -73,13 +73,15 @@ class MonitorJS {
    * @param {OptionsType} options {pageId：页面标示,url：上报地址}
    */
   monitorPerformance(options: OptionsType) {
-    // new MonitorNetworkSpeed(options).reportNetworkSpeed();
     const recordFunc = () => {
       new MonitorPerformance(options).record()
     }
-    recordFunc()
-    window.removeEventListener('unload', recordFunc)
-    window.addEventListener('unload', recordFunc)
+    window.onload = function () {
+      setTimeout(() => {
+        // 延迟上报
+        recordFunc()
+      }, 300)
+    }
   }
 }
 export default MonitorJS

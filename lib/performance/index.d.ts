@@ -1,32 +1,19 @@
 import BaseMonitor from '../base/baseMonitor';
-import { DataProps, OptionsType } from '../types';
+import { OptionsType } from '../types';
 declare class MonitorPerformance extends BaseMonitor {
     isPage: any;
     isResource: any;
     usefulType: string[];
     outTime: number;
     config: any;
-    constructor(options: {
-        reportUrl: OptionsType['reportUrl'];
-        extendsInfo: OptionsType['extendsInfo'];
-        appID: OptionsType['appID'];
-        isPage: OptionsType['isPage'];
-        isResource: OptionsType['isResource'];
-    });
+    constructor(options: OptionsType);
     /**
      * 获取需要上报资源数据类型
      * @param {*} options
      */
     getSourceType(options: {
-        reportUrl: OptionsType['reportUrl'];
-        appID: OptionsType['appID'];
-        extendsInfo?: DataProps;
-        isPage?: boolean;
-        isResource?: boolean;
         isRScript?: boolean;
         isRCSS?: boolean;
-        isRFetch?: any;
-        isRXHR?: boolean;
         isRLink?: boolean;
         isRIMG?: boolean;
     }): string[];

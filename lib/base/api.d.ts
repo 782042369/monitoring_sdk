@@ -1,5 +1,5 @@
 import { DataProps, OptionsType } from '../types';
-import { ErrorCategoryEnum } from './../enum/index';
+import { CategoryEnum } from './../enum/index';
 /**
  * 数据持久化
  */
@@ -10,7 +10,7 @@ declare class API {
      * 上报信息 （默认方式）
      */
     report(data: {
-        category: ErrorCategoryEnum;
+        category: CategoryEnum;
         device: string;
         appID: OptionsType['appID'];
         url: string;
@@ -21,26 +21,18 @@ declare class API {
     /**
      * 发送消息
      */
-    sendInfo(data: {
-        category: ErrorCategoryEnum;
-        device: string;
-        appID: OptionsType['appID'];
-        url: string;
-        log: string;
-        markUser: string;
-        markUv: string;
-    }): void;
     /**
      * 通过img方式上报信息
      */
     reportByImg(data: {
-        category: ErrorCategoryEnum;
+        category: CategoryEnum;
         device: string;
         appID: OptionsType['appID'];
         url: string;
         log: string;
         markUser: string;
         markUv: string;
+        first: number;
     }): void;
     formatParams(data: DataProps): string;
 }

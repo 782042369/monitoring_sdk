@@ -7,7 +7,7 @@
  */
 import { ParamsType, ViewModel } from '../../types'
 import BaseMonitor from '../../base/baseMonitor'
-import { ErrorCategoryEnum } from '../../enum'
+import { CategoryEnum } from '../../enum'
 import { isString, getLocationHref } from '../../utils'
 import { getBigVersion, vue2VmHandler, vue3VmHandler } from './utils'
 
@@ -63,7 +63,7 @@ class VueError extends BaseMonitor {
     Vue.config.errorHandler = (error: Error, vm: ViewModel, info: string) => {
       try {
         this.msg = JSON.stringify(handleVueError(error, vm, info, Vue))
-        this.category = ErrorCategoryEnum.VUE_ERROR
+        this.category = CategoryEnum.VUE
         this.recordError()
       } catch (error) {
         console.info('vue错误异常', error)

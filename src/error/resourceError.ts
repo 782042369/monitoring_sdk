@@ -6,7 +6,7 @@
  * @Description:
  */
 import BaseMonitor from '../base/baseMonitor'
-import { ErrorCategoryEnum } from '../enum'
+import { CategoryEnum } from '../enum'
 import { ParamsType } from '../types'
 /**
  * 资源加载错误
@@ -27,7 +27,7 @@ class ResourceError extends BaseMonitor {
           if (!event) {
             return
           }
-          this.category = ErrorCategoryEnum.RESOURCE_ERROR
+          this.category = CategoryEnum.RESOURCE
           const target: any = event.target || event.srcElement
           const isElementTarget =
             target instanceof HTMLScriptElement ||

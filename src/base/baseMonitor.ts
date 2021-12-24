@@ -1,4 +1,4 @@
-import { ErrorCategoryEnum } from '../enum'
+import { CategoryEnum } from '../enum'
 import DeviceInfo from '../device'
 import { isFunction, isObject, markUser, markUv } from '../utils'
 import TaskQueue from './taskQueue'
@@ -11,7 +11,7 @@ import getLastEvent from '../utils/getLastEvent'
  * 监控基类
  */
 class BaseMonitor {
-  category: ErrorCategoryEnum
+  category: CategoryEnum
   msg: string
   url: string
   line: string
@@ -30,9 +30,9 @@ class BaseMonitor {
     reportUrl: OptionsType['reportUrl']
     extendsInfo: OptionsType['extendsInfo']
     appID: OptionsType['appID']
-    userID?: OptionsType['appID']
+    userID?: OptionsType['userID']
   }) {
-    this.category = ErrorCategoryEnum.UNKNOW_ERROR // 错误类型
+    this.category = CategoryEnum.UNKNOW // 错误类型
     this.msg = '' // 错误信息
     this.url = '' // 错误信息地址
     this.line = '' // 行数
@@ -76,17 +76,10 @@ class BaseMonitor {
         return
       }
       const errorInfo = this.handleErrorInfo()
-      console.info('errorInfo: ', errorInfo)
       // this.Breadcrumb.push({
       //   category: errorInfo.category,
       //   data: errorInfo.logInfo,
       // })
-      // console.log('this.Breadcrumb: ', this.Breadcrumb)
-      console.info(
-        `------------------------ ${this.category} ------------------------\n`,
-        errorInfo
-      )
-
       // 记录日志
       TaskQueue.add(this.reportUrl, errorInfo)
     } catch (error) {
@@ -106,12 +99,12 @@ class BaseMonitor {
       txt.errorstack = this.errorObj.stack
     }
     switch (this.category) {
-      case ErrorCategoryEnum.JS_ERROR:
+      case CategoryEnum.JS:
         txt.errorline = this.line
         txt.errorcol = this.col
         break
       default:
-        txt.errorother = this.errorObj
+        txt.logother = this.errorObj
         break
     }
     const lastEvent: any = getLastEvent() // 最后一个交互事件
@@ -137,7 +130,11 @@ class BaseMonitor {
       log: JSON.stringify(txt), // 错误信息
       markUser: markUser(this.userID), // 用户
       markUv: markUv(), // uv
-      preUrl: document.referrer,
+      // 来自域名
+      preUrl:
+        document.referrer && document.referrer !== location.href
+          ? document.referrer
+          : '',
     }
     selector && (recordInfo.selector = selector)
     return recordInfo

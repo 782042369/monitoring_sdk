@@ -12,13 +12,6 @@ const pagePerformance = {
       }
       const t = window.performance.timing
       const times: DataProps = {}
-      const loadTime = t.loadEventEnd - t.loadEventStart
-      if (loadTime < 0) {
-        setTimeout(() => {
-          pagePerformance.getTiming()
-        }, 200)
-        return
-      }
       // 【重要】重定向的时间
       times.redirectTime = (t.redirectEnd - t.redirectStart).toFixed(2)
       // 【重要】DNS 查询时间
@@ -47,14 +40,15 @@ const pagePerformance = {
       // 【重要】页面加载完成的时间
       // 【原因】这几乎代表了用户等待页面可用的时间
       times.loadPageTime = (t.loadEventEnd - t.navigationStart).toFixed(2)
-
+      times.radt = (t.fetchStart - t.navigationStart).toFixed(2) || 0
+      console.log('times: ', times)
       return times
     } catch (error) {
       console.info(error)
     }
   },
 
-  getEntries(usefulType: any[] = []) {
+  getEntries(usefulType: any[] = [], url: string) {
     if (!window.performance || !window.performance.getEntries) {
       console.info('该浏览器不支持performance.getEntries方法')
       return
@@ -64,11 +58,16 @@ const pagePerformance = {
     if (!entryList || entryList.length === 0) {
       return entryTimesList
     }
-    entryList.forEach((item: DataProps) => {
+    entryList.forEach((item: DataProps & PerformanceEntry) => {
+      const name = item.name ? item.name.split('?')[0] : ''
       const templeObj: DataProps = {}
+      // 忽略上传日志的接口再次上报
+      if (name.indexOf(url) > -1) {
+        return
+      }
       if (usefulType.indexOf(item.initiatorType) > -1) {
         // 请求资源路径
-        templeObj.name = item.name
+        templeObj.name = name
         // 发起资源类型
         templeObj.initiatorType = item.initiatorType
         // http协议版本
@@ -93,6 +92,7 @@ const pagePerformance = {
         templeObj.reqTotalTime = (item.responseEnd - item.requestStart).toFixed(
           2
         )
+        templeObj.decodedBodySize = item.decodedBodySize || 0
         entryTimesList.push(templeObj)
       }
     })

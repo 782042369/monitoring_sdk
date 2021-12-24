@@ -2,12 +2,12 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 18:15:10
  * @LastEditors: yanghongxuan
- * @LastEditTime: 2021-12-23 09:57:43
+ * @LastEditTime: 2021-12-24 14:53:56
  * @Description:
  */
-import { checkUrl } from '../utils'
+import { checkUrl, firstIn } from '../utils'
 import { DataProps, OptionsType } from '../types'
-import { ErrorCategoryEnum } from './../enum/index'
+import { CategoryEnum } from './../enum/index'
 
 /**
  * 数据持久化
@@ -21,7 +21,7 @@ class API {
    * 上报信息 （默认方式）
    */
   report(data: {
-    category: ErrorCategoryEnum
+    category: CategoryEnum
     device: string
     appID: OptionsType['appID']
     url: string
@@ -32,60 +32,64 @@ class API {
     if (!checkUrl(this.reportUrl)) {
       throw `上报信息url地址格式不正确,reportUrl=${this.reportUrl}`
     }
-    this.reportByImg(data)
+    this.reportByImg({
+      ...data,
+      first: firstIn(),
+    })
   }
 
   /**
    * 发送消息
    */
-  sendInfo(data: {
-    category: ErrorCategoryEnum
-    device: string
-    appID: OptionsType['appID']
-    url: string
-    log: string
-    markUser: string
-    markUv: string
-  }) {
-    const dataStr = JSON.stringify(data)
-    try {
-      if (fetch) {
-        fetch(this.reportUrl, {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          method: 'POST',
-          body: dataStr,
-          mode: 'same-origin', // 告诉浏览器是同源，同源后浏览器不会进行预检请求
-          keepalive: true,
-        })
-        return
-      }
-    } catch (error) {
-      console.info('fetch请求异常', error)
-    }
-    try {
-      const xhr = new XMLHttpRequest()
-      xhr.open('POST', this.reportUrl, true)
-      // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-      xhr.setRequestHeader('Content-Type', 'application/json')
-      xhr.send(dataStr)
-    } catch (error) {
-      console.info(error)
-    }
-  }
+  // sendInfo(data: {
+  //   category: CategoryEnum
+  //   device: string
+  //   appID: OptionsType['appID']
+  //   url: string
+  //   log: string
+  //   markUser: string
+  //   markUv: string
+  // }) {
+  //   const dataStr = JSON.stringify(data)
+  //   try {
+  //     if (fetch) {
+  //       fetch(this.reportUrl, {
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //         },
+  //         method: 'POST',
+  //         body: dataStr,
+  //         mode: 'same-origin', // 告诉浏览器是同源，同源后浏览器不会进行预检请求
+  //         keepalive: true,
+  //       })
+  //       return
+  //     }
+  //   } catch (error) {
+  //     console.info('fetch请求异常', error)
+  //   }
+  //   try {
+  //     const xhr = new XMLHttpRequest()
+  //     xhr.open('POST', this.reportUrl, true)
+  //     // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  //     xhr.setRequestHeader('Content-Type', 'application/json')
+  //     xhr.send(dataStr)
+  //   } catch (error) {
+  //     console.info(error)
+  //   }
+  // }
 
   /**
    * 通过img方式上报信息
    */
   reportByImg(data: {
-    category: ErrorCategoryEnum
+    category: CategoryEnum
     device: string
     appID: OptionsType['appID']
     url: string
     log: string
     markUser: string
     markUv: string
+    first: number
   }) {
     if (!checkUrl(this.reportUrl)) {
       throw `上报信息url地址格式不正确,reportUrl=${this.reportUrl}`

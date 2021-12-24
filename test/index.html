@@ -2,7 +2,7 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 18:15:30
  * @LastEditors: yanghongxuan
- * @LastEditTime: 2021-12-22 18:22:25
+ * @LastEditTime: 2021-12-24 17:37:57
  * @Description:
 -->
 <!DOCTYPE html>
@@ -21,7 +21,7 @@
         userID: '1',
       })
     </script>
-    <link rel="stylesheet" href="./style.css" />
+    <!-- <link rel="stylesheet" href="./style.css" /> -->
   </head>
   <body>
     <div id="a">
@@ -34,6 +34,11 @@
       </div>
       <img
         src="https://camo.githubusercontent.com/9f1292f0e9356dab9d9094bca540fd55b1981fa7/68747470733a2f2f75706c6f61642d696d616765732e6a69616e7368752e696f2f75706c6f61645f696d616765732f333239303032382d313534636437373333613061353438362e6a70673f696d6167654d6f6772322f6175746f2d6f7269656e742f7374726970253743696d61676556696577322f322f772f31323430"
+        alt=""
+        style="width: 30vw; height: 30vh; display: block; object-fit: contain"
+      />
+      <img
+        src="https://www.cnblogs.com/images/logo.svg?v=R9M0WmLAIPVydmdzE2keuvnjl-bPR7_35oHqtiBzGsM"
         alt=""
         style="width: 30vw; height: 30vh; display: block; object-fit: contain"
       />
@@ -59,9 +64,12 @@
   setTimeout(() => {
     var ajax = new XMLHttpRequest()
     //步骤二:设置请求的url参数,参数一是请求的类型,参数二是请求的url,可以带参数,动态的传递参数starName到服务端
-    ajax.open('get', 'http://127.0.0.1:5500/test/index.html')
+    ajax.open('get', 'http://127.0.0.1:7070/api/uvpvtast')
     //步骤三:发送请求
     ajax.send()
   }, 2000)
+  setTimeout(() => {
+    location.href = 'http://127.0.0.1:5500/test/index.html'
+  }, 2500)
   fn()
 </script>

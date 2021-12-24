@@ -4,6 +4,6 @@ import { DataProps } from '../types';
  */
 declare const pagePerformance: {
     getTiming(): DataProps | undefined;
-    getEntries(usefulType?: any[]): DataProps[] | undefined;
+    getEntries(usefulType: any[] | undefined, url: string): DataProps[] | undefined;
 };
 export default pagePerformance;

@@ -5,13 +5,13 @@
  * @LastEditTime: 2021-12-23 09:57:54
  * @Description:
  */
-import { ErrorCategoryEnum } from '../enum'
+import { CategoryEnum } from '../enum'
 
 interface BreadcrumbPushData {
   /**
    * 事件类型
    */
-  category: ErrorCategoryEnum
+  category: CategoryEnum
   data: any
 }
 

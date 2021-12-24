@@ -33,3 +33,4 @@ export declare function markUser(userID?: string | number): string;
  * 获得Uv
  */
 export declare function markUv(): string;
+export declare function firstIn(): number;
