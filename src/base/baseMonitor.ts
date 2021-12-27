@@ -1,5 +1,4 @@
 import { CategoryEnum } from '../enum'
-import DeviceInfo from '../device'
 import { isFunction, isObject, markUser, markUv } from '../utils'
 import TaskQueue from './taskQueue'
 // import Breadcrumb from '../base/Breadcrumb'
@@ -109,11 +108,9 @@ class BaseMonitor {
     }
     const lastEvent: any = getLastEvent() // 最后一个交互事件
     const selector = lastEvent ? getSelector(lastEvent.path) : '' // 代表最后一个操作的元素
-    const deviceInfo = this.getDeviceInfo()
     const extendsInfo = this.getExtendsInfo()
     const recordInfo: {
       category: string
-      device: string
       appID: string
       url: string
       log: string
@@ -124,7 +121,6 @@ class BaseMonitor {
     } = {
       ...extendsInfo,
       category: this.category, // 错误分类
-      device: deviceInfo, // 设备信息
       appID: this.appID, // 应用id
       url: this?.url || location.href, // url 地址
       log: JSON.stringify(txt), // 错误信息
@@ -166,19 +162,6 @@ class BaseMonitor {
     } catch (error) {
       console.info('call getExtendsInfo error', error)
       return {}
-    }
-  }
-
-  /**
-   * 获取设备信息
-   */
-  getDeviceInfo() {
-    try {
-      const deviceInfo = DeviceInfo.getDeviceInfo()
-      return JSON.stringify(deviceInfo)
-    } catch (error) {
-      console.info(error)
-      return ''
     }
   }
 }

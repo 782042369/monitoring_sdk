@@ -2,7 +2,7 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 18:15:10
  * @LastEditors: yanghongxuan
- * @LastEditTime: 2021-12-23 09:57:50
+ * @LastEditTime: 2021-12-27 10:30:13
  * @Description:
  */
 import API from './api'
@@ -14,7 +14,6 @@ interface QueueProps {
     reportUrl: OptionsType['reportUrl']
     data: {
       category: CategoryEnum
-      device: string
       appID: OptionsType['appID']
       url: string
       log: string
@@ -49,7 +48,6 @@ const TaskQueue: QueueProps = {
     reportUrl: OptionsType['reportUrl'],
     data: {
       category: CategoryEnum
-      device: string
       appID: OptionsType['appID']
       url: string
       log: string

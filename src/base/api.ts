@@ -2,10 +2,17 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 18:15:10
  * @LastEditors: yanghongxuan
- * @LastEditTime: 2021-12-24 14:53:56
+ * @LastEditTime: 2021-12-27 11:37:07
  * @Description:
  */
-import { checkUrl, firstIn } from '../utils'
+import {
+  checkUrl,
+  createFingerprint,
+  firstIn,
+  getLanguage,
+  getNetwork,
+  getOrientationStatu,
+} from '../utils'
 import { DataProps, OptionsType } from '../types'
 import { CategoryEnum } from './../enum/index'
 
@@ -22,7 +29,6 @@ class API {
    */
   report(data: {
     category: CategoryEnum
-    device: string
     appID: OptionsType['appID']
     url: string
     log: string
@@ -35,6 +41,14 @@ class API {
     this.reportByImg({
       ...data,
       first: firstIn(),
+      device: JSON.stringify({
+        lan: getLanguage(),
+        net: getNetwork(),
+        orientation: getOrientationStatu(),
+        fingerprint: createFingerprint(),
+        h: window.screen.height,
+        w: window.screen.width, // 屏幕宽
+      }),
     })
   }
 
@@ -43,7 +57,6 @@ class API {
    */
   // sendInfo(data: {
   //   category: CategoryEnum
-  //   device: string
   //   appID: OptionsType['appID']
   //   url: string
   //   log: string
@@ -83,13 +96,13 @@ class API {
    */
   reportByImg(data: {
     category: CategoryEnum
-    device: string
     appID: OptionsType['appID']
     url: string
     log: string
     markUser: string
     markUv: string
     first: number
+    device: string
   }) {
     if (!checkUrl(this.reportUrl)) {
       throw `上报信息url地址格式不正确,reportUrl=${this.reportUrl}`

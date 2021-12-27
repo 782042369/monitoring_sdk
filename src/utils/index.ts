@@ -2,7 +2,7 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 16:25:42
  * @LastEditors: yanghongxuan
- * @LastEditTime: 2021-12-24 11:29:35
+ * @LastEditTime: 2021-12-27 14:14:13
  * @Description:
  */
 
@@ -156,6 +156,10 @@ export function markUv() {
   }
   return psMarkUv
 }
+/**
+ *
+ * @returns 进入应用首次流量标识
+ */
 export function firstIn(): number {
   const flag = sessionStorage.getItem('ps_first')
   if (!flag) {
@@ -163,4 +167,72 @@ export function firstIn(): number {
     return 1
   }
   return 0
+}
+/**
+ *
+ * @returns 获取横竖屏状态
+ */
+export function getOrientationStatu() {
+  let orientationStatus = ''
+  const orientation = window.matchMedia('(orientation: portrait)')
+  if (orientation.matches) {
+    orientationStatus = '竖屏'
+  } else {
+    orientationStatus = '横屏'
+  }
+  return orientationStatus
+}
+/**
+ *
+ * @returns 获取网络状态
+ */
+export function getNetwork(): string {
+  const netWork = (navigator as any)?.connection?.effectiveType
+  return netWork
+}
+/**
+ *
+ * @returns 获取当前语言
+ */
+export function getLanguage() {
+  const language = window.navigator.language
+  const arr = language.split('-')
+  if (arr[1]) {
+    arr[1] = arr[1].toUpperCase()
+  }
+  return arr.join('_')
+}
+/**
+ *
+ * @returns 生成浏览器指纹
+ */
+export function createFingerprint() {
+  function bin2hex(s: string) {
+    let i: number,
+      l: number,
+      n: string | any[],
+      o = ''
+    s += ''
+    for (i = 0, l = s.length; i < l; i++) {
+      n = s.charCodeAt(i).toString(16)
+      o += n.length < 2 ? `0${n}` : n
+    }
+    return o
+  }
+  const canvas = document.createElement('canvas')
+  const ctx = canvas.getContext('2d') as CanvasRenderingContext2D
+  const txt = window.location.host
+  ctx.textBaseline = 'top'
+  ctx.font = "14px 'Arial'"
+  ctx.textBaseline = 'alphabetic'
+  ctx.fillStyle = '#f60'
+  ctx.fillRect(125, 1, 62, 20)
+  ctx.fillStyle = '#069'
+  ctx.fillText(txt, 2, 15)
+  ctx.fillStyle = 'rgba(102, 204, 0, 0.7)'
+  ctx.fillText(txt, 4, 17)
+  const b64 = canvas.toDataURL().replace('data:image/png;base64,', '')
+  const bin = atob(b64)
+  const crc = bin2hex(bin.slice(-16, -12))
+  return crc
 }

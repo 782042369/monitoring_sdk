@@ -11,7 +11,6 @@ declare class API {
      */
     report(data: {
         category: CategoryEnum;
-        device: string;
         appID: OptionsType['appID'];
         url: string;
         log: string;
@@ -26,13 +25,13 @@ declare class API {
      */
     reportByImg(data: {
         category: CategoryEnum;
-        device: string;
         appID: OptionsType['appID'];
         url: string;
         log: string;
         markUser: string;
         markUv: string;
         first: number;
+        device: string;
     }): void;
     formatParams(data: DataProps): string;
 }

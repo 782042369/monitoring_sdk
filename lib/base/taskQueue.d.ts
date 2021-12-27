@@ -6,7 +6,6 @@ interface QueueProps {
         reportUrl: OptionsType['reportUrl'];
         data: {
             category: CategoryEnum;
-            device: string;
             appID: OptionsType['appID'];
             url: string;
             log: string;

@@ -33,4 +33,28 @@ export declare function markUser(userID?: string | number): string;
  * 获得Uv
  */
 export declare function markUv(): string;
+/**
+ *
+ * @returns 进入应用首次流量标识
+ */
 export declare function firstIn(): number;
+/**
+ *
+ * @returns 获取横竖屏状态
+ */
+export declare function getOrientationStatu(): string;
+/**
+ *
+ * @returns 获取网络状态
+ */
+export declare function getNetwork(): string;
+/**
+ *
+ * @returns 获取当前语言
+ */
+export declare function getLanguage(): string;
+/**
+ *
+ * @returns 生成浏览器指纹
+ */
+export declare function createFingerprint(): string;

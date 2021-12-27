@@ -78,7 +78,6 @@ class MonitorPerformance extends BaseMonitor {
         ...extendsInfo,
         category: this.category,
         log: JSON.stringify(result),
-        device: this.getDeviceInfo(),
         appID: this.appID,
         markUser: markUser(this.userID), // 用户
         markUv: markUv(), // uv

@@ -38,7 +38,6 @@ declare class BaseMonitor {
      */
     handleErrorInfo(): {
         category: string;
-        device: string;
         appID: string;
         url: string;
         log: string;
@@ -51,9 +50,5 @@ declare class BaseMonitor {
      * 获取扩展信息
      */
     getExtendsInfo(): DataProps;
-    /**
-     * 获取设备信息
-     */
-    getDeviceInfo(): string;
 }
 export default BaseMonitor;
