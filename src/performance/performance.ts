@@ -41,7 +41,6 @@ const pagePerformance = {
       // 【原因】这几乎代表了用户等待页面可用的时间
       times.loadPageTime = (t.loadEventEnd - t.navigationStart).toFixed(2)
       times.radt = (t.fetchStart - t.navigationStart).toFixed(2) || 0
-      console.log('times: ', times)
       return times
     } catch (error) {
       console.info(error)

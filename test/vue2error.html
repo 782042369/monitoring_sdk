@@ -2,7 +2,7 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 18:15:30
  * @LastEditors: yanghongxuan
- * @LastEditTime: 2021-12-27 14:16:08
+ * @LastEditTime: 2021-12-29 18:00:22
  * @Description:
 -->
 <!DOCTYPE html>
@@ -62,6 +62,9 @@
     },
     created() {
       this.func1().then((ret) => {
+        setTimeout(() => {
+          location.href = location.href
+        }, 2500)
         throw new Error('promise error 22222222222') //promise_error
       })
       ss() //vue_error

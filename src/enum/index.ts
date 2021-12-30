@@ -2,7 +2,7 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 18:15:10
  * @LastEditors: yanghongxuan
- * @LastEditTime: 2021-12-24 15:05:46
+ * @LastEditTime: 2021-12-27 17:48:56
  * @Description:
  */
 /**
@@ -59,4 +59,13 @@ export enum AjaxMethodEnum {
   'POST' = 'post',
   'DELETE' = 'delete',
   'PUT' = 'put',
+}
+/**
+ * 缓存key枚举
+ */
+export enum StorageKeyEnum {
+  'FIRST_PV' = 'ps_first',
+  'MARKUSER' = 'ps_markUser',
+  'MARKTIME' = 'ps_markUvTime',
+  'MARKUV' = 'ps_markUv',
 }

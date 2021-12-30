@@ -51,3 +51,12 @@ export declare enum AjaxMethodEnum {
     'DELETE' = "delete",
     'PUT' = "put"
 }
+/**
+ * 缓存key枚举
+ */
+export declare enum StorageKeyEnum {
+    'FIRST_PV' = "ps_first",
+    'MARKUSER' = "ps_markUser",
+    'MARKTIME' = "ps_markUvTime",
+    'MARKUV' = "ps_markUv"
+}

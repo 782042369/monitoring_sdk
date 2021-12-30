@@ -2,7 +2,7 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 18:15:30
  * @LastEditors: yanghongxuan
- * @LastEditTime: 2021-12-27 14:15:50
+ * @LastEditTime: 2021-12-27 18:27:42
  * @Description:
 -->
 <!DOCTYPE html>
@@ -35,7 +35,7 @@
   // 各个请求库的  错误上报测试
   const fetchfn = async () => {
     await Promise.all([
-      fetch('http://127.0.0.1/mycode/php/crossdomain/index.php'),
+      fetch('http://127.0.0.1:5500/test/xhrerror.html'),
       fetch('http://127.0.0.1/mycode/php/crossdomain/index.php', {
         method: 'POST',
       }),
@@ -49,44 +49,42 @@
   }
   const xhrfn = () => {
     $.ajax({
-      url: 'http://127.0.0.1/mycode/php/crossdomain/index.php',
-      success(data) {
-        console.log(data)
-      },
+      url: 'http://127.0.0.1:5500/test/xhrerror.html',
+      success() {},
       error(error) {
         console.error(error)
       },
     })
-    $.ajax({
-      url: 'http://127.0.0.1/mycode/php/crossdomain/index.php',
-      method: 'post',
-      success(data) {
-        console.log(data)
-      },
-      error(error) {
-        console.error(error)
-      },
-    })
-    $.ajax({
-      url: 'http://127.0.0.1/mycode/php/crossdomain/index.php',
-      method: 'delete',
-      success(data) {
-        console.log(data)
-      },
-      error(error) {
-        console.error(error)
-      },
-    })
-    $.ajax({
-      url: 'http://127.0.0.1/mycode/php/crossdomain/index.php',
-      method: 'put',
-      success(data) {
-        console.log(data)
-      },
-      error(error) {
-        console.error(error)
-      },
-    })
+    // $.ajax({
+    //   url: 'http://127.0.0.1/mycode/php/crossdomain/index.php',
+    //   method: 'post',
+    //   success(data) {
+    //     console.log(data)
+    //   },
+    //   error(error) {
+    //     console.error(error)
+    //   },
+    // })
+    // $.ajax({
+    //   url: 'http://127.0.0.1/mycode/php/crossdomain/index.php',
+    //   method: 'delete',
+    //   success(data) {
+    //     console.log(data)
+    //   },
+    //   error(error) {
+    //     console.error(error)
+    //   },
+    // })
+    // $.ajax({
+    //   url: 'http://127.0.0.1/mycode/php/crossdomain/index.php',
+    //   method: 'put',
+    //   success(data) {
+    //     console.log(data)
+    //   },
+    //   error(error) {
+    //     console.error(error)
+    //   },
+    // })
   }
   const axiosfn = async () => {
     await Promise.all([

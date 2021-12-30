@@ -2,7 +2,7 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 16:17:00
  * @LastEditors: yanghongxuan
- * @LastEditTime: 2021-12-24 16:58:36
+ * @LastEditTime: 2021-12-27 18:07:42
  * @Description:
  */
 
@@ -16,6 +16,7 @@ import {
 import MonitorPerformance from './performance'
 import { checkUrl } from './utils'
 import { OptionsType } from './types'
+import { StorageKeyEnum } from './enum'
 class MonitorJS {
   jsError: boolean
   promiseError: boolean
@@ -66,6 +67,15 @@ class MonitorJS {
       new VueError(param).handleError(options.vue)
     }
     this.monitorPerformance(options)
+    /**
+     * pv统计刷新页面 清空本地缓存
+     */
+    const recordFunc = () => {
+      alert(1)
+      sessionStorage.removeItem(StorageKeyEnum.FIRST_PV)
+    }
+    window.addEventListener('beforeunload', recordFunc)
+    window.removeEventListener('beforeunload', recordFunc)
   }
 
   /**

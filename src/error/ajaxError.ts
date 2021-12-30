@@ -49,6 +49,8 @@ class XHRError extends BaseMonitor {
     self: {
       status: number
       response: any
+      decodedBodySize?: number
+      responseText?: string
     },
     lib: AjaxLibEnum,
     logData: {
@@ -67,6 +69,8 @@ class XHRError extends BaseMonitor {
         method: logData.method.toLowerCase(), // 请求方式
         lib,
         path: logData.url,
+        decodedBodySize:
+          self.decodedBodySize || self?.responseText?.length || 0,
       }
       this.recordError()
     } catch (error) {
@@ -96,7 +100,8 @@ class XHRError extends BaseMonitor {
     ;(XMLHttpRequest as any).prototype.send = function () {
       if (this.addEventListener && this.logData) {
         const startTime = Date.now() //在发送之前记录一下开始的时间
-        ;['error', 'load', 'abort'].map((ele: any) => {
+        ;['error', 'load', 'abort', 'onreadystatechange'].map((ele: any) => {
+          //    xhr.xhr.responseText.length
           this.addEventListener(ele, () => {
             self._handleEvent(
               ele,
@@ -127,14 +132,16 @@ class XHRError extends BaseMonitor {
       const startTime = Date.now() //在发送之前记录一下开始的时间
       originFetch
         .apply(this, args)
-        .then((res) => {
+        .then(async (res) => {
           const tempRes = res.clone()
+          const decodedBodySize = await res.text()
           self._handleEvent(
             res.ok ? 'load' : 'error',
             startTime,
             {
               status: tempRes.status || res.ok ? 200 : 500,
               response: res,
+              decodedBodySize: decodedBodySize.length,
             },
             AjaxLibEnum.FETCH,
             logData

@@ -2,10 +2,11 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 16:25:42
  * @LastEditors: yanghongxuan
- * @LastEditTime: 2021-12-27 14:14:13
+ * @LastEditTime: 2021-12-27 17:49:31
  * @Description:
  */
 
+import { StorageKeyEnum } from '../enum'
 import { DataProps } from '../types'
 
 export function checkUrl(url: string | undefined): boolean {
@@ -130,10 +131,10 @@ export function markUser(userID?: string | number) {
   if (userID) {
     return String(userID)
   }
-  let psMarkUser = localStorage.getItem('ps_markUser') || ''
+  let psMarkUser = localStorage.getItem(StorageKeyEnum.MARKUSER) || ''
   if (!psMarkUser) {
     psMarkUser = randomString()
-    localStorage.setItem('ps_markUser', psMarkUser)
+    localStorage.setItem(StorageKeyEnum.MARKUSER, psMarkUser)
   }
   return psMarkUser
 }
@@ -143,14 +144,14 @@ export function markUser(userID?: string | number) {
  */
 export function markUv() {
   const date = new MyDate()
-  let psMarkUv = localStorage.getItem('ps_markUv') || ''
-  const datatime: any = localStorage.getItem('ps_markUvTime') || ''
+  let psMarkUv = localStorage.getItem(StorageKeyEnum.MARKUV) || ''
+  const datatime: any = localStorage.getItem(StorageKeyEnum.MARKTIME) || ''
   const today = date.format('yyyy/MM/dd 23:59:59')
   if ((!psMarkUv && !datatime) || date.getTime() > datatime * 1) {
     psMarkUv = randomString()
-    localStorage.setItem('ps_markUv', psMarkUv)
+    localStorage.setItem(StorageKeyEnum.MARKUV, psMarkUv)
     localStorage.setItem(
-      'ps_markUvTime',
+      StorageKeyEnum.MARKTIME,
       JSON.stringify(new Date(today).getTime())
     )
   }
@@ -161,9 +162,9 @@ export function markUv() {
  * @returns 进入应用首次流量标识
  */
 export function firstIn(): number {
-  const flag = sessionStorage.getItem('ps_first')
+  const flag = sessionStorage.getItem(StorageKeyEnum.FIRST_PV)
   if (!flag) {
-    sessionStorage.setItem('ps_first', '1')
+    sessionStorage.setItem(StorageKeyEnum.FIRST_PV, '1')
     return 1
   }
   return 0
