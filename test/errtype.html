@@ -1,0 +1,46 @@
+<!--
+ * @Author: 杨宏旋
+ * @Date: 2021-07-19 18:15:30
+ * @LastEditors: yanghongxuan
+ * @LastEditTime: 2022-07-26 16:18:37
+ * @Description:
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>性能监控</title>
+    <script src="../lib/index.js"></script>
+    <script>
+        new MonitorJS().init({
+            appID: 'zZQpe1627352687237',
+            reportUrl: 'http://127.0.0.1:7070/api', //上报错误地址
+            isPage: true,
+            userID: '3',
+        })
+    </script>
+    <!-- <link rel="stylesheet" href="./style.css" /> -->
+</head>
+
+<body>
+    <div id="a">
+    </div>
+</body>
+
+</html>
+<script>
+    // RangeError
+    // new Array(-1)
+    // SyntaxError EvalError
+    // eval('var a = ;')
+    // SyntaxError
+    // var b =
+    console.log('a+b: ', 1 + b);
+    // TypeError
+    [1, 2].split('.');
+    // URIError
+    decodeURI('%2')
+</script>
