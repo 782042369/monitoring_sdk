@@ -6,14 +6,27 @@ import BaseMonitor from '../base/baseMonitor'
 import { CategoryEnum } from '../enum/index.js'
 import API from '../base/api.js'
 import { markUser, markUv } from '../utils'
-import { OptionsType } from '../types'
-
+import { OptionsType, DataProps } from '../types'
 class MonitorPerformance extends BaseMonitor {
-  isPage: any
-  isResource: any
+  isPage: boolean
+  isResource: boolean
   usefulType: string[]
   outTime: number
-  config: any
+  config: {
+    resourceList: Array<{
+      name: string
+      initiatorType: string
+      nextHopProtocol: string
+      redirectTime: string
+      dnsTime: string
+      tcpTime: string
+      ttfbTime: string
+      responseTime: string
+      reqTotalTime: string
+      decodedBodySize: number
+    }> // 资源列表
+    performance: DataProps
+  }
   constructor(options: OptionsType) {
     super({
       reportUrl: options.reportUrl,
@@ -61,13 +74,11 @@ class MonitorPerformance extends BaseMonitor {
   record() {
     try {
       if (this.isPage) {
-        this.config.performance = pagePerformance.getTiming()
+        this.config.performance = pagePerformance.getTiming() || {}
       }
       if (this.isResource) {
-        this.config.resourceList = pagePerformance.getEntries(
-          this.usefulType,
-          this.reportUrl
-        )
+        this.config.resourceList =
+          pagePerformance.getEntries(this.usefulType, this.reportUrl) || []
       }
       const result = {
         performance: this.config.performance,
@@ -95,7 +106,7 @@ class MonitorPerformance extends BaseMonitor {
     if ((window as any)?.performance?.clearResourceTimings) {
       performance.clearResourceTimings()
       this.config.performance = {}
-      this.config.resourceList = ''
+      this.config.resourceList = []
     }
   }
 }

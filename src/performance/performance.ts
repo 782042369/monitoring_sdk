@@ -1,3 +1,10 @@
+/*
+ * @Author: yanghongxuan
+ * @Date: 2021-12-23 16:54:07
+ * @LastEditors: yanghongxuan
+ * @LastEditTime: 2022-11-18 09:38:58
+ * @Description:
+ */
 import { DataProps } from '../types'
 
 /**
@@ -52,47 +59,53 @@ const pagePerformance = {
       console.info('该浏览器不支持performance.getEntries方法')
       return
     }
-    const entryTimesList: DataProps[] = []
-    const entryList = window.performance.getEntries()
+    const entryTimesList: Array<{
+      name: string
+      initiatorType: string
+      nextHopProtocol: string
+      redirectTime: string
+      dnsTime: string
+      tcpTime: string
+      ttfbTime: string
+      responseTime: string
+      reqTotalTime: string
+      decodedBodySize: number
+    }> = []
+    const entryList = window.performance.getEntriesByType(
+      'resource'
+    ) as Array<PerformanceResourceTiming>
     if (!entryList || entryList.length === 0) {
       return entryTimesList
     }
-    entryList.forEach((item: DataProps & PerformanceEntry) => {
+    entryList.forEach((item) => {
       const name = item.name ? item.name.split('?')[0] : ''
-      const templeObj: DataProps = {}
       // 忽略上传日志的接口再次上报
       if (name.indexOf(url) > -1) {
         return
       }
       if (usefulType.indexOf(item.initiatorType) > -1) {
-        // 请求资源路径
-        templeObj.name = name
-        // 发起资源类型
-        templeObj.initiatorType = item.initiatorType
-        // http协议版本
-        templeObj.nextHopProtocol = item.nextHopProtocol
-        // 重定向时间
-        templeObj.redirectTime = (
-          item.redirectEnd - item.redirectStart
-        ).toFixed(2)
-        // dns查询耗时
-        templeObj.dnsTime = (
-          item.domainLookupEnd - item.domainLookupStart
-        ).toFixed(2)
-        // tcp链接耗时
-        templeObj.tcpTime = (item.connectEnd - item.connectStart).toFixed(2)
-        // 发送请求到接收到响应第一个字符
-        templeObj.ttfbTime = (item.responseStart - item.requestStart).toFixed(2)
-        // 接收响应的时间（从第一个字符到最后一个字符）
-        templeObj.responseTime = (
-          item.responseEnd - item.responseStart
-        ).toFixed(2)
-        // 请求+响应总时间
-        templeObj.reqTotalTime = (item.responseEnd - item.requestStart).toFixed(
-          2
-        )
-        templeObj.decodedBodySize = item.decodedBodySize || 0
-        entryTimesList.push(templeObj)
+        entryTimesList.push({
+          /** 请求资源路径*/
+          name,
+          /** 发起资源类型*/
+          initiatorType: item.initiatorType,
+          /** http协议版本*/
+          nextHopProtocol: item.nextHopProtocol,
+          /** 重定向时间*/
+          redirectTime: (item.redirectEnd - item.redirectStart).toFixed(2),
+          /** dns查询耗时*/
+          dnsTime: (item.domainLookupEnd - item.domainLookupStart).toFixed(2),
+          /** tcp链接耗时*/
+          tcpTime: (item.connectEnd - item.connectStart).toFixed(2),
+          /** 发送请求到接收到响应第一个字符*/
+          ttfbTime: (item.responseStart - item.requestStart).toFixed(2),
+          /** 接收响应的时间（从第一个字符到最后一个字符）*/
+          responseTime: (item.responseEnd - item.responseStart).toFixed(2),
+          /** 请求+响应总时间 */
+          reqTotalTime: (item.responseEnd - item.requestStart).toFixed(2),
+          /** 表示解压之后的body大小 */
+          decodedBodySize: item.decodedBodySize || 0,
+        })
       }
     })
     return entryTimesList

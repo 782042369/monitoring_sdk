@@ -2,7 +2,7 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-22 10:39:11
  * @LastEditors: yanghongxuan
- * @LastEditTime: 2021-12-24 14:17:58
+ * @LastEditTime: 2022-11-17 17:26:45
  * @Description: 全局声明
  */
 export type DataProps = Record<string, any>

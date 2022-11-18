@@ -23,16 +23,11 @@ declare class API {
     /**
      * 通过img方式上报信息
      */
-    reportByImg(data: {
-        category: CategoryEnum;
-        appID: OptionsType['appID'];
-        url: string;
-        log: string;
-        markUser: string;
-        markUv: string;
-        first: number;
-        device: string;
-    }): void;
+    reportByImg(data: string): void;
+    /**
+     * sendBeacon上报
+     */
+    reportByNavigator(data: string): void;
     formatParams(data: DataProps): string;
 }
 export default API;

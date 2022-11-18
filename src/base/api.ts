@@ -2,16 +2,16 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 18:15:10
  * @LastEditors: yanghongxuan
- * @LastEditTime: 2021-12-27 11:37:07
+ * @LastEditTime: 2022-11-18 09:33:33
  * @Description:
  */
 import {
   checkUrl,
   createFingerprint,
-  firstIn,
+  //   firstIn,
   getLanguage,
   getNetwork,
-  getOrientationStatu,
+  getOrientationStatus,
 } from '../utils'
 import { DataProps, OptionsType } from '../types'
 import { CategoryEnum } from './../enum/index'
@@ -38,18 +38,23 @@ class API {
     if (!checkUrl(this.reportUrl)) {
       throw `上报信息url地址格式不正确,reportUrl=${this.reportUrl}`
     }
-    this.reportByImg({
+    const reportInfo = this.formatParams({
       ...data,
-      first: firstIn(),
+      //   first: firstIn(),
       device: JSON.stringify({
         lan: getLanguage(),
         net: getNetwork(),
-        orientation: getOrientationStatu(),
+        orientation: getOrientationStatus(),
         fingerprint: createFingerprint(),
         h: window.screen.height,
         w: window.screen.width, // 屏幕宽
       }),
     })
+    if ('sendBeacon' in navigator) {
+      this.reportByNavigator(reportInfo)
+    } else {
+      this.reportByImg(reportInfo)
+    }
   }
 
   /**
@@ -94,35 +99,24 @@ class API {
   /**
    * 通过img方式上报信息
    */
-  reportByImg(data: {
-    category: CategoryEnum
-    appID: OptionsType['appID']
-    url: string
-    log: string
-    markUser: string
-    markUv: string
-    first: number
-    device: string
-  }) {
+  reportByImg(data: string) {
     if (!checkUrl(this.reportUrl)) {
       throw `上报信息url地址格式不正确,reportUrl=${this.reportUrl}`
     }
     try {
       const img = new Image()
-      img.src = `${
-        this.reportUrl
-      }/up.gif?v=${new Date().getTime()}&${this.formatParams(data)}`
+      img.src = `${this.reportUrl}/up.gif?v=${new Date().getTime()}&${data}`
     } catch (error) {
       console.info(error)
     }
   }
 
-  // /**
-  //  * sendBeacon上报
-  //  */
-  // reportByNavigator(data:DataProps) {
-  //   navigator.sendBeacon && navigator.sendBeacon(this.reportUrl, data)
-  // }
+  /**
+   * sendBeacon上报
+   */
+  reportByNavigator(data: string) {
+    navigator.sendBeacon(this.reportUrl, data)
+  }
 
   /*
    *格式化参数

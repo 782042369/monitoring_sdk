@@ -2,7 +2,7 @@
  * @Author: 杨宏旋
  * @Date: 2021-07-19 16:25:42
  * @LastEditors: yanghongxuan
- * @LastEditTime: 2021-12-27 17:49:31
+ * @LastEditTime: 2022-11-18 09:34:14
  * @Description:
  */
 
@@ -173,7 +173,7 @@ export function firstIn(): number {
  *
  * @returns 获取横竖屏状态
  */
-export function getOrientationStatu() {
+export function getOrientationStatus() {
   let orientationStatus = ''
   const orientation = window.matchMedia('(orientation: portrait)')
   if (orientation.matches) {
@@ -207,19 +207,19 @@ export function getLanguage() {
  *
  * @returns 生成浏览器指纹
  */
-export function createFingerprint() {
-  function bin2hex(s: string) {
-    let i: number,
-      l: number,
-      n: string | any[],
-      o = ''
-    s += ''
-    for (i = 0, l = s.length; i < l; i++) {
-      n = s.charCodeAt(i).toString(16)
-      o += n.length < 2 ? `0${n}` : n
-    }
-    return o
+function bin2hex(s: string) {
+  let i: number,
+    l: number,
+    n: string | any[],
+    o = ''
+  s += ''
+  for (i = 0, l = s.length; i < l; i++) {
+    n = s.charCodeAt(i).toString(16)
+    o += n.length < 2 ? `0${n}` : n
   }
+  return o
+}
+export function createFingerprint() {
   const canvas = document.createElement('canvas')
   const ctx = canvas.getContext('2d') as CanvasRenderingContext2D
   const txt = window.location.host
